@@ -1,21 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
-	
-	<!-- 
-		*pom.xml의 구조(구성)
-		project{ 프로젝트 정보 + properties + [repositories] + dependencies + build}
-	 -->
-	
-	<!-- 프로젝트 정보 -->
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.hj</groupId>
-	<artifactId>spring</artifactId>
-	<name>reSpring-workspace</name>
+	<artifactId>withus</artifactId>
+	<name>withusHJ-workspace</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
-	
-	<!-- properties : pom.xml문서 전역에서 쓸수있도록 변수 선언되어있는 영역 -->
 	<properties>
 		<java-version>1.6</java-version>
 		<org.springframework-version>5.2.9.RELEASE</org.springframework-version>
@@ -134,7 +125,7 @@
 			<artifactId>junit</artifactId>
 			<version>4.7</version>
 			<scope>test</scope>
-		</dependency>
+		</dependency>   
 		
 		<!-- 여기서부터 우리가 추가로 필요한 라이브러리들을 하나씩 등록할꺼임 -->
 		<!-- 1. DB관련 라이브러리 (오라클, 마이바티스) -->
@@ -221,8 +212,7 @@
 		    <groupId>com.google.code.gson</groupId>
 		    <artifactId>gson</artifactId>
 		    <version>2.8.5</version>
-		</dependency>
-		        
+		</dependency>     
 	</dependencies>
     <build>
         <plugins>
