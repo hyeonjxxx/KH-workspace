@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="withusMemeberMapper">
+	<resultMap type="Member" id="memberRset">
+		<result column="member_no" property="memberNo"/>
+		<result column="member_id" property="memberId"/>
+		<result column="member_pwd" property="memberPwd"/>
+		<result column="member_name" property="memberName"/>
+		<result column="member_phone" property="phone"/>
+		<result column="member_create_dt" property="memberCreateDate"/>
+		<result column="member_link" property="memberLink"/>
+		<result column="report_count" property="reportCount"/>
+		<result column="member_status" property="memberStatus"/>
+		<result column="member_profile" property="memberProfile"/>
+		<result column="partner_join" property="partnerJoin"/>
+		<result column="partner_name" property="partnerName"/>
+		<result column="partner_info" property="partnerInto"/>
+	</resultMap>
+	
+	<!-- 페이징 처리 -->
+	<select id="mSelectListCount" resultType="_int">
+		select
+			   count(*)
+		from member
+	</select>
+	
+	<!-- 회원조회용 -->
+	<select id="mSelectList" resultMap="memberRset">
+		select
+			   member_no
+		     , member_id
+		     , member_name
+		     , to_char(member_create_dt,'YYYY-MM-DD') member_create_dt
+		     , partner_join
+		     , partner_name
+		     , member_status
+		  from member  
+		 order
+		    by member_no desc   
+	</select>
+</mapper>

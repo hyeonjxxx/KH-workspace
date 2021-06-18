@@ -118,106 +118,27 @@
 	                </tr>
 	            </thead>
 	            <tbody>
-	                <tr>
-	                    <td>28</td>
-	                    <td>USER11@gmail.com</td>
-	                    <td>김지원</td>
-	                    <td>2021-05-17</td>
-	                    <td>Y</td>
-	                    <td>니브</td>
-	                    <td>Y</td>
-	                    <td><button type="button" class="btn-sm" data-toggle="modal" data-target="#delModal">탈퇴</button></td>
-	                </tr>
-	                <tr>
-	                    <td>28</td>
-	                    <td>USER11@gmail.com</td>
-	                    <td>김지원</td>
-	                    <td>2021-05-17</td>
-	                    <td>Y</td>
-	                    <td>니브</td>
-	                    <td>Y</td>
-	                    <td><button type="button" class="btn-sm" data-toggle="modal" data-target="#delModal">탈퇴</button></td>
-	                </tr>
-	                <tr>
-	                    <td>28</td>
-	                    <td>USER11@gmail.com</td>
-	                    <td>김지원</td>
-	                    <td>2021-05-17</td>
-	                    <td>Y</td>
-	                    <td>니브</td>
-	                    <td>Y</td>
-	                    <td><button type="button" class="btn-sm" data-toggle="modal" data-target="#delModal">탈퇴</button></td>
-	                </tr>
-	                <tr>
-	                    <td>28</td>
-	                    <td>USER11@gmail.com</td>
-	                    <td>김지원</td>
-	                    <td>2021-05-17</td>
-	                    <td>Y</td>
-	                    <td>니브</td>
-	                    <td>Y</td>
-	                    <td><button type="button" class="btn-sm" data-toggle="modal" data-target="#delModal">탈퇴</button></td>
-	                </tr>
-	                <tr>
-	                    <td>28</td>
-	                    <td>USER11@gmail.com</td>
-	                    <td>김지원</td>
-	                    <td>2021-05-17</td>
-	                    <td>Y</td>
-	                    <td>니브</td>
-	                    <td>Y</td>
-	                    <td><button type="button" class="btn-sm" data-toggle="modal" data-target="#delModal">탈퇴</button></td>
-	                </tr>
-	                <tr>
-	                    <td>28</td>
-	                    <td>USER11@gmail.com</td>
-	                    <td>김지원</td>
-	                    <td>2021-05-17</td>
-	                    <td>Y</td>
-	                    <td>니브</td>
-	                    <td>Y</td>
-	                    <td><button type="button" class="btn-sm" data-toggle="modal" data-target="#delModal">탈퇴</button></td>
-	                </tr>    
-	                <tr>
-	                    <td>28</td>
-	                    <td>USER11@gmail.com</td>
-	                    <td>김지원</td>
-	                    <td>2021-05-17</td>
-	                    <td>Y</td>
-	                    <td>니브</td>
-	                    <td>Y</td>
-	                    <td><button type="button" class="btn-sm" data-toggle="modal" data-target="#delModal">탈퇴</button></td>
-	                </tr>
-	                <tr>
-	                    <td>28</td>
-	                    <td>USER11@gmail.com</td>
-	                    <td>김지원</td>
-	                    <td>2021-05-17</td>
-	                    <td>Y</td>
-	                    <td>니브</td>
-	                    <td>Y</td>
-	                    <td><button type="button" class="btn-sm" data-toggle="modal" data-target="#delModal">탈퇴</button></td>
-	                </tr>
-	                <tr>
-	                    <td>28</td>
-	                    <td>USER11@gmail.com</td>
-	                    <td>김지원</td>
-	                    <td>2021-05-17</td>
-	                    <td>Y</td>
-	                    <td>니브</td>
-	                    <td>Y</td>
-	                    <td><button type="button" class="btn-sm" data-toggle="modal" data-target="#delModal">탈퇴</button></td>
-	                </tr>
-	                <tr>
-	                    <td>28</td>
-	                    <td>USER11@gmail.com</td>
-	                    <td>김지원</td>
-	                    <td>2021-05-17</td>
-	                    <td>Y</td>
-	                    <td>니브</td>
-	                    <td>Y</td>
-	                    <td><button type="button" class="btn-sm" data-toggle="modal" data-target="#delModal">탈퇴</button></td>
-	                </tr>             
+	            	<c:forEach var="m" items="${ mList }">
+		                <tr>
+		                    <td>${ m.memberNo }</td>
+		                    <td>${ m.memberId }</td>
+		                    <td>${ m.memberName }</td>
+		                    <td>${ m.memberCreateDate }</td>
+		                    <td>${ m.partnerJoin }</td>
+		                    <td>
+		                    	<c:choose>
+		                    	<c:when test="${!empty m.partnerName }">
+		                    		${ m.partnerName }
+		                    	</c:when>
+		                    	<c:otherwise>
+		                    		-
+		                    	</c:otherwise>
+		                    	</c:choose>
+		                    </td>
+		                    <td>${ m.memberStatus }</td>
+		                    <td><button type="button" class="btn-sm" data-toggle="modal" data-target="#delModal">탈퇴</button></td>
+		                </tr>
+	                </c:forEach>            
 	            </tbody>
 	        </table>
 	    </div>
