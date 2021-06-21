@@ -22,16 +22,16 @@ public class MemberController {
 	
 	// 회원조회
 	@RequestMapping("memberListView.mana")
-	public ModelAndView selectMemberList(@RequestParam(value="currentPate", defaultValue="1") int currentPage,ModelAndView mv) {
+	public ModelAndView selectMemberList(@RequestParam(value="currentPage", defaultValue="1") int currentPage,ModelAndView mv) {
 		
 		int totalList = mService.selectListCount();
-		PageInfo pi = Pagination.getPageInfo(totalList, currentPage, 10, 5);
+		PageInfo pi = Pagination.getPageInfo(totalList, currentPage, 5, 10);
 		
 		ArrayList<Member> mList = mService.selectList(pi);
+		
 		mv.addObject("mList",mList)
 		  .addObject("pi", pi)
 		  .setViewName("admin/manaMemberListView");
-		//System.out.println(mList);
 		return mv;
 	}
 	

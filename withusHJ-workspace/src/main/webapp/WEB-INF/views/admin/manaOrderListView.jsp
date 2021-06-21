@@ -97,19 +97,32 @@
                         <th width="250">펀딩 정보</th>
                         <th>수량</th>
                         <th>주문 날짜</th>
-                        <th>펀딩 상태</th>
+                        <th>결제 상태</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td rowspan="2">10491</td>
-                        <td>김지원</td>
-                        <td>프로젝트이름<br>리원드/옵션명111</td>
-                        <td>1</td>
-                        <td>2021-06-09 15:24:11</td>
-                        <td>결제예약</td>
-                    </tr>
-                 
+	                <c:forEach var="o" items="${ oList }">
+	                    <tr>
+	                        <td>${ o.orderNo }</td>
+	                        <td>${ o.purEmail }</td>
+	                        <td>프로젝트이름<br>리원드/옵션명111</td>
+	                        <td>1</td>
+	                        <td>${ o.orderDate }</td>
+	                        
+	                        	<c:choose>
+	                        		<c:when test="${ o.orderStatus == 1 }">
+	                        			<td>결제완료</td>
+	                        		</c:when>
+	                        		<c:when test="${ o.orderStatus == 2 }">
+	                        			<td>취소요청</td>
+	                        		</c:when>
+	                        		<c:otherwise>
+	                        			<td>취소완료</td>
+	                        		</c:otherwise>
+	                        	</c:choose>
+	                       
+	                    </tr>
+	                </c:forEach>
                 </tbody>
             </table>
         </div>
@@ -119,13 +132,27 @@
         <!-- 페이징 -->
         <div class="paging_wrap">
             <ul class="pagination">
-                <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+				<c:choose>
+	        		<c:when test="${ pi.currentPage eq 1 }">
+		           		<li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
+		            </c:when>
+		            <c:otherwise>
+		            	<li class="page-item disabled"><a class="page-link" href="${ pi.currentPage -1 }">이전</a></li>
+		            </c:otherwise>
+		    	</c:choose>        
+		            
+				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+	            	<li class="page-item"><a class="page-link" href="memberListView.mana?currentPage=${p}">${ p }</a></li>
+				</c:forEach>		            
+		            
+		        <c:choose> 
+		        	<c:when test="${ pi.currentPage eq pi.maxPage }">
+		           	 	<li class="page-item"><a class="page-link" href="#">다음</a></li>
+		           	</c:when>
+		           	<c:otherwise>
+		           		<li class="page-item"><a class="page-link" href="${ pi.currentPage+1 }">다음</a></li>
+		           	</c:otherwise> 	
+	        	</c:choose>
             </ul>
         </div>
 

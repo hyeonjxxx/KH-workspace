@@ -46,7 +46,7 @@
 	.modal-footer{height: 80%;}
 	
 	/* pagination */
-	.paging_wrap{width:fit-content;margin:auto; margin-top: 100px;}
+	.paging_wrap{width:fit-content;margin:auto; margin-top: 50px;}
 	.pagination a {
 	    color: black;
 	    float: left;
@@ -187,13 +187,27 @@
 	    <!-- 페이징 -->
 	    <div class="paging_wrap">
 	        <ul class="pagination">
-	            <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-	            <li class="page-item"><a class="page-link" href="#">1</a></li>
-	            <li class="page-item"><a class="page-link" href="#">2</a></li>
-	            <li class="page-item"><a class="page-link" href="#">3</a></li>
-	            <li class="page-item"><a class="page-link" href="#">4</a></li>
-	            <li class="page-item"><a class="page-link" href="#">5</a></li>
-	            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+	        	<c:choose>
+	        		<c:when test="${ pi.currentPage eq 1 }">
+		           		<li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
+		            </c:when>
+		            <c:otherwise>
+		            	<li class="page-item disabled"><a class="page-link" href="${ pi.currentPage -1 }">이전</a></li>
+		            </c:otherwise>
+		    	</c:choose>        
+		            
+				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+	            	<li class="page-item"><a class="page-link" href="memberListView.mana?currentPage=${p}">${ p }</a></li>
+				</c:forEach>		            
+		            
+		        <c:choose> 
+		        	<c:when test="${ pi.currentPage eq pi.maxPage }">
+		           	 	<li class="page-item"><a class="page-link" href="#">다음</a></li>
+		           	</c:when>
+		           	<c:otherwise>
+		           		<li class="page-item"><a class="page-link" href="${ pi.currentPage+1 }">다음</a></li>
+		           	</c:otherwise> 	
+	        	</c:choose>
 	        </ul>
 	    </div>
 	

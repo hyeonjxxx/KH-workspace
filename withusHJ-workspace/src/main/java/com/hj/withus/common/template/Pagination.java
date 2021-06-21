@@ -15,7 +15,7 @@ public class Pagination {
 		if((endPage = startPage+pageLimit-1)>maxPage) {
 			endPage = maxPage;
 		}
-		return null;
+		return new PageInfo(totalList, currentPage, pageLimit, boardLimit, startPage, endPage, maxPage);
 	}
 	
 }
