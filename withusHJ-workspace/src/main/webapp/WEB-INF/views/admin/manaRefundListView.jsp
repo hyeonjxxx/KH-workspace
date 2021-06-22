@@ -95,51 +95,19 @@
                         <th>환불 신청인</th>
                         <th width="330">펀딩 정보</th>
                         <th width="180">환불 사유</th>
-                        <th>신청 날짜</th>
                         <th>환불 상태</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td >10491</td>
-                        <td>김지원</td>
-                        <td>프로젝트이름<br>리원드/옵션명111</td>
-                        <td>배송 중 파손</td>
-                        <td>2021-06-09 15:24:11</td>
-                        <td>N</td>
-                    </tr>
-                    <tr>
-                        <td >10491</td>
-                        <td>김지원</td>
-                        <td>프로젝트이름<br>리원드/옵션명111</td>
-                        <td>배송 중 파손</td>
-                        <td>2021-06-09 15:24:11</td>
-                        <td>N</td>
-                    </tr>
-                    <tr>
-                        <td >10491</td>
-                        <td>김지원</td>
-                        <td>프로젝트이름<br>리원드/옵션명111</td>
-                        <td>배송 중 파손</td>
-                        <td>2021-06-09 15:24:11</td>
-                        <td>N</td>
-                    </tr>
-                    <tr>
-                        <td >10491</td>
-                        <td>김지원</td>
-                        <td>프로젝트이름<br>리원드/옵션명111</td>
-                        <td>배송 중 파손</td>
-                        <td>2021-06-09 15:24:11</td>
-                        <td>N</td>
-                    </tr>
-                    <tr>
-                        <td >10491</td>
-                        <td>김지원</td>
-                        <td>프로젝트이름<br>리원드/옵션명111</td>
-                        <td>배송 중 파손</td>
-                        <td>2021-06-09 15:24:11</td>
-                        <td>N</td>
-                    </tr>                                                                                
+                    <c:forEach var="r" items="${ rList }">
+	                    <tr>
+	                        <td >${ r.refundNo }</td>
+	                        <td>김지원</td>
+	                        <td>프로젝트이름<br>리원드/옵션명111</td>
+	                        <td>${ r.reReason }</td>
+	                        <td>${ r.refundStatus }</td>
+	                    </tr>
+                    </c:forEach>
                 </tbody>
             </table>
         </div>
@@ -149,13 +117,25 @@
         <!-- 페이징 -->
         <div class="paging_wrap">
             <ul class="pagination">
-                <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            	<c:choose>
+            		<c:when test="${ pi.currentPage eq 1 }">
+	                	<li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
+            		</c:when>
+            		<c:otherwise>
+            			<li class="page-item"><a class="page-link" href="${ pi.currentPage-1 }">이전</a></li>
+            		</c:otherwise>
+            	</c:choose>
+                <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+                	<li class="page-item"><a class="page-link" href="refundListView.mana?currentPage=${ p }">${ p }</a></li>
+                </c:forEach>
+                <c:choose>
+                	<c:when test="${ pi.currentPage eq maxPage }">
+                		<li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
+                	</c:when>
+                	<c:otherwise>
+	                	<li class="page-item"><a class="page-link" href="${ pi.currentPage+1 }">다음</a></li>
+                	</c:otherwise>
+                </c:choose>
             </ul>
         </div>
 

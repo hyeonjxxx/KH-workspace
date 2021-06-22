@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="withusRefundMapper">
+	<resultMap type="Refund" id="refundRset">
+		<result column="refund_no" property="refundNo"/>
+		<result column="order_no" property="orderNo"/>
+		<result column="r_originname" property="reOrginName"/>
+		<result column="r_changename" property="reChangeName"/>
+		<result column="r_reason" property="reReason"/>
+		<result column="refund_status" property="refundStatus"/>
+	</resultMap>
+	
+	<!-- 페이징 처리 -->
+	<select id="rSelectListCount" resultType="_int">
+		select
+			   count(*)
+		from refund
+	</select>
+	
+	<!-- 회원조회용 -->
+	<select id="rSelectList" resultMap="refundRset">
+		select
+			   refund_no
+		 <!--, 환불신청이 (회원테이블 조인?)
+		     , 펀딩정보 (주문테이블 조인)
+		 -->
+		     , r_reason
+			 , refund_status
+		  from refund  
+		 order
+		    by refund_no desc   
+	</select>
+</mapper>
+  

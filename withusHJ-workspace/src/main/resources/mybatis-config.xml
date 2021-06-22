@@ -14,14 +14,13 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<typeAliases>
 		<typeAlias type="com.hj.withus.admin.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.hj.withus.admin.model.vo.Order" alias="Order"/>
-<!-- 	
-		<typeAlias type="com.hj.spring.board.model.vo.Reply" alias="Reply"/>
- -->
+		<typeAlias type="com.hj.withus.admin.model.vo.Refund" alias="Refund"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="/mappers/withusMember-mapper.xml"/>
 		<mapper resource="/mappers/withusOrder-mapper.xml"/>
+		<mapper resource="/mappers/withusRefund-mapper.xml"/>
 	</mappers>
 
 </configuration>
