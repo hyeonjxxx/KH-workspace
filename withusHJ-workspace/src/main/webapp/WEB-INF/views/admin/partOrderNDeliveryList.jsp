@@ -90,8 +90,8 @@
 </head>
 <body>
 
-	<!-- header -->
-    <jsp:include page="../common/header.jsp"/>
+	<!-- header 
+    <jsp:include page="../common/header.jsp"/>-->
     
 	<div class="wrap">
     

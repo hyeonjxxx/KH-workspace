@@ -6,12 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-	<!-- jQuery 라이브러리 -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<!-- 부트스트랩에서 제공하고 있는 스타일 -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-	<!-- 부트스트랩에서 제공하고 있는 스크립트 -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<!-- jQuery 라이브러리 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- 부트스트랩에서 제공하고 있는 스타일 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<!-- 부트스트랩에서 제공하고 있는 스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
@@ -67,7 +68,7 @@
         
         <input type="image" src="${ pageContext.request.contextPath }/resources/images/searchIcon.PNG" id="searchIcon">
         
-        
+<!--         
 		<c:if test="${ !empty alertMsg }">
 			<script>
 				alert("${alertMsg}");
@@ -76,7 +77,7 @@
 		</c:if>
 		<c:choose>
             <c:when test="${ empty loginUser }">
-            
+ -->
 				<!-- 로그인전 -->
 				<div class="headerRight">
 					<a href="login.me">로그인</a>
@@ -103,6 +104,7 @@
 					<img src="resources/images/memberIcon.PNG" width="30px" style="margin-left: -3px; margin-top: -6px;">
 				</div>
 			</div>
+		
 
 </body>
 </html>

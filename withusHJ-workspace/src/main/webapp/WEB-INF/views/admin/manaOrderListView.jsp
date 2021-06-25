@@ -103,7 +103,7 @@
                 <tbody>
 	                <c:forEach var="o" items="${ oList }">
 	                    <tr>
-	                        <td>${ o.orderNo }</td>
+	                        <td class="ono">${ o.orderNo }</td>
 	                        <td>${ o.purEmail }</td>
 	                        <td>프로젝트이름<br>리원드/옵션명111</td>
 	                        <td>1</td>
@@ -125,6 +125,16 @@
 	                </c:forEach>
                 </tbody>
             </table>
+            
+           <!-- 주문상세 정보 -->
+           <script type="text/javascript">
+           $(function(){
+        	   $(".table.table-bordered tbody tr").cilck(function(){
+        		   location.href="orderDetail.mana?ono="+$(this).children(".ono").test();
+        	   });
+           });
+           </script>  
+            
         </div>
         
         <br clear="both"><br>

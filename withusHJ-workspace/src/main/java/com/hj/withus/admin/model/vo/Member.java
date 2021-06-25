@@ -16,7 +16,7 @@ public class Member {
 	private String memberId;
 	private String memberPwd;
 	private String memberName;
-	private String phone;
+	private String memberPhone;
 	private String memberCreateDate;
 	private String memberLink;
 	private int reportCount;
@@ -24,5 +24,5 @@ public class Member {
 	private String memberProfile;
 	private String partnerJoin;
 	private String partnerName;
-	private String partnerInto;
+	private String partnerIntro;
 }

@@ -6,7 +6,7 @@
 		<result column="member_id" property="memberId"/>
 		<result column="member_pwd" property="memberPwd"/>
 		<result column="member_name" property="memberName"/>
-		<result column="member_phone" property="phone"/>
+		<result column="member_phone" property="memberPhone"/>
 		<result column="member_create_dt" property="memberCreateDate"/>
 		<result column="member_link" property="memberLink"/>
 		<result column="report_count" property="reportCount"/>
@@ -14,7 +14,7 @@
 		<result column="member_profile" property="memberProfile"/>
 		<result column="partner_join" property="partnerJoin"/>
 		<result column="partner_name" property="partnerName"/>
-		<result column="partner_info" property="partnerInto"/>
+		<result column="partner_intro" property="partnerIntro"/>
 	</resultMap>
 	
 	<!-- 페이징 처리 -->
