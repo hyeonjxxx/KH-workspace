@@ -29,9 +29,7 @@ public class OrderDao {
 	
 	public Order selectOrderDetail(SqlSessionTemplate sqlSession, int orderNo) {
 		
-		Order test =sqlSession.selectOne("withusOrderMapper.selectOrderDetail", orderNo);
-		System.out.println(test);
-		return test;
+		return sqlSession.selectOne("withusOrderMapper.selectOrderDetail", orderNo);
 	}
 
 }

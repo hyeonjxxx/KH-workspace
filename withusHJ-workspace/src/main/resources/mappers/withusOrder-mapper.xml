@@ -70,7 +70,7 @@
 		        order_no
 		      , order_date
 		      , member_name
-		      , project_end_dt
+		      , to_char(project_end_dt, 'YYYY-MM-DD') project_end_dt
 		      , order_status
 		      <!-- , partner_name -->
 		      , project_title
