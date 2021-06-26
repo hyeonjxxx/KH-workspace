@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -32,8 +33,20 @@ public class OrderController {
 		  .setViewName("admin/manaOrderListView");
 		
 		return mv;
+	}
+	
+	@RequestMapping("orderDetail.mana")
+	public String selectOrderDetail(int ono, Model model) {
 		
+		Order o = oService.slectOrderDetail(ono);
 		
+		if(o != null) {
+			model.addAttribute("o", o);
+			return "admin/manaOrderDetailView";
+		}else {
+			model.addAttribute("errorMsg","주문내역 상세 조회 실패");
+			return "";
+		}
 	}
 	
 }

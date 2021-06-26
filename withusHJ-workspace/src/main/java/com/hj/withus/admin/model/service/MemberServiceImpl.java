@@ -28,6 +28,13 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.selectList(sqlSession, pi);
 	}
 
+	@Override
+	public int updateMemStatus(String mId, String mStatus) {
+		return mDao.updateMemStatus(sqlSession, mId, mStatus);
+	}
+	
+	
+
 
 
 

@@ -16,16 +16,21 @@ public class OrderServiceImpl implements OrderService {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	@Autowired
-	private OrderDao orDao;
+	private OrderDao oDao;
 	
 	@Override
 	public int selectListCount() {
-		return orDao.selectListCount(sqlSession);
+		return oDao.selectListCount(sqlSession);
 	}
 	
 	@Override
 	public ArrayList<Order> selectList(PageInfo pi) {
-		return orDao.selectList(sqlSession,pi);
+		return oDao.selectList(sqlSession,pi);
+	}
+
+	@Override
+	public Order slectOrderDetail(int orderNo) {
+		return oDao.selectOrderDetail(sqlSession, orderNo);
 	}
 
 

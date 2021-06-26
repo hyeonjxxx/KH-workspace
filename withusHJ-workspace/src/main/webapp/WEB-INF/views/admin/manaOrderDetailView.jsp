@@ -24,6 +24,10 @@
     .btn.btn-withus{background-color: #3498db; color: white;}
     .btn.btn-withus:hover{cursor: pointer; background-color: #2c83be; color: white;}
 
+    /* text css */
+    .text_st1{color: grey; font-size: 14px;}
+    .text_st2{vertical-align:center; items-align:center;}
+
     /* modal */
     .modal-header.none, .modal-footer.none{border: none;}
     .modal-footer button.btn.btn-secondary{ width: 47%; float: left;}
@@ -43,79 +47,83 @@
             <div class="data1">
                 <label class="tableName">펀딩 내역</label>
                 <table class="table table-bordered">
-                <tr>
-                    <th>펀딩번호</th>
-                    <td>10491</td>
-                    <th>펀딩 금액</th>
-                    <td>44,000 원</td>
-                </tr>
-                <tr>
-                        <th>펀딩 주문날짜</th>
-                        <td>2021-06-09 15:20:11</td>
-                        <th>추가 후원금</th>
-                        <td>5,000 원</td>
-                    </tr>
-                    <tr>
-                        <th>펀딩 서포터</th>
-                        <td>류재석</td>
-                        <th>배송비</th>
-                        <td>0 원</td>
-                    </tr>
-                    <tr>
-                        <th>펀딩 마감일</th>
-                        <td>2021-06-20</td>
-                        <th>총 결제금액</th>
-                        <td>49,000 원</td>
-                    </tr>
-                    <tr>
-                        <th>펀딩 상태</th>
-                        <td>
-                            <!--  -->
-                                                               결제 완료 &nbsp;&nbsp;&nbsp;&nbsp;
-                            <!-- 펀딩마감일 +00일 이후 결제 취소버튼 노출 -->
-                              
-                            <button type="button" class="btn-sm" data-toggle="modal" data-target="#cancelPayModal">결제 취소</button>
-                            
-                        </td>
-                        <th>총 결제금액</th>
-                        <td>49,000 원</td>
-                    </tr>
-                    <tr>
-                        <th rowspan="2">결제 내역</th>
-                        <td rowspan="2">
-                            파트너 : 니브<br>
-                            리워드 : 옵션명 블라블라<br>
-                            수량 : 1개
-                        </td>
-                        <th>카드 번호</th>
-                        <td>1111-2222-1111-2222</td>
+	                <tr>
+	                    <th>펀딩번호</th>
+	                    <td>10491</td>
+	                    <th>펀딩 금액</th>
+	                    <td>44,000 원</td>
+	                </tr>
+	                <tr>
+		                <th>펀딩 주문날짜</th>
+		                <td>2021-06-09 15:20:11</td>
+		                <th>추가 후원금</th>
+		                <td>5,000 원</td>
+	                </tr>
+	                <tr>
+	                    <th>펀딩 서포터</th>
+	                    <td>류재석</td>
+	                    <th>총 결제금액</th>
+	                    <td>49,000 원</td>
+	                </tr>
+	                <tr>
+	                    <th>펀딩 마감일</th>
+	                    <td>2021-06-20</td>
+	                    <th>결제 방법</th>
+	                    <td>신용(체크) 카드</td>
+	                </tr>
+	                <tr>
+		                <th>펀딩 상태</th>
+		                <td>
+		                    <!--  -->
+		                                                       결제 완료 &nbsp;&nbsp;&nbsp;&nbsp;
+		                    <!-- 펀딩마감일 +00일 이후 결제 취소버튼 노출 -->
+		                      
+		                    <button type="button" class="btn-sm" data-toggle="modal" data-target="#cancelPayModal">결제 취소</button>
+		                    
+		                </td>
+	                    <th>카드 번호</th>
+	                    <td>1111-2222-1111-2222</td>
+	                </tr>
+	                <tr>
+                        <th class="text_st2">결제 내역</th>
+	                    <td colspan="3">
+                            <span class="text_st1" style="font-weight: 600;">위글위글</span> <br>
+                            <span>프로젝트명</span>
+                            <span>리워드명</span> <br>
+                            <span class="text_st1">옵션명 / 수량</span>
+	                    </td>
                     </tr> 
                     <tr>
-                        <th>취소/환불 금액</th>
-                        <td>-</td>
                     </tr>              
-                </table>
+           		</table>
             </div>
             <div class="data1">
                 <label class="tableName">배송지 정보</label>
                 <table class="table table-bordered">
                     <tr>
-                        <th>배송지 </th>
-                        <td>서울시 강남구 테헤란로 110, 5층</td>
+                        <th>수취인</th>
+                        <td>이름!</td>
                     </tr>
                     <tr>
                         <th>연락처</th>
                         <td>010-1234-2341</td>
                     </tr>
                     <tr>
+                        <th>배송지 </th>
+                        <td>서울시 강남구 테헤란로 110, 5층</td>
+                    </tr>
+                    <tr>
                         <th>배송시 요청사항</th>
                         <td></td>
                     </tr>
                     <tr>
+                        <th>배송 상태</th>
+                        <td>배송준비중</td>
+                    </tr>
+                    <tr>
                         <th rowspan="2">운송장 번호</th>
                         <td>
-							택배사 <br>
-							ㄹㅇㄴㅁㄹ
+							택배사 : 12345643
                         </td>
                         
                     </tr>      

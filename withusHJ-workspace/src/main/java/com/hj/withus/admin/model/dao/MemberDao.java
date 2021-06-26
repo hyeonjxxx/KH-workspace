@@ -25,5 +25,9 @@ public class MemberDao {
 		
 		return (ArrayList)sqlSession.selectList("withusMemeberMapper.mSelectList", null, rowBounds);
 	}	
+	
+	public int updateMemStatus(SqlSessionTemplate sqlSession, String mId,String mStatus) {
+		return sqlSession.update("withusMemeberMapper.updateMemStatus", mId);
+	}
 
 }

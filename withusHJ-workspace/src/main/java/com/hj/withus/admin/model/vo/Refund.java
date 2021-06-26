@@ -19,4 +19,9 @@ public class Refund {
 	private String reReason;
 	private String refundStatus;
 	
+	private String memberName;
+	private String projectTitle;
+	private String rewardTitle;
+	private String orderOption;
+	
 }

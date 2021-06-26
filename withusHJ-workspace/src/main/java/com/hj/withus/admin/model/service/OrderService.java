@@ -12,5 +12,8 @@ public interface OrderService {
 	int selectListCount();
 	ArrayList<Order> selectList(PageInfo pi);
 	
+	// 상세 조회
+	Order slectOrderDetail(int orderNo);
+	
 
 }

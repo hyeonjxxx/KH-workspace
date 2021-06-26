@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="withusOrderMapper">
+
 	<resultMap type="Order" id="orderRset">
 		<result column="order_no" property="orderNo"/>
 		<result column="project_no" property="projectNo"/>
 		<result column="member_no" property="memberNo"/>
+		<result column="reward_no" property="rewardNo"/>
 		<result column="pur_email" property="purEmail"/>
 		<result column="order_plus" property="orderPlus"/>
+		<result column="totalPrice" property="totalPrice"/>
 		<result column="order_status" property="orderStatus"/>
+		<result column="bank_name" property="bankName"/>
+		<result column="bank_account" property="bankAccount"/>
 		<result column="receiver_name" property="receiverName"/>
 		<result column="receiver_phone" property="receiverPhone"/>
 		<result column="address_no" property="addressNo"/>
@@ -18,7 +23,17 @@
 		<result column="shipping_com" property="shippingCom"/>
 		<result column="shipping_no" property="shippingNo"/>
 		<result column="order_date" property="orderDate"/>
+		<result column="order_count" property="orderCount"/>
+		<result column="order_option" property="orderOption"/>
+		
+		<result column="member_name" property="memberName"/>
+		<result column="project_end_dt" property="projectEndDt"/>
+		<result column="project_Title" property="projectTitle"/>
+		<result column="reward_Title" property="rewardTitle"/>
+		<result column="reward_price" property="rewardPrice"/>
+		<result column="card_no" property="cardNo"/>
 	</resultMap>
+		
 	
 	<!-- 페이징 처리 -->
 	<select id="oSelectListCount" resultType="_int">
@@ -27,22 +42,60 @@
 		from tb_order
 	</select>
 	
-	<!-- 회원조회용 -->
+	<!-- 주문내역 리스트 -->
 	<select id="oSelectList" resultMap="orderRset">
 		select
 			   order_no
-		     , pur_email
+		     , member_name
+             , p.project_title
+             , reward_title
+             , order_option
+             , order_count
 		     , to_char(order_date,'YYYY-MM-DD HH24:MI:SS') order_date
 			 , order_status
-		  from tb_order  
+			 , shipping_status
+		  from tb_order o 
+          join member using (member_no)
+          full join project p
+          on (o.project_no = p.project_no)
+         join reward using (reward_no)
 		 order
-		    by order_no desc   
+		    by order_no desc
 	</select>
+
+	<!-- 상세조회 -->	
+	<select id="selectOrderDetail" resultMap="orderRset"
+            parameterType="_int">
+		select 
+		        order_no
+		      , order_date
+		      , member_name
+		      , project_end_dt
+		      , order_status
+		      <!-- , partner_name -->
+		      , project_title
+		      , reward_title
+		      , order_option
+		      , order_count
+		      , reward_price
+		      , order_plus
+		      , total_price
+		      , card_no
+		      , receiver_name
+		      , address_no
+		      , address_detail
+		      , address
+		      , receiver_phone
+		      , shipping_req
+		   from tb_order
+		   join member using(member_no)
+		   join pay using(order_no)
+		   join reward using(project_no)
+		   join project using(project_no)
+		   where reward.reward_no = tb_order.reward_no	
+		     and order_no = #{orderNo}
+	</select>
+	
+
 </mapper>
-			 <!--        
-			 , case order_status 
-                   when 1 then '결제완료'
-                   when 2 then '취소신청'
-                   else '취소완료'
-               end as 결제상태 
-               -->    
+			  

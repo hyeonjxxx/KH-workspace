@@ -140,46 +140,53 @@
 		                </tr>
 	                </c:forEach>            
 	            </tbody>
+
+
 	        </table>
 	    </div>
-	
-	    <!-- 탈퇴 클릭 시 모달  -->
-	    <!-- The Modal -->
-	    <div class="modal fade" id="delModal">
-	        <div class="modal-dialog modal-dialog-centered" style="width: 380px;">
-	        <div class="modal-content">
-	        
-	            <!-- Modal Header -->
-	            <div class="modal-header">
-	            <h5 class="modal-title">김지원 회원을 탈퇴시키겠습니까?</h5>
-	            <button type="button" class="close" data-dismiss="modal">&times;</button>
-	            </div>
-	            
-	            <!-- Modal body -->
-	            <div class="modal-body">
-	                <form>
-	                    <div class="input-group mb-s" >
-	                        <div class="input-group-prepend">
-	                          <span class="input-group-text">회원상태</span>
-	                        </div>
-	                        <select type="text" class="form-control" id="memberStatus" name="memberStatus">
-	                          <option value="Y">활동</option>
-	                          <option value="N">탈퇴</option>
-	                        </select>
-	                    </div>
-	                </form>
-	            </div>
-	            
-	            <!-- Modal footer -->
-	            <div class="modal-footer">
-	            <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-	            <button type="button" class="btn btn-withus" data-dismiss="modal">수정</button>
-	            </div>
-	            
-	        </div>
-	        </div>
-	    </div>
-	
+			    <!-- 탈퇴 클릭 시 모달  -->
+			    <!-- The Modal -->
+			    <div class="modal fade" id="delModal">
+			        <div class="modal-dialog modal-dialog-centered" style="width: 380px;">
+			        <div class="modal-content">
+			        
+			            <!-- Modal Header -->
+			            <div class="modal-header">
+			            <h5 class="modal-title">${ m.memberName } 회원을 탈퇴시키겠습니까?</h5>
+			            <button type="button" class="close" data-dismiss="modal">&times;</button>
+			            </div>
+			            
+			            <!-- Modal body -->
+			            <div class="modal-body">
+			                <form id=deleteMem method=post>
+			                	<input type="hidden" name="mId" value="${m.memberId }">
+			                	
+			                    <div class="input-group mb-s" >
+			                        <div class="input-group-prepend">
+			                          <span class="input-group-text">회원상태</span>
+			                        </div>
+			                        <select type="text" class="form-control" id="memberStatus" name="memberStatus">
+			                          <option name="memStatus" value="Y">활동</option>
+			                          <option name="memStatus" value="N">탈퇴</option>
+			                        </select>
+			                    </div>
+			                </form>
+			            </div>
+			            
+			            <!-- Modal footer -->
+			            <div class="modal-footer">
+			            <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+			            <button type="button" class="btn btn-withus" data-dismiss="modal" onclick="deleteMemSubmit()">수정</button>
+			            </div>
+			        </div>
+			        </div>
+			    </div>			            
+		             
+		             <script>
+		             	function deleteMemSubmit(){
+		             		$("#deleteMem").attr("action","deleteMem.mana").submit();
+		             	}
+		             </script>
 	
 	    
 	    <br clear="both"><br>

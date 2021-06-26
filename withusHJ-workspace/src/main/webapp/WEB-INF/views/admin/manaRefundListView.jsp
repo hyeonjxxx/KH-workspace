@@ -93,7 +93,7 @@
                     <tr>
                         <th>신청번호</th>
                         <th>환불 신청인</th>
-                        <th width="330">펀딩 정보</th>
+                        <th width="460">펀딩 정보</th>
                         <th width="180">환불 사유</th>
                         <th>환불 상태</th>
                     </tr>
@@ -102,8 +102,8 @@
                     <c:forEach var="r" items="${ rList }">
 	                    <tr>
 	                        <td >${ r.refundNo }</td>
-	                        <td>김지원</td>
-	                        <td>프로젝트이름<br>리원드/옵션명111</td>
+	                        <td>${ r.memberName }</td>
+	                        <td>${ r.projectTitle }<br>${ r.rewardTitle }/${ r.orderOption }</td>
 	                        <td>${ r.reReason }</td>
 	                        <td>${ r.refundStatus }</td>
 	                    </tr>

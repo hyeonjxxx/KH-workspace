@@ -26,5 +26,12 @@ public class OrderDao {
 		
 		return (ArrayList)sqlSession.selectList("withusOrderMapper.oSelectList", null, rowBounds);
 	}
+	
+	public Order selectOrderDetail(SqlSessionTemplate sqlSession, int orderNo) {
+		
+		Order test =sqlSession.selectOne("withusOrderMapper.selectOrderDetail", orderNo);
+		System.out.println(test);
+		return test;
+	}
 
 }

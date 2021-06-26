@@ -89,37 +89,48 @@
 
             <br>
 
-            <table class="table table-bordered">
+            <table class="table table-bordered" id="orderTable">
                 <thead class="tableHead">
                     <tr>
                         <th>주문번호</th>
                         <th>펀딩 서포터명</th>
-                        <th width="250">펀딩 정보</th>
+                        <th width="420">펀딩 정보</th>
                         <th>수량</th>
                         <th>주문 날짜</th>
                         <th>결제 상태</th>
+                        <th>배송 상태<th>
                     </tr>
                 </thead>
                 <tbody>
 	                <c:forEach var="o" items="${ oList }">
 	                    <tr>
 	                        <td class="ono">${ o.orderNo }</td>
-	                        <td>${ o.purEmail }</td>
-	                        <td>프로젝트이름<br>리원드/옵션명111</td>
-	                        <td>1</td>
+	                        <td>${ o.memberName }</td>
+	                        <td>${ o.projectTitle }<br>${ o.rewardTitle }/${ o.orderOption }</td>
+	                        <td>${ o.orderCount }</td>
 	                        <td>${ o.orderDate }</td>
-	                        
-	                        	<c:choose>
-	                        		<c:when test="${ o.orderStatus == 1 }">
-	                        			<td>결제완료</td>
-	                        		</c:when>
-	                        		<c:when test="${ o.orderStatus == 2 }">
-	                        			<td>취소요청</td>
-	                        		</c:when>
-	                        		<c:otherwise>
-	                        			<td>취소완료</td>
-	                        		</c:otherwise>
-	                        	</c:choose>
+                        	<c:choose>
+                        		<c:when test="${ o.orderStatus == 1 }">
+                        			<td>결제완료</td>
+                        		</c:when>
+                        		<c:when test="${ o.orderStatus == 2 }">
+                        			<td>취소요청</td>
+                        		</c:when>
+                        		<c:when test="${ o.orderStatus == 3 }">
+                        			<td>취소완료</td>
+                        		</c:when>
+                        	</c:choose>
+                        	<c:choose>
+                        		<c:when test="${ o.shippingStatus == 1 }">
+                        			<td>배송준비중</td>
+                        		</c:when>
+                        		<c:when test="${ o.shippingStatus == 2 }">
+                        			<td>배송시작</td>
+                        		</c:when>
+                        		<c:when test="${ o.shippingStatus == 3 }">
+                        			<td>배송완료</td>
+                        		</c:when>
+                        	</c:choose>
 	                       
 	                    </tr>
 	                </c:forEach>
@@ -129,11 +140,12 @@
            <!-- 주문상세 정보 -->
            <script type="text/javascript">
            $(function(){
-        	   $(".table.table-bordered tbody tr").cilck(function(){
-        		   location.href="orderDetail.mana?ono="+$(this).children(".ono").test();
+        	   $("#orderTable tbody tr").click(function(){
+        		   location.href="orderDetail.mana?ono="+$(this).children(".ono").text();
         	   });
            });
            </script>  
+
             
         </div>
         

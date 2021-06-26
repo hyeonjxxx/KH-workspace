@@ -10,5 +10,7 @@ public interface MemberService {
 	int selectListCount();
 	ArrayList<Member> selectList(PageInfo pi);
 	
+	int updateMemStatus(String mId, String mStatus);
+	
 
 }
