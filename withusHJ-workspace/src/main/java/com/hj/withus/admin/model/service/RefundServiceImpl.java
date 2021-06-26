@@ -28,4 +28,9 @@ public class RefundServiceImpl implements RefundService {
 		return rDao.selectList(sqlSession, pi);
 	}
 
+	@Override
+	public Refund selectRefund(int refundNo) {
+		return rDao.selectRefund(sqlSession, refundNo);
+	}
+
 }

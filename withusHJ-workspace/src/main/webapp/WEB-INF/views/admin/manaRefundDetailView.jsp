@@ -56,34 +56,28 @@
                     <tr>
                         <th>펀딩 서포터</th>
                         <td>류재석</td>
-                        <th>배송비</th>
-                        <td>0 원</td>
+                        <th>총 결제금액</th>
+                        <td>49,000 원</td> 
                     </tr>
                     <tr>
                         <th>펀딩 마감일</th>
                         <td>2021-06-20</td>
                         <th>결제 방법</th>
-                        <td>신용(체크)카드</td> 
+                        <td>신용(체크)카드</td>
                     </tr>
                     <tr>
                         <th>펀딩 상태</th>
                         <td>결제 완료</td>
-                        <th>총 결제금액</th>
-                        <td>49,000 원</td>
+                        <th>카드 번호</th>
+                        <td>1111-2222-1111-2222</td>
                     </tr>
                     <tr>
-                        <th rowspan="2">결제 내역</th>
-                        <td rowspan="2">
+                        <th colspan="1">결제 내역</th>
+                        <td colspan="3">
 				                            파트너 : 니브<br>
 				                            리워드 : 옵션명 블라블라<br>
 				                            수량 : 1개
                         </td>
-                        <th>카드 번호</th>
-                        <td>1111-2222-1111-2222</td>
-                    </tr> 
-                    <tr>
-                        <th>취소/환불 금액</th>
-                        <td>49,000원</td>
                     </tr>     
                 </table>
             </div>
@@ -96,15 +90,19 @@
                     </tr>
                     <tr>
                         <th>환불사유</th>
-                        <td>배송 중 파손</td>
+                        <td>${ r.reReason }</td>
                     </tr>
                     <tr>
                         <th>증빙자료</th>
-                        <td>사진원본명.jpg</td>
+                        <td>${ r.reOriginName }</td>
                     </tr>
                     <tr>
+                        <th>취소/환불 금액</th>
+                        <td>49,000원</td>
+                    </tr> 
+                    <tr>
                         <th>파트너 승인여부</th>
-                        <td>N</td>
+                        <td>${ r.refundStatus }</td>
                         
                     </tr>      
                 </table> 

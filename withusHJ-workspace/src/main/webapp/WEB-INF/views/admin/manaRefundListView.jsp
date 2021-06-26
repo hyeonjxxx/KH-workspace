@@ -88,7 +88,7 @@
 
             <br>
 
-            <table class="table table-bordered">
+            <table class="table table-bordered" id="refundList">
                 <thead class="tableHead">
                     <tr>
                         <th>신청번호</th>
@@ -101,7 +101,7 @@
                 <tbody>
                     <c:forEach var="r" items="${ rList }">
 	                    <tr>
-	                        <td >${ r.refundNo }</td>
+	                        <td class="rno">${ r.refundNo }</td>
 	                        <td>${ r.memberName }</td>
 	                        <td>${ r.projectTitle }<br>${ r.rewardTitle }/${ r.orderOption }</td>
 	                        <td>${ r.reReason }</td>
@@ -110,6 +110,13 @@
                     </c:forEach>
                 </tbody>
             </table>
+            <script>
+            $(function(){
+            	$("#refundList tbody tr").click(function(){
+            		location.href="refundDetail.mana?rno="+$(this).children("rno").text();
+            	});
+            });
+            </script>
         </div>
         
         <br clear="both"><br>

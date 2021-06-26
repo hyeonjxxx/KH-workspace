@@ -46,5 +46,17 @@
 		 order
 		    by refund_no desc   
 	</select>
+	
+	<select id="selectRefund" resultMap="refundRset" 
+	        parameterType="_int">
+	select
+		    r_reason
+		  , r_OriginName
+		  , refund_status
+		   
+	from refund
+	where refund_no = #{refundNo}
+	</select>
+	
 </mapper>
   

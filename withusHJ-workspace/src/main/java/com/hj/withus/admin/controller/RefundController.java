@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -33,10 +34,13 @@ public class RefundController {
 		  .setViewName("admin/manaRefundListView");
 		
 		return mv;
-		
-		
-		
-		
+	}
+	
+	@RequestMapping("refundDetail.mana")
+	public String selectRefund(int rno, Model model) {
+		Refund r = rService.selectRefund(rno);
+		model.addAttribute("r", r);
+		return "admin/manaRefundDetailView";
 	}
 
 }

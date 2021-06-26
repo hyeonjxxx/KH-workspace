@@ -25,4 +25,8 @@ public class RefundDao {
 		
 		return (ArrayList)sqlSession.selectList("withusRefundMapper.rSelectList",null, rowBounds);
 	}
+	
+	public Refund selectRefund(SqlSessionTemplate sqlSession, int refundNo) {
+		return sqlSession.selectOne("withusRefundMapper.selectRefund", refundNo);
+	}
 }
