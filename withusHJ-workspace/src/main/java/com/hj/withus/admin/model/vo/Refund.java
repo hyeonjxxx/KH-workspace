@@ -19,9 +19,21 @@ public class Refund {
 	private String reReason;
 	private String refundStatus;
 	
+	// 환불신청 상세
 	private String memberName;
-	private String projectTitle;
 	private String rewardTitle;
+	private String rewardPrice;
+	private String projectTitle;
+	private String projectEndDt;
 	private String orderOption;
+	private String orderDate;
+	private String orderPlus;
+	private String totalPrice;
+	private int orderStatus;
+	private int orderCount;
+	private String bankName;
+	private String bankAccount;
+	
+	
 	
 }

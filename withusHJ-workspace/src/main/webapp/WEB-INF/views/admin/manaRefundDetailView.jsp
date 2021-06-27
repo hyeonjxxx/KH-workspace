@@ -21,6 +21,9 @@
     .btn.btn-withus{background-color: #3498db; color: white;}
     .btn.btn-withus:hover{cursor: pointer; background-color: #2c83be; color: white;}
 
+	/* text css  */
+	.text_st2{vertical-align:center; items-align:center;}
+
     /* modal */
     .modal-header.none {border-bottom: none;} 
     .modal-footer.none{border-top: none;}
@@ -41,44 +44,56 @@
             <div class="data1">
                 <label class="tableName">펀딩 내역</label>
                 <table class="table table-bordered">
-                <tr>
-                    <th>펀딩번호</th>
-                    <td>10491</td>
-                    <th>펀딩 금액</th>
-                    <td>44,000 원</td>
-                </tr>
-                <tr>
-                        <th>펀딩 주문날짜</th>
-                        <td>2021-06-09 15:20:11</td>
-                        <th>추가 후원금</th>
-                        <td>5,000 원</td>
-                    </tr>
-                    <tr>
-                        <th>펀딩 서포터</th>
-                        <td>류재석</td>
-                        <th>총 결제금액</th>
-                        <td>49,000 원</td> 
-                    </tr>
-                    <tr>
-                        <th>펀딩 마감일</th>
-                        <td>2021-06-20</td>
-                        <th>결제 방법</th>
-                        <td>신용(체크)카드</td>
-                    </tr>
-                    <tr>
-                        <th>펀딩 상태</th>
-                        <td>결제 완료</td>
-                        <th>카드 번호</th>
-                        <td>1111-2222-1111-2222</td>
-                    </tr>
-                    <tr>
-                        <th colspan="1">결제 내역</th>
-                        <td colspan="3">
-				                            파트너 : 니브<br>
-				                            리워드 : 옵션명 블라블라<br>
-				                            수량 : 1개
-                        </td>
-                    </tr>     
+	                <tr>
+	                    <th>펀딩번호</th>
+	                    <td>${ o.refundNo }</td>
+	                    <th>펀딩 금액</th>
+	                    <td>${o.rewardPrice} 원</td>
+	                </tr>
+	                <tr>
+	                    <th>펀딩 주문날짜</th>
+	                    <td>${ r.orderDate }</td>
+	                    <th>추가 후원금</th>
+	                    <td>${ r.orderPlus } 원</td>
+	                </tr>
+	                <tr>
+	                    <th>펀딩 서포터</th>
+	                    <td>${ r.memberName }</td>
+	                    <th>총 결제금액</th>
+	                    <td>${ r.totalPrice } 원</td> 
+	                </tr>
+	                <tr>
+	                    <th>펀딩 마감일</th>
+	                    <td>${ r.projectEndDt }</td>
+	                    <th>결제 방법</th>
+	                    <td>신용(체크)카드</td>
+	                </tr>
+	                <tr>
+	                    <th>펀딩 상태</th>
+	                    <c:choose>
+                       		<c:when test="${ r.orderStatus == 1 }">
+                       			<td>결제완료</td>
+                       		</c:when>
+                       		<c:when test="${ r.orderStatus == 2 }">
+                       			<td>취소요청</td>
+                       		</c:when>
+                       		<c:when test="${ r.orderStatus == 3 }">
+                       			<td>취소완료</td>
+                       		</c:when>
+                       	</c:choose>
+	                    <th>카드 번호</th>
+	                    <td>${ r.cardNo }</td>
+	                </tr>
+	                <tr>
+	                    <th>결제 내역</th>
+	                    <td colspan="3">
+	                    	<span class="text_st1" style="font-weight: 600;">파트너명</span> <br>
+                            <span>${ r.projectTitle }</span>
+                            <span>${ r.rewardTitle }</span> <br>
+                            <span class="text_st1">${ r.orderOption } / ${ r.orderCount }</span>
+	                    </td>       
+	                    </td>
+	                </tr>     
                 </table>
             </div>
             <div class="data1">
@@ -86,7 +101,13 @@
                 <table class="table table-bordered">
                     <tr>
                         <th>펀딩 정보 </th>
-                        <td>[울트라얼리버트]쟁여두기세트 리워드명 ~~~</td>
+                        <td><span>${ r.rewardTitle }</span> <br>
+                            <span class="text_st1">${ r.orderOption } / ${ r.orderCount }</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>환불계좌 </th>
+                        <td>${ r.bankName } / ${ r.bankAccount }</td>
                     </tr>
                     <tr>
                         <th>환불사유</th>
@@ -98,7 +119,7 @@
                     </tr>
                     <tr>
                         <th>취소/환불 금액</th>
-                        <td>49,000원</td>
+                        <td>${ r.totalPrice }원</td>
                     </tr> 
                     <tr>
                         <th>파트너 승인여부</th>
@@ -113,7 +134,7 @@
 
         <div class="button_area">
             <button type="button" class="btn btn-withus"  data-toggle="modal" data-target="#cancelPayModal">수 정</button>
-            <button type="button" class="btn btn-secondary">목록으로</button>
+            <button type="button" class="btn btn-secondary"  onclick="history.back()">목록으로</button>
         </div>
 
         <!-- 탈퇴 클릭 시 모달  -->

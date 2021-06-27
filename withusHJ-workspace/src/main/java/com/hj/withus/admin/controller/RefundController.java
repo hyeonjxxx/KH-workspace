@@ -38,8 +38,10 @@ public class RefundController {
 	
 	@RequestMapping("refundDetail.mana")
 	public String selectRefund(int rno, Model model) {
+		
 		Refund r = rService.selectRefund(rno);
 		model.addAttribute("r", r);
+		
 		return "admin/manaRefundDetailView";
 	}
 

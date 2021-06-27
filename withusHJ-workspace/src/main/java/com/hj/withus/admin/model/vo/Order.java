@@ -10,7 +10,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Setter @Getter
 @ToString
-public class Order {
+public class Order   {
 
 	private int orderNo;
 	private int projectNo;

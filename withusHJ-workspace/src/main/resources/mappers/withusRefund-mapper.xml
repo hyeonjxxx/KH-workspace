@@ -10,9 +10,19 @@
 		<result column="refund_status" property="refundStatus"/>
 		
 		<result column="member_name" property="memberName"/>
-		<result column="project_title" property="projectTitle"/>
 		<result column="reward_title" property="rewardTitle"/>
+		<result column="reward_price" property="rewardPrice"/>
+		<result column="project_title" property="projectTitle"/>
+		<result column="project_end_dt" property="projectEndDt"/>
 		<result column="order_option" property="orderOption"/>
+		<result column="order_date" property="orderDate"/>
+		<result column="order_plus" property="orderPlus"/>
+		<result column="total_price" property="totalPrice"/>
+		<result column="order_status" property="orderStatus"/>
+		<result column="order_count" property="orderCount"/>
+		<result column="bank_name" property="bankName"/>
+		<result column="bank_account" property="bankAccount"/>
+		
 	</resultMap>
 	
 	<!-- 페이징 처리 -->
@@ -50,11 +60,44 @@
 	<select id="selectRefund" resultMap="refundRset" 
 	        parameterType="_int">
 	select
-		    r_reason
-		  , r_OriginName
-		  , refund_status
-		   
-	from refund
+	         refund_no
+	     --, reward_pirce
+	     --, order_date
+	     --, order_plus
+	     --, member_name
+	     --, total_price
+	    -- , project_end_dt
+	     --, order_Status
+	     --, cardNo
+	     --, project_title
+	     --, reward_title
+	     --, order_option
+	     --, order_count
+	     --, bank_name
+	     --, bank_account
+	     , r_reason
+	     , r_changename
+	     , refund_status
+	  from refund , 
+	       (   
+	       select 
+	               order_no
+	             , order_date   
+	             , order_status
+	             , order_count
+	             , order_plus
+	             , order_option
+	             , bank_name
+	             , bank_account
+	             , total_price
+	             , reward_title
+	             , reward_price
+	             , o.reward_no 
+	          from tb_order o
+	          join reward r 
+	            on (o.reward_no = r.reward_no)
+	          where o.reward_no = r.reward_no        
+	       )
 	where refund_no = #{refundNo}
 	</select>
 	

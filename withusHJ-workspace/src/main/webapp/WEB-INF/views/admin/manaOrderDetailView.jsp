@@ -145,7 +145,7 @@
 
         <div class="button_area">
             <button type="button" class="btn btn-withus">수 정</button>
-            <button type="button" class="btn btn-secondary">목록으로</button>
+            <button type="button" class="btn btn-secondary"  onclick="history.back()">목록으로</button>
         </div>
 
         <!-- 탈퇴 클릭 시 모달  -->
