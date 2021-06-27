@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import com.hj.withus.common.model.PageInfo;
 
-
 @Repository
 public class OrderDao {
 	
@@ -17,7 +16,7 @@ public class OrderDao {
 		return sqlSession.selectOne("withusOrderMapper.oSelectListCount");
 	}
 	
-	public ArrayList<Order> selectList(SqlSessionTemplate sqlSession, PageInfo pi){
+	public ArrayList<com.hj.withus.admin.model.vo.Order> selectList(SqlSessionTemplate sqlSession, PageInfo pi){
 		
 		int offset =(pi.getCurrentPage()-1)*pi.getBoardLimit();
 		int limit = pi.getBoardLimit();
@@ -27,7 +26,7 @@ public class OrderDao {
 		return (ArrayList)sqlSession.selectList("withusOrderMapper.oSelectList", null, rowBounds);
 	}
 	
-	public Order selectOrderDetail(SqlSessionTemplate sqlSession, int orderNo) {
+	public com.hj.withus.admin.model.vo.Order selectOrderDetail(SqlSessionTemplate sqlSession, int orderNo) {
 		
 		return sqlSession.selectOne("withusOrderMapper.selectOrderDetail", orderNo);
 	}

@@ -3,7 +3,6 @@ package com.hj.withus.admin.controller;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.hj.withus.admin.model.service.OrderService;
 import com.hj.withus.common.model.PageInfo;
+import com.hj.withus.admin.model.vo.Order;
 import com.hj.withus.common.template.Pagination;
 
 @Controller
@@ -36,17 +36,17 @@ public class OrderController {
 	}
 	
 	@RequestMapping("orderDetail.mana")
-	public String selectOrderDetail(int ono, Model model) {
+	public String selectOrder(int ono, Model model) {
 		
 		Order o = oService.slectOrderDetail(ono);
+		model.addAttribute("o", o);
+		return "admin/manaOrderDetailView";
 		
-		if(o != null) {
-			model.addAttribute("o", o);
-			return "admin/manaOrderDetailView";
-		}else {
-			model.addAttribute("errorMsg","주문내역 상세 조회 실패");
-			return "";
-		}
+//		if(o != null) {
+//		}else {
+//			model.addAttribute("errorMsg","주문내역 상세 조회 실패");
+//			return "";
+//		}
 	}
 	
 }

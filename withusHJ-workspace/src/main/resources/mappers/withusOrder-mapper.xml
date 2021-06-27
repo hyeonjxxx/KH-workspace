@@ -9,7 +9,7 @@
 		<result column="reward_no" property="rewardNo"/>
 		<result column="pur_email" property="purEmail"/>
 		<result column="order_plus" property="orderPlus"/>
-		<result column="totalPrice" property="totalPrice"/>
+		<result column="total_price" property="totalPrice"/>
 		<result column="order_status" property="orderStatus"/>
 		<result column="bank_name" property="bankName"/>
 		<result column="bank_account" property="bankAccount"/>
@@ -72,14 +72,13 @@
 		      , member_name
 		      , to_char(project_end_dt, 'YYYY-MM-DD') project_end_dt
 		      , order_status
-		      <!-- , partner_name -->
 		      , project_title
 		      , reward_title
 		      , order_option
 		      , order_count
 		      , reward_price
 		      , order_plus
-		      , total_price
+		      , to_char(total_price, '999,999,999,999,999')total_price
 		      , card_no
 		      , receiver_name
 		      , address_no
@@ -87,6 +86,7 @@
 		      , address
 		      , receiver_phone
 		      , shipping_req
+		      , shipping_status
 		   from tb_order
 		   join member using(member_no)
 		   join pay using(order_no)

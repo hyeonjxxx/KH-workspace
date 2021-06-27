@@ -49,25 +49,25 @@
                 <table class="table table-bordered">
 	                <tr>
 	                    <th>펀딩번호</th>
-	                    <td>10491</td>
+	                    <td>${ o.orderNo }</td>
 	                    <th>펀딩 금액</th>
-	                    <td>44,000 원</td>
+	                    <td>${o.rewardPrice} 원</td>
 	                </tr>
 	                <tr>
 		                <th>펀딩 주문날짜</th>
-		                <td>2021-06-09 15:20:11</td>
+		                <td>${ o.orderDate }</td>
 		                <th>추가 후원금</th>
-		                <td>5,000 원</td>
+		                <td>${ o.orderPlus } 원</td>
 	                </tr>
 	                <tr>
 	                    <th>펀딩 서포터</th>
-	                    <td>류재석</td>
+	                    <td>${ o.memberName }</td>
 	                    <th>총 결제금액</th>
-	                    <td>49,000 원</td>
+	                    <td>${ o.totalPrice } 원</td>
 	                </tr>
 	                <tr>
 	                    <th>펀딩 마감일</th>
-	                    <td>2021-06-20</td>
+	                    <td>${ o.projectEndDt }</td>
 	                    <th>결제 방법</th>
 	                    <td>신용(체크) 카드</td>
 	                </tr>
@@ -82,15 +82,15 @@
 		                    
 		                </td>
 	                    <th>카드 번호</th>
-	                    <td>1111-2222-1111-2222</td>
+	                    <td>${ o.cardNo }</td>
 	                </tr>
 	                <tr>
                         <th class="text_st2">결제 내역</th>
 	                    <td colspan="3">
-                            <span class="text_st1" style="font-weight: 600;">위글위글</span> <br>
-                            <span>프로젝트명</span>
-                            <span>리워드명</span> <br>
-                            <span class="text_st1">옵션명 / 수량</span>
+                            <span class="text_st1" style="font-weight: 600;">파트너명</span> <br>
+                            <span>${ o.projectTitle }</span>
+                            <span>${ o.rewardTitle }</span> <br>
+                            <span class="text_st1">${ o.orderOption } / ${ o.orderCount }</span>
 	                    </td>
                     </tr> 
                     <tr>
@@ -102,28 +102,38 @@
                 <table class="table table-bordered">
                     <tr>
                         <th>수취인</th>
-                        <td>이름!</td>
+                        <td>${ o.receiverName }</td>
                     </tr>
                     <tr>
                         <th>연락처</th>
-                        <td>010-1234-2341</td>
+                        <td>${ o.receiverPhone }</td>
                     </tr>
                     <tr>
                         <th>배송지 </th>
-                        <td>서울시 강남구 테헤란로 110, 5층</td>
+                        <td>[${ o.addressNo }] ${ o.addressDetail }, ${ o.address }</td>
                     </tr>
                     <tr>
                         <th>배송시 요청사항</th>
-                        <td></td>
+                        <td>${ o.shippingReq }</td>
                     </tr>
                     <tr>
                         <th>배송 상태</th>
-                        <td>배송준비중</td>
+                        <c:choose>
+                       		<c:when test="${ o.shippingStatus == 1 }">
+                       			<td>배송준비중</td>
+                       		</c:when>
+                       		<c:when test="${ o.shippingStatus == 2 }">
+                       			<td>배송시작</td>
+                       		</c:when>
+                       		<c:when test="${ o.shippingStatus == 3 }">
+                       			<td>배송완료</td>
+                       		</c:when>
+                       	</c:choose>
                     </tr>
                     <tr>
                         <th rowspan="2">운송장 번호</th>
                         <td>
-							택배사 : 12345643
+							${ o.shippingCom } : ${ o.shippingNo }
                         </td>
                         
                     </tr>      

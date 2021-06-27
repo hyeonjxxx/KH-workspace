@@ -18,7 +18,7 @@ public class Order {
 	private int rewardNo;
 	private String purEmail;
 	private int orderPlus;
-	private int totalPrice;
+	private String totalPrice;
 	private int orderStatus;
 	private String bankName;
 	private String bankAccount;

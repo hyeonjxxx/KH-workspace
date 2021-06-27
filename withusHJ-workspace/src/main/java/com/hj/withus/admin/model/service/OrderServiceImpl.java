@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
 import com.hj.withus.admin.model.dao.OrderDao;
+import com.hj.withus.admin.model.vo.Order;
 import com.hj.withus.common.model.PageInfo;
 
 @Service
@@ -30,7 +30,7 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public Order slectOrderDetail(int orderNo) {
-		return oDao.selectOrderDetail(sqlSession, orderNo);
+		return (Order) oDao.selectOrderDetail(sqlSession, orderNo);
 	}
 
 
