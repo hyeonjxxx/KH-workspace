@@ -31,6 +31,7 @@ public class Refund {
 	private String totalPrice;
 	private int orderStatus;
 	private int orderCount;
+	private String cardNo;
 	private String bankName;
 	private String bankAccount;
 	

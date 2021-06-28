@@ -46,7 +46,7 @@
                 <table class="table table-bordered">
 	                <tr>
 	                    <th>펀딩번호</th>
-	                    <td>${ o.refundNo }</td>
+	                    <td>${ o.orderNo }</td>
 	                    <th>펀딩 금액</th>
 	                    <td>${o.rewardPrice} 원</td>
 	                </tr>
@@ -100,7 +100,7 @@
                 <label class="tableName">환불신청 정보</label>
                 <table class="table table-bordered">
                     <tr>
-                        <th>펀딩 정보 </th>
+                        <th width=265>펀딩 정보 </th>
                         <td><span>${ r.rewardTitle }</span> <br>
                             <span class="text_st1">${ r.orderOption } / ${ r.orderCount }</span>
                         </td>
@@ -115,7 +115,7 @@
                     </tr>
                     <tr>
                         <th>증빙자료</th>
-                        <td>${ r.reOriginName }</td>
+                        <td>${ r.reChangeName }</td>
                     </tr>
                     <tr>
                         <th>취소/환불 금액</th>

@@ -8,10 +8,17 @@
 <title>Insert title here</title>
 <!-- Load icon library(검색) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- jQuery 라이브러리 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- 부트스트랩에서 제공하고 있는 스타일 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<!-- 부트스트랩에서 제공하고 있는 스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
     
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+
   *{box-sizing: border-box;} 
   .wrap{width: 1000px; height: 1800px; margin: auto;}
   .wrap>div{width: 100%;}
@@ -90,14 +97,11 @@
 </head>
 <body>
 
-	<!-- header 
-    <jsp:include page="../common/header.jsp"/>-->
+
     
 	<div class="wrap">
     
-    	<!-- 마이페이지 사이드 메뉴바
-    	<jsp:include page=""/>
-    	 -->
+
     	 
 	    <!--  -->
 	    <div id="mypage">
@@ -430,7 +434,5 @@
 
 	</div>
 	
-	<!-- footer -->
-    <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

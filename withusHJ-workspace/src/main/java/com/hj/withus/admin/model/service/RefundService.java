@@ -10,7 +10,7 @@ public interface RefundService {
 	
 	int selectListCount();
 	ArrayList<Refund> selectList(PageInfo pi);
-	
+	// 상세조회
 	Refund selectRefund(int refundNo);
 
 }

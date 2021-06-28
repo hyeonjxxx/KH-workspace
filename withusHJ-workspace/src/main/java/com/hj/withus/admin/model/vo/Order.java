@@ -36,7 +36,8 @@ public class Order   {
 	private String orderOption;
 	
 	// 주문내역 조회시 필요한 컬럼 선언
-	private String memberName;
+	private String memberNameSm;
+	private String memberNamePm;
 	private String projectEndDt;
 	private String projectTitle;
 	private String rewardTitle;

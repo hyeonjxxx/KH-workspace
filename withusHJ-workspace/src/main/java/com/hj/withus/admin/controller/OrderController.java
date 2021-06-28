@@ -26,9 +26,9 @@ public class OrderController {
 		int totalList = oService.selectListCount();
 		PageInfo pi = Pagination.getPageInfo(totalList, currentPage, 5, 10);
 		
-		ArrayList<Order> oList = oService.selectList(pi);
+		ArrayList<Order> olist = oService.selectList(pi);
 		
-		mv.addObject("oList", oList)
+		mv.addObject("olist", olist)
 		  .addObject("pi", pi)
 		  .setViewName("admin/manaOrderListView");
 		
@@ -39,14 +39,20 @@ public class OrderController {
 	public String selectOrder(int ono, Model model) {
 		
 		Order o = oService.slectOrderDetail(ono);
-		model.addAttribute("o", o);
-		return "admin/manaOrderDetailView";
 		
-//		if(o != null) {
-//		}else {
-//			model.addAttribute("errorMsg","주문내역 상세 조회 실패");
-//			return "";
-//		}
+		if(o != null) {
+			model.addAttribute("o", o);
+			return "admin/manaOrderDetailView";
+		}else {
+			model.addAttribute("errorMsg","주문내역 상세 조회 실패");
+			return "";
+		}
 	}
+	
+	@RequestMapping("orderNDeliveryList.part")
+	public String selectOrderNDilvery() {
+		return "admin/partOrderNDeliveryList";
+	}
+
 	
 }

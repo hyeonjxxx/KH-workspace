@@ -26,7 +26,8 @@
 		<result column="order_count" property="orderCount"/>
 		<result column="order_option" property="orderOption"/>
 		
-		<result column="member_name" property="memberName"/>
+		<result column="sm.member_name" property="memberNameSm"/>
+		<result column="pm.member_name" property="memberNamePm"/>
 		<result column="project_end_dt" property="projectEndDt"/>
 		<result column="project_Title" property="projectTitle"/>
 		<result column="reward_Title" property="rewardTitle"/>
@@ -69,9 +70,10 @@
 		select 
 		        order_no
 		      , order_date
-		      , member_name
+		      , sm.member_name
 		      , to_char(project_end_dt, 'YYYY-MM-DD') project_end_dt
 		      , order_status
+		      , pm.member_name 
 		      , project_title
 		      , reward_title
 		      , order_option
@@ -87,13 +89,33 @@
 		      , receiver_phone
 		      , shipping_req
 		      , shipping_status
-		   from tb_order
-		   join member using(member_no)
+		   from tb_order o
+		   join member sm on(o.member_no = sm.member_no)
 		   join pay using(order_no)
 		   join reward using(project_no)
-		   join project using(project_no)
-		   where reward.reward_no = tb_order.reward_no	
-		     and order_no = #{orderNo}
+		   join project p using(project_no)
+		   join member pm on(p.member_no = pm.member_no)
+		   where order_no = #{orderNo}
+	</select>
+	
+	<!-- 사용자(파트너) -->
+	<!-- 파트너 발송관리 -->
+	<select id="" >
+		select 
+		       order_no
+		     , member_name
+		     , order_status
+		     , total_price
+		     , reward_title
+		     , order_option
+		     , delivery_date
+		     , shipping_status
+		     , shipping_com
+		     , shipping_no
+		  from tb_order o
+		  join member m on(o.member_no = m.member_no)
+		  join reward r on (o.project_no = r.project_no)
+		  join project p on(o.project_no = p.project_no)
 	</select>
 	
 

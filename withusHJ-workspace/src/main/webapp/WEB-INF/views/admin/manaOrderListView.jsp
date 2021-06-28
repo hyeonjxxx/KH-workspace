@@ -102,7 +102,7 @@
                     </tr>
                 </thead>
                 <tbody>
-	                <c:forEach var="o" items="${ oList }">
+	                <c:forEach var="o" items="${ olist }">
 	                    <tr>
 	                        <td class="ono">${ o.orderNo }</td>
 	                        <td>${ o.memberName }</td>

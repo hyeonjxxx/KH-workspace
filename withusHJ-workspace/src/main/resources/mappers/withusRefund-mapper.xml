@@ -22,7 +22,7 @@
 		<result column="order_count" property="orderCount"/>
 		<result column="bank_name" property="bankName"/>
 		<result column="bank_account" property="bankAccount"/>
-		
+		<result column="card_no" property="cardNo"/>
 	</resultMap>
 	
 	<!-- 페이징 처리 -->
@@ -59,47 +59,36 @@
 	
 	<select id="selectRefund" resultMap="refundRset" 
 	        parameterType="_int">
-	select
-	         refund_no
-	     --, reward_pirce
-	     --, order_date
-	     --, order_plus
-	     --, member_name
-	     --, total_price
-	    -- , project_end_dt
-	     --, order_Status
-	     --, cardNo
-	     --, project_title
-	     --, reward_title
-	     --, order_option
-	     --, order_count
-	     --, bank_name
-	     --, bank_account
-	     , r_reason
-	     , r_changename
-	     , refund_status
-	  from refund , 
-	       (   
-	       select 
-	               order_no
-	             , order_date   
-	             , order_status
-	             , order_count
-	             , order_plus
-	             , order_option
-	             , bank_name
-	             , bank_account
-	             , total_price
-	             , reward_title
-	             , reward_price
-	             , o.reward_no 
-	          from tb_order o
-	          join reward r 
-	            on (o.reward_no = r.reward_no)
-	          where o.reward_no = r.reward_no        
-	       )
-	where refund_no = #{refundNo}
+		select 
+		       o.order_no
+		     , to_char(o.order_date,'YYYY-MM-DD HH24:MI:SS') order_date
+		     , sn.member_name
+		     , to_char(p.project_end_dt,'YYYY-MM-DD') project_end_dt
+		     , o.order_status
+		     , pn.member_name
+		     , p.project_title 
+		     , rd.reward_title
+		     , o.order_option
+		     , o.order_count
+		     , to_char(rd.reward_price, '999,999,999') reward_price
+		     , to_char(o.order_plus, '999,999,999') order_plus
+		     , to_char(o.total_price, '999,999,999')total_price
+		     , py.card_no
+		     , o.bank_name
+		     , o.bank_account
+		     , r.r_reason
+		     , r.refund_status
+	      from tb_order o
+	      join member sn on(o.member_no = sn.member_no)
+	      join project p on(o.project_no = p.project_no)
+	      join member pn on(o.project_no = pn.member_no)
+	      join reward rd on(o.project_no = rd.project_no)
+	      join pay py on(o.order_no = py.order_no)
+	      join refund r on(o.order_no = r.order_no) 
+	     where r.refund_no = #{refundNo}
 	</select>
+	
+
 	
 </mapper>
   

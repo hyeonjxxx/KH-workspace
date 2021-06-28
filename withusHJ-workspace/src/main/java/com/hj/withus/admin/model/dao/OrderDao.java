@@ -27,8 +27,10 @@ public class OrderDao {
 	}
 	
 	public com.hj.withus.admin.model.vo.Order selectOrderDetail(SqlSessionTemplate sqlSession, int orderNo) {
+		com.hj.withus.admin.model.vo.Order test = sqlSession.selectOne("withusOrderMapper.selectOrderDetail", orderNo);
 		
-		return sqlSession.selectOne("withusOrderMapper.selectOrderDetail", orderNo);
+		System.out.println(test);
+		return test;
 	}
 
 }

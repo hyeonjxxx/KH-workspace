@@ -113,7 +113,7 @@
             <script>
             $(function(){
             	$("#refundList tbody tr").click(function(){
-            		location.href="refundDetail.mana?rno="+$(this).children("rno").text();
+            		location.href="refundDetail.mana?rno="+$(this).children(".rno").text();
             	});
             });
             </script>

@@ -35,14 +35,25 @@ public class RefundController {
 		
 		return mv;
 	}
-	
 	@RequestMapping("refundDetail.mana")
 	public String selectRefund(int rno, Model model) {
 		
 		Refund r = rService.selectRefund(rno);
-		model.addAttribute("r", r);
+		if(r != null) {
+			model.addAttribute("r", r);
+			return "admin/manaRefundDetailView";
+		}else{
+			model.addAttribute("errorMsg","환물신청 내역 상세 조회 실패");
+			return ""; 
+		}
 		
-		return "admin/manaRefundDetailView";
 	}
-
+	/*	
+	@RequestMapping("refundDetail.mana")
+	public String selectRefund() {
+		
+			return "admin/manaRefundDetailView";
+		
+	}
+ */
 }
