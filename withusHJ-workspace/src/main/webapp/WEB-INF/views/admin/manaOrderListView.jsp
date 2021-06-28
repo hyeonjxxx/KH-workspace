@@ -105,7 +105,7 @@
 	                <c:forEach var="o" items="${ olist }">
 	                    <tr>
 	                        <td class="ono">${ o.orderNo }</td>
-	                        <td>${ o.memberName }</td>
+	                        <td>${ o.supporterName }</td>
 	                        <td>${ o.projectTitle }<br>${ o.rewardTitle }/${ o.orderOption }</td>
 	                        <td>${ o.orderCount }</td>
 	                        <td>${ o.orderDate }</td>

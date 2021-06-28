@@ -10,7 +10,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Setter @Getter
 @ToString
-public class Order   {
+public class OrderTB   {
 
 	private int orderNo;
 	private int projectNo;
@@ -36,11 +36,14 @@ public class Order   {
 	private String orderOption;
 	
 	// 주문내역 조회시 필요한 컬럼 선언
-	private String memberNameSm;
-	private String memberNamePm;
+	private String supporterName;
+	private String partnerName;
 	private String projectEndDt;
 	private String projectTitle;
 	private String rewardTitle;
 	private int rewardPrice;
 	private String cardNo;
+	
+	// 파트너 발송관리
+	private String deliveryDate;
 }

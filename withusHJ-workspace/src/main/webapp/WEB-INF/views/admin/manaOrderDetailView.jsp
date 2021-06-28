@@ -61,7 +61,7 @@
 	                </tr>
 	                <tr>
 	                    <th>펀딩 서포터</th>
-	                    <td>${ o.memberNameSm }</td>
+	                    <td>${ o.supporterName }</td>
 	                    <th>총 결제금액</th>
 	                    <td>${ o.totalPrice } 원</td>
 	                </tr>
@@ -87,7 +87,7 @@
 	                <tr>
                         <th class="text_st2">결제 내역</th>
 	                    <td colspan="3">
-                            <span class="text_st1" style="font-weight: 600;">${ o.memberNamePm }</span> <br>
+                            <span class="text_st1" style="font-weight: 600;">${ o.partnerName }</span> <br>
                             <span>${ o.projectTitle }</span>
                             <span>${ o.rewardTitle }</span> <br>
                             <span class="text_st1">${ o.orderOption } / ${ o.orderCount }</span>

@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	</settings>
 	<typeAliases>
 		<typeAlias type="com.hj.withus.admin.model.vo.Member" alias="Member"/>
-		<typeAlias type="com.hj.withus.admin.model.vo.Order" alias="Order"/>
+		<typeAlias type="com.hj.withus.admin.model.vo.OrderTB" alias="Order"/>
 		<typeAlias type="com.hj.withus.admin.model.vo.Refund" alias="Refund"/>
 		<typeAlias type="com.hj.withus.admin.model.vo.Reward" alias="Reward"/>
 	</typeAliases>

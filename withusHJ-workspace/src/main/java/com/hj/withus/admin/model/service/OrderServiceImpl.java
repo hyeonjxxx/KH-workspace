@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hj.withus.admin.model.dao.OrderDao;
-import com.hj.withus.admin.model.vo.Order;
+import com.hj.withus.admin.model.vo.OrderTB;
 import com.hj.withus.common.model.PageInfo;
 
 @Service
@@ -24,14 +24,26 @@ public class OrderServiceImpl implements OrderService {
 	}
 	
 	@Override
-	public ArrayList<Order> selectList(PageInfo pi) {
+	public ArrayList<OrderTB> selectList(PageInfo pi) {
 		return oDao.selectList(sqlSession,pi);
 	}
 
 	@Override
-	public Order slectOrderDetail(int orderNo) {
-		return (Order) oDao.selectOrderDetail(sqlSession, orderNo);
+	public OrderTB slectOrderDetail(int orderNo) {
+		return (OrderTB) oDao.selectOrderDetail(sqlSession, orderNo);
 	}
+
+	@Override
+	public int selectDeliveryCount() {
+		return oDao.selectDeilveryCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<OrderTB> selectOrderNDelivery(PageInfo pi) {
+		return oDao.selectOrderNDelivery(sqlSession, pi);
+	}
+	
+	
 
 
 

@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Repository;
 
+import com.hj.withus.admin.model.vo.OrderTB;
 import com.hj.withus.common.model.PageInfo;
 
 @Repository
@@ -16,7 +16,7 @@ public class OrderDao {
 		return sqlSession.selectOne("withusOrderMapper.oSelectListCount");
 	}
 	
-	public ArrayList<com.hj.withus.admin.model.vo.Order> selectList(SqlSessionTemplate sqlSession, PageInfo pi){
+	public ArrayList<OrderTB> selectList(SqlSessionTemplate sqlSession, PageInfo pi){
 		
 		int offset =(pi.getCurrentPage()-1)*pi.getBoardLimit();
 		int limit = pi.getBoardLimit();
@@ -26,11 +26,24 @@ public class OrderDao {
 		return (ArrayList)sqlSession.selectList("withusOrderMapper.oSelectList", null, rowBounds);
 	}
 	
-	public com.hj.withus.admin.model.vo.Order selectOrderDetail(SqlSessionTemplate sqlSession, int orderNo) {
-		com.hj.withus.admin.model.vo.Order test = sqlSession.selectOne("withusOrderMapper.selectOrderDetail", orderNo);
+	public OrderTB selectOrderDetail(SqlSessionTemplate sqlSession, int orderNo) {
 		
-		System.out.println(test);
-		return test;
+		return sqlSession.selectOne("withusOrderMapper.selectOrderDetail", orderNo);
+	}
+	
+	
+	public int selectDeilveryCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("withusOrderMapper.SelectDeliveryCount");
+	}
+	
+	public ArrayList<OrderTB> selectOrderNDelivery(SqlSessionTemplate sqlSession, PageInfo pi){
+		
+		int offset = (pi.getCurrentPage()-1)*pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("withusOrderMapper.selectOrderNDelivery",null,rowBounds);
 	}
 
 }

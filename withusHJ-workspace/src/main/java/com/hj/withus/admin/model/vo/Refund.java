@@ -20,7 +20,8 @@ public class Refund {
 	private String refundStatus;
 	
 	// 환불신청 상세
-	private String memberName;
+	private String supporterName;
+	private String partnerName;
 	private String rewardTitle;
 	private String rewardPrice;
 	private String projectTitle;

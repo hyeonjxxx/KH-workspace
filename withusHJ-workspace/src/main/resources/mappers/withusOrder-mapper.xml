@@ -26,13 +26,14 @@
 		<result column="order_count" property="orderCount"/>
 		<result column="order_option" property="orderOption"/>
 		
-		<result column="sm.member_name" property="memberNameSm"/>
-		<result column="pm.member_name" property="memberNamePm"/>
+		<result column="supporter_name" property="supporterName"/>
+		<result column="partner_name" property="partnerName"/>
 		<result column="project_end_dt" property="projectEndDt"/>
 		<result column="project_Title" property="projectTitle"/>
 		<result column="reward_Title" property="rewardTitle"/>
 		<result column="reward_price" property="rewardPrice"/>
 		<result column="card_no" property="cardNo"/>
+		<result column="delivery_date" property="deliveryDate"/>
 	</resultMap>
 		
 	
@@ -47,7 +48,7 @@
 	<select id="oSelectList" resultMap="orderRset">
 		select
 			   order_no
-		     , member_name
+		     , member_name supporter_name
              , p.project_title
              , reward_title
              , order_option
@@ -70,10 +71,10 @@
 		select 
 		        order_no
 		      , order_date
-		      , sm.member_name
+		      , sm.member_name supporter_name
 		      , to_char(project_end_dt, 'YYYY-MM-DD') project_end_dt
 		      , order_status
-		      , pm.member_name 
+		      , pm.member_name  partner_name
 		      , project_title
 		      , reward_title
 		      , order_option
@@ -99,23 +100,33 @@
 	</select>
 	
 	<!-- 사용자(파트너) -->
+	<!-- 발송리스트 갯수 -->
+	<select id="SelectDeliveryCount" resultType="_int">
+			select
+			   count(*)
+		from tb_order
+		<!-- 파트너가 게시한 프로젝트만 출력, 로그인한 mem_no = 프로젝트 mem_no-->
+	</select>
 	<!-- 파트너 발송관리 -->
-	<select id="" >
+	<select id="selectOrderNDelivery" resultMap="orderRset">
 		select 
-		       order_no
-		     , member_name
-		     , order_status
-		     , total_price
-		     , reward_title
-		     , order_option
-		     , delivery_date
-		     , shipping_status
-		     , shipping_com
-		     , shipping_no
-		  from tb_order o
-		  join member m on(o.member_no = m.member_no)
-		  join reward r on (o.project_no = r.project_no)
-		  join project p on(o.project_no = p.project_no)
+		        o.order_no
+		      , m.member_name supporter_name
+		      , o.order_status
+		      , to_char(o.total_price, '999,999,999,999,999')total_price
+              , r.reward_title
+      		  , o.order_option
+      		  , o.order_count
+		      , o.shipping_status
+		      , o.shipping_com
+		      , o.shipping_no
+		      , (select 
+		         to_char(delivery_date, 'YYYY-MM-DD')delivery_date 
+		           from project p 
+		           where p.project_no = o.project_no) delivery_date  
+		   from tb_order o
+  		   join member m on(o.member_no = m.member_no)
+ 		   join reward r on(o.project_no = r.project_no)
 	</select>
 	
 

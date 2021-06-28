@@ -46,9 +46,9 @@
                 <table class="table table-bordered">
 	                <tr>
 	                    <th>펀딩번호</th>
-	                    <td>${ o.orderNo }</td>
+	                    <td>${ r.orderNo }</td>
 	                    <th>펀딩 금액</th>
-	                    <td>${o.rewardPrice} 원</td>
+	                    <td>${r.rewardPrice} 원</td>
 	                </tr>
 	                <tr>
 	                    <th>펀딩 주문날짜</th>
@@ -58,7 +58,7 @@
 	                </tr>
 	                <tr>
 	                    <th>펀딩 서포터</th>
-	                    <td>${ r.memberName }</td>
+	                    <td>${ r.supporterName }</td>
 	                    <th>총 결제금액</th>
 	                    <td>${ r.totalPrice } 원</td> 
 	                </tr>
@@ -87,7 +87,7 @@
 	                <tr>
 	                    <th>결제 내역</th>
 	                    <td colspan="3">
-	                    	<span class="text_st1" style="font-weight: 600;">파트너명</span> <br>
+	                    	<span class="text_st1" style="font-weight: 600;">${ r.partnerName }</span> <br>
                             <span>${ r.projectTitle }</span>
                             <span>${ r.rewardTitle }</span> <br>
                             <span class="text_st1">${ r.orderOption } / ${ r.orderCount }</span>

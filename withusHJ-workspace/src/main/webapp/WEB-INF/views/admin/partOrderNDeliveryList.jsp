@@ -96,13 +96,9 @@
 </style>
 </head>
 <body>
-
-
     
 	<div class="wrap">
-    
-
-    	 
+	
 	    <!--  -->
 	    <div id="mypage">
 	        <div id="content" class="list">
@@ -205,27 +201,42 @@
 	                      <th width="80">발송번호</th>
 	                      <th width="80">펀딩금 반환</th>
 	                    </tr>
-	                    <tr>
-	                      <td>10491</td>
-	                      <td>박상이</td>
-	                      <td>완료</td>
-	                      <td>35,000원</td>
-	                      <td>[얼리버드]가치가자 세트X1개</td>
-	                      <td><button type="button" class="btn btn-withus btn-sm" data-toggle="modal" data-target="#sendInfoModal">발송정보 입력</button></td>
-	                      <td>2021-05-말</td>
-	                      <td>미발송</td>
-	                      <td>대한통운 <br> 10659</td>
-	                      <td style="font-size:10px;">
-	                        <!-- 조건처리 해야 되는데...-->
-	                        <!-- 리워드 기간 -->
-	                        	지연반환 신청기간 <br>
-	                        	2021-05-11 ~ 2021-00-00<br>
-	                        <!-- 리워드 종료일 이후 -->
-	                        	신청 <br>
-	                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#refundInfo">확인하기</button>
-	                      </td>
-	                    </tr>
-	                  </thead>
+                    </thead>
+                    <tbody>
+                    	<c:forEach var="p" items="${ polist }">
+		                    <tr>
+		                      <td>${ p.orderNo }</td>
+		                      <td>${ p.supporterName }</td>
+		                      <td>${ p.orderStatus }</td>
+		                      <td>${ p.totalPrice } 원</td>
+		                      <td>${ p.rewardTitle }/${ p.orderOption }/${ p.orderCount }</td>
+		                      <td><button type="button" class="btn btn-withus btn-sm" data-toggle="modal" data-target="#sendInfoModal">발송정보 입력</button></td>
+		                      <td>${ p.deliveryDate }</td>
+		                      <c:choose>
+                        		<c:when test="${ p.shippingStatus == 1 }">
+                        			<td>배송준비중</td>
+                        		</c:when>
+                        		<c:when test="${ p.shippingStatus == 2 }">
+                        			<td>배송시작</td>
+                        		</c:when>
+                        		<c:when test="${ p.shippingStatus == 3 }">
+                        			<td>배송완료</td>
+                        		</c:when>
+                        	</c:choose>
+		                      <td>${ p.shippingCom } <br> ${ p.shippingNo }</td>
+		                      <td style="font-size:10px;">
+		                        <!-- 조건처리 해야 되는데...-->
+		                        <!-- 리워드 기간 -->
+		                        	지연반환 신청기간 <br>
+		                        	2021-05-11 ~ 2021-00-00<br>
+		                        <!-- 리워드 종료일 이후 -->
+		                        	신청 <br>
+		                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#refundInfo">확인하기</button>
+		                      </td>
+		                    </tr>
+                    	</c:forEach>
+                    </tbody>
+	                  
 	                </table>
 	
 	              </div>

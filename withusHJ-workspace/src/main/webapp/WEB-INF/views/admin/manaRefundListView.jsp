@@ -102,7 +102,7 @@
                     <c:forEach var="r" items="${ rList }">
 	                    <tr>
 	                        <td class="rno">${ r.refundNo }</td>
-	                        <td>${ r.memberName }</td>
+	                        <td>${ r.supporterName }</td>
 	                        <td>${ r.projectTitle }<br>${ r.rewardTitle }/${ r.orderOption }</td>
 	                        <td>${ r.reReason }</td>
 	                        <td>${ r.refundStatus }</td>
