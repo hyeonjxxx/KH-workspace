@@ -114,15 +114,15 @@
 	                  <tr>
 	                    <th rowspan="2">펀딩·배송 상태</th>
 	                    <th style="color: rgb(52, 152, 219);">미발송</th> 
-	                    <th>발송 준비 중</th>
+	                    <th>배송 준비 중</th>
 	                    <th>배송 중</th>
 	                    <th>배송 완료</th>
 	                  </tr>
 	                  <tr>
-	                    <td>3 건</td>
-	                    <td>0 건</td>
-	                    <td>0 건</td>
-	                    <td>0 건</td>
+	                    <td>${ sc.noneShipping } 건</td>
+	                    <td>${ sc.readyShipping } 건</td>
+	                    <td>${ sc.shipping } 건</td>
+	                    <td>${ sc.doneShipping }건</td>
 	                  </tr>
 	                  <tr>
 	                    <th rowspan="2">펀딩금 반환 상태</th>
@@ -132,10 +132,10 @@
 	                    <th>거절</th>
 	                  </tr>
 	                  <tr>
-	                    <td>3 건</td>
-	                    <td>0 건</td>
-	                    <td>0 건</td>
-	                    <td>0 건</td>
+	                    <td>${ sc.refund } 건</td>
+	                    <td>${ sc.dropRefund } 건</td>
+	                    <td>${ sc.comRefund } 건</td>
+	                    <td>${ sc.refRefund } 건</td>
 	                  </tr>
 	                </table>
 	              </div>
@@ -205,12 +205,12 @@
                     <tbody>
                     	<c:forEach var="p" items="${ polist }">
 		                    <tr>
-		                      <td>${ p.orderNo }</td>
+		                      <td class=ono>${ p.orderNo }</td>
 		                      <td>${ p.supporterName }</td>
 		                      <td>${ p.orderStatus }</td>
 		                      <td>${ p.totalPrice } 원</td>
 		                      <td>${ p.rewardTitle }/${ p.orderOption }/${ p.orderCount }</td>
-		                      <td><button type="button" class="btn btn-withus btn-sm" data-toggle="modal" data-target="#sendInfoModal">발송정보 입력</button></td>
+		                      <td><button type="button" class="btn btn-withus btn-sm" id ="sendInfo" data-toggle="modal" data-target="#sendInfoModal" >발송정보 입력</button></td>
 		                      <td>${ p.deliveryDate }</td>
 		                      <c:choose>
                         		<c:when test="${ p.shippingStatus == 1 }">
@@ -306,6 +306,13 @@
 	                  </div>
 	                </div>
 	              </div>
+	              <script type="text/javascript">
+          			 $(function(){
+			        	   $("#sendInfo").click(function(){
+			        		   location.href="orderNDeliveryList.part?ono="+$(this).children(".ono").text();
+			        	   });
+			           });
+           </script> 
 	      
 	              <!-- 환불신청내역 조회  -->
 	              <!-- The Modal -->

@@ -39,10 +39,20 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
+	public OrderTB selectStatusCount() {
+		return oDao.selectStatusCount(sqlSession);
+	}
+	
+	@Override
+	public OrderTB selectSendInfo(int orderNo) {
+		return oDao.selectSendInfo(sqlSession, orderNo);
+	}
+	
+	@Override
 	public ArrayList<OrderTB> selectOrderNDelivery(PageInfo pi) {
 		return oDao.selectOrderNDelivery(sqlSession, pi);
 	}
-	
+
 	
 
 

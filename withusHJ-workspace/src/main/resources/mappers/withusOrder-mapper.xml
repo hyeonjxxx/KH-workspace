@@ -34,6 +34,14 @@
 		<result column="reward_price" property="rewardPrice"/>
 		<result column="card_no" property="cardNo"/>
 		<result column="delivery_date" property="deliveryDate"/>
+		
+		<result column="noneShipping" property="noneShipping"/>
+		<result column="readyShipping" property="readyShipping"/>
+		<result column="shipping" property="shipping"/>
+		<result column="doneShipping" property="doneShipping"/>
+		<result column="dropRefund" property="dropRefund"/>
+		<result column="comRefund" property="comRefund"/>
+		<result column="refRefund" property="refRefund"/>
 	</resultMap>
 		
 	
@@ -100,14 +108,42 @@
 	</select>
 	
 	<!-- 사용자(파트너) -->
+	
 	<!-- 발송리스트 갯수 -->
 	<select id="SelectDeliveryCount" resultType="_int">
 			select
 			   count(*)
 		from tb_order
-		<!-- 파트너가 게시한 프로젝트만 출력, 로그인한 mem_no = 프로젝트 mem_no-->
+	<!-- 파트너가 게시한 프로젝트만 출력, 로그인한 mem_no = 프로젝트 mem_no-
+		  select
+		  count(order_no)
+		  from project p 
+		  join member m  on(m.member_no = p.member_no)
+		  join tb_order o on(p.project_no = o.project_no)
+		  where m.member_no = p.member_no
+		   and p.project_no = #{projectNo}
+	-->
 	</select>
-	<!-- 파트너 발송관리 -->
+	<!--  -->
+	<select id="selecetStatsCount" resultMap="orderRset">
+	 		select
+			    count(case when o.shipping_no is null then 1 end) as noneShipping 
+			  , count(case when o.shipping_status = 1 then 1 end) as readyShipping
+			  , count(case when o.shipping_status = 2 then 1 end) as shipping
+			  , count(case when o.shipping_status = 3 then 1 end) as doneShipping
+			  , count(case when o.order_status = 2 then 1 end) as refund
+			  , count(case when o.order_status = 3 then 1 end) as dropRefund
+			  , count(case when o.order_status = 4 then 1 end) as comRefund
+			  , count(case when o.order_status = 5 then 1 end) as refRefund
+		   from tb_order o
+		   join project p on(p.project_no = o.project_no)
+		   join member m  on(m.member_no = p.member_no)
+		  where m.member_no = p.member_no
+		    and p.project_no = 1
+		    <!-- and p.project_no = #{projectNo} -->
+	</select>
+	
+	<!-- 파트너 주문현황 -->
 	<select id="selectOrderNDelivery" resultMap="orderRset">
 		select 
 		        o.order_no
@@ -129,6 +165,25 @@
  		   join reward r on(o.project_no = r.project_no)
 	</select>
 	
+	<!-- 발송정보 입력창 -->
+	<select id="selectSendInfo" resultMap="orderRset"
+		    parameterType="_int">
+		select
+		        o.order_no
+		      , m.member_name
+		      , o.order_option
+		      , o.order_count
+		      , o.total_price
+		      , (
+		        select 
+		                r.reward_title
+		           from reward r 
+		           where r.project_no = o.project_no
+		        ) reward_title
+		  from tb_order o
+		  join member m on(o.member_no = m.member_no)
+		  where order_no=#{orderNo}
+	</select>
 
 </mapper>
 			  

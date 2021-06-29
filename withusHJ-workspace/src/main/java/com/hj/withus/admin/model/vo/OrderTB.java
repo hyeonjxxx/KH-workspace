@@ -12,6 +12,7 @@ import lombok.ToString;
 @ToString
 public class OrderTB   {
 
+
 	private int orderNo;
 	private int projectNo;
 	private int memberNo;
@@ -45,5 +46,18 @@ public class OrderTB   {
 	private String cardNo;
 	
 	// 파트너 발송관리
+	private int noneShipping;
+	private int readyShipping;
+	private int shipping;
+	private int doneShipping;
+	private int refund;
+	private int dropRefund;
+	private int comRefund;
+	private int refRefund;
 	private String deliveryDate;
+
+
+	
+	
+	
 }

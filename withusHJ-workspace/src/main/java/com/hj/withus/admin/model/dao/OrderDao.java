@@ -36,6 +36,16 @@ public class OrderDao {
 		return sqlSession.selectOne("withusOrderMapper.SelectDeliveryCount");
 	}
 	
+	public OrderTB selectStatusCount(SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("withusOrderMapper.selecetStatsCount");
+	}
+	
+	public OrderTB selectSendInfo(SqlSessionTemplate sqlSession, int orderNo) {
+		return sqlSession.selectOne("withusOrderMapper.selectSendInfo", orderNo);
+	}
+
+	
 	public ArrayList<OrderTB> selectOrderNDelivery(SqlSessionTemplate sqlSession, PageInfo pi){
 		
 		int offset = (pi.getCurrentPage()-1)*pi.getBoardLimit();
@@ -45,5 +55,12 @@ public class OrderDao {
 		
 		return (ArrayList)sqlSession.selectList("withusOrderMapper.selectOrderNDelivery",null,rowBounds);
 	}
+	
+	
 
+	
+	
+	
+	
+	
 }
