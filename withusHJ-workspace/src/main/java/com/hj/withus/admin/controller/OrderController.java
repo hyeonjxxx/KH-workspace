@@ -61,15 +61,15 @@ public class OrderController {
 		// 주문현황 리스트 
 		ArrayList<OrderTB> polist = oService.selectOrderNDelivery(pi);
 		// 발송정보 입력창 , 해쉬맵 or 자바 스크립트로
-		//OrderTB oi = oService.selectSendInfo(ono);
+		OrderTB oi = oService.selectSendInfo();
 		// 펀딩금 반화 신청창
 		
 		mv.addObject("polist", polist)
 		  .addObject("pi",pi)
 		  .addObject("sc", sc)
-		  //.addObject("oi", oi)
+		  .addObject("oi", oi)
 		  .setViewName("admin/partOrderNDeliveryList");
-		
+
 		return mv;
 	}
 

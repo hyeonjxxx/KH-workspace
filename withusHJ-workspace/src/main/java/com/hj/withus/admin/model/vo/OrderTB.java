@@ -56,7 +56,10 @@ public class OrderTB   {
 	private int refRefund;
 	private String deliveryDate;
 
-
+	private int refundNo;
+	private String reOrginName;
+	private String reChangeName;
+	private String reReason;
 	
 	
 	

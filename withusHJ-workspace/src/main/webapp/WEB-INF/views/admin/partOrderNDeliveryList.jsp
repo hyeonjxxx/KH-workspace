@@ -260,22 +260,23 @@
 	                        <table>
 	                          <tr>
 	                            <th>펀딩번호</th>
-	                            <td>10491</td>
+	                            <td>${oi.orderNo}</td>
 	                          </tr>
 	                          <tr>
 	                            <th>서포트명</th>
-	                            <td>박상이</td>
-	                          </tr>
-	                          <tr rowspan="2">
-	                            <td><h6>[얼리버드]가치가자 세트X1개</h6></td>
+	                            <td>${oi.supporterName}</td>
 	                          </tr>
 	                          <tr>
-	                            <th>옵션정보..?</th>
-	                            <td>10658</td>
+	                          	<td>펀딩 정보</td>
+	                            <td><h6>${ oi.rewardTitle }</h6></td>
+	                          </tr>
+	                          <tr>
+	                            <th>옵션정보</th>
+	                            <td>${ oi.orderOption }/${ oi.orderCount }</td>
 	                          </tr>
 	                          <tr>
 	                            <th>총 결제 금액</th>
-	                            <td>35,000원</td>
+	                            <td>${ oi.totalPrice }원</td>
 	                          </tr> 
 	                        </table>
 	                      </div>
@@ -306,13 +307,6 @@
 	                  </div>
 	                </div>
 	              </div>
-	              <script type="text/javascript">
-          			 $(function(){
-			        	   $("#sendInfo").click(function(){
-			        		   location.href="orderNDeliveryList.part?ono="+$(this).children(".ono").text();
-			        	   });
-			           });
-           </script> 
 	      
 	              <!-- 환불신청내역 조회  -->
 	              <!-- The Modal -->
@@ -333,22 +327,23 @@
                                 <table class="">
                                     <tr>
                                         <th>펀딩번호</th>
-                                        <td>10491</td>
+                                        <td>${oi.orderNo}</td>
                                     </tr>
                                     <tr>
                                         <th>서포트명</th>
-                                        <td>박상이</td>
-                                    </tr>
-                                    <tr rowspan="2">
-                                        <td><h6>[얼리버드]가치가자 세트X1개</h6></td>
+                                        <td>${oi.supporterName}</td>
                                     </tr>
                                     <tr>
-                                        <th>옵션정보..?</th>
-                                        <td>10658</td>
+                                    	<td>펀딩 정보</td>
+                                        <td><h6>${oi.rewardTitle }</h6></td>
+                                    </tr>
+                                    <tr>
+                                        <th>옵션</th>
+                                        <td>${ oi.orderOption }/${ oi.orderCount }</td>
                                     </tr>
                                     <tr>
                                         <th>총 결제 금액</th>
-                                        <td>35,000원</td>
+                                        <td>${ oi.totalPrice }원</td>
                                     </tr> 
                                 </table>
                             </div>
@@ -356,16 +351,16 @@
                             <p>펀딩금 반환 신청 사유</p>
                             <table style="width:100%">
                                 <tr>
-                                    <th>사유</th>
-                                    <td>제품불량</td>
+                                    <th>환불신청번호</th>
+                                    <td>${ oi.refundNo }</td>
                                 </tr>
                                 <tr>
                                     <th>상세사유</th>
-                                    <td>불량</td>
+                                    <td>${ oi.reReason }</td>
                                 </tr>
                                 <tr>
                                     <th>증빙자료</th>
-                                    <td>파일첨부파일 : 원본명.jpg</td>
+                                    <td>${ oi.reChangeName }</td>
                                 </tr>
                             </table>
             
@@ -376,30 +371,26 @@
                                 </tr>
                                 <tr>
                                     <td>반환 신청 금액</td>
-                                    <td>35,000원</td>
+                                    <td>${ oi.totalPrice }원</td>
                                 </tr>
                                 <tr>
                                     <td colspan="2">
-                                        상세금액
+                                                                                        상세금액
                                         <table class="subTable">
                                             <tr>
                                                 <td>리워드 금액</td>
-                                                <td>35,000원</td>
-                                            </tr>
-                                            <tr>
-                                                <td>배송비</td>
-                                                <td>0원</td>
+                                                <td>${ oi.rewardPrice }원</td>
                                             </tr>
                                             <tr>
                                                 <td>추가 후원금</td>
-                                                <td>0원</td>
+                                                <td>${ oi.orderPlus }원</td>
                                             </tr>
                                         </table>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colspan="2">
-                                    펀딩금 반환 신청 처리
+                                                                               펀딩금 반환 신청 처리
                                     <table class="subTable">
                                         <tr>
                                             <td><b>승인</b></td>
