@@ -17,8 +17,9 @@ public interface OrderService {
 	// 파트너 발송관리
 	int selectDeliveryCount();
 	OrderTB selectStatusCount();
-	OrderTB selectSendInfo();
+	//OrderTB selectSendInfo();
 	ArrayList<OrderTB> selectOrderNDelivery(PageInfo pi);
+	OrderTB selectSendInfo(int orderNo);
 	
 
 }

@@ -43,14 +43,19 @@ public class OrderServiceImpl implements OrderService {
 		return oDao.selectStatusCount(sqlSession);
 	}
 	
-	@Override
-	public OrderTB selectSendInfo() {
-		return oDao.selectSendInfo(sqlSession);
-	}
+//	@Override
+//	public OrderTB selectSendInfo() {
+//		return oDao.selectSendInfo(sqlSession);
+//	}
 	
 	@Override
 	public ArrayList<OrderTB> selectOrderNDelivery(PageInfo pi) {
 		return oDao.selectOrderNDelivery(sqlSession, pi);
+	}
+	
+	@Override
+	public OrderTB selectSendInfo(int orderNo) {
+		return oDao.selectSendInfo(sqlSession, orderNo);
 	}
 
 	

@@ -7,11 +7,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.hj.withus.admin.model.service.OrderService;
-import com.hj.withus.common.model.PageInfo;
 import com.hj.withus.admin.model.vo.OrderTB;
+import com.hj.withus.common.model.PageInfo;
 import com.hj.withus.common.template.Pagination;
 
 @Controller
@@ -61,16 +63,23 @@ public class OrderController {
 		// 주문현황 리스트 
 		ArrayList<OrderTB> polist = oService.selectOrderNDelivery(pi);
 		// 발송정보 입력창 , 해쉬맵 or 자바 스크립트로
-		OrderTB oi = oService.selectSendInfo();
+		//OrderTB oi = oService.selectSendInfo();
 		// 펀딩금 반화 신청창
 		
 		mv.addObject("polist", polist)
 		  .addObject("pi",pi)
 		  .addObject("sc", sc)
-		  .addObject("oi", oi)
+		  //.addObject("oi", oi)
 		  .setViewName("admin/partOrderNDeliveryList");
 
 		return mv;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="send.info", produces="application/json; charset=utf-8")
+	public String ajaxSelectSendInfo(int ono) {
+		
+		return new Gson().toJson(oService.selectSendInfo(ono));
 	}
 
 	

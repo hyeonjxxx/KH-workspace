@@ -210,7 +210,7 @@
 		                      <td>${ p.orderStatus }</td>
 		                      <td>${ p.totalPrice } 원</td>
 		                      <td>${ p.rewardTitle }/${ p.orderOption }/${ p.orderCount }</td>
-		                      <td><button type="button" class="btn btn-withus btn-sm" id ="sendInfo" data-toggle="modal" data-target="#sendInfoModal" >발송정보 입력</button></td>
+		                      <td><button type="button" class="btn btn-withus btn-sm" id ="sendInfo" data-toggle="modal" data-target="#sendInfoModal" onclick="postFormSubmit(1);">발송정보 입력</button></td>
 		                      <td>${ p.deliveryDate }</td>
 		                      <c:choose>
                         		<c:when test="${ p.shippingStatus == 1 }">
@@ -231,15 +231,50 @@
 		                        	2021-05-11 ~ 2021-00-00<br>
 		                        <!-- 리워드 종료일 이후 -->
 		                        	신청 <br>
-		                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#refundInfo">확인하기</button>
+		                        <button type="button" class="btn btn-danger btn-sm"  onclick="postFormSubmit(2);">확인하기</button>
 		                      </td>
 		                    </tr>
+                   	    <form id="postForm" action="" method="post">
+		            	<input type="hidden" name="ono" value="${ p.orderNo }">
+	            		</form>
                     	</c:forEach>
+	            		
+	            		<script>
+	            		function postFormSubmit(num){
+		            		if(num == 1){ // 수정하기 클릭시
+		            			$("#postForm").attr("action", "send.info").submit();
+		            		}else{ // 삭제하기 클릭시
+		            			$("#postForm").attr("action", "delete.bo").submit();
+		            		}
+		            	}
+		            </script>
                     </tbody>
 	                  
 	                </table>
 	
 	              </div>
+	              
+	              <script>
+	              	function selectSendInfo(){
+	              		$.ajax({
+	            			url:"send.info",
+	            			data:{ono:${p.orderNo}}
+	              		   ,success:function(result){
+	              			   $("#sendInfo").modal("show");
+	              			   
+	              			   alert("ajax 실패")
+	        					
+	            				
+	            			},error:function(){
+	            				console.log("조회 ajax실패");
+	            			}
+	            		});
+	              		
+	              	}
+	              </script>
+	              
+	              
+	              
 	
 	              <!-- 발송정보 입력창  -->
 	              <!-- The Modal -->

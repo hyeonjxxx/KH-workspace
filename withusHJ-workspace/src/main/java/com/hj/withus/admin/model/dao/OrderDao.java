@@ -41,9 +41,9 @@ public class OrderDao {
 		return sqlSession.selectOne("withusOrderMapper.selecetStatsCount");
 	}
 	
-	public OrderTB selectSendInfo(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectOne("withusOrderMapper.selectSendInfo");
-	}
+//	public OrderTB selectSendInfo(SqlSessionTemplate sqlSession) {
+//		return sqlSession.selectOne("withusOrderMapper.selectSendInfo");
+//	}
 
 	
 	public ArrayList<OrderTB> selectOrderNDelivery(SqlSessionTemplate sqlSession, PageInfo pi){
@@ -57,6 +57,9 @@ public class OrderDao {
 	}
 	
 	
+	public OrderTB selectSendInfo(SqlSessionTemplate sqlSession, int orderNo) {
+		return sqlSession.selectOne("withusOrderMapper.selectSendInfo", orderNo);
+	}
 
 	
 	

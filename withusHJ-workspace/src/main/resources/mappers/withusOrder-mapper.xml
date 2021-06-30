@@ -186,7 +186,7 @@
 		  join member m on(o.member_no = m.member_no)
 		  join reward r on(r.project_no = o.project_no)
 		  join refund re on(o.order_no = re.order_no)
-		  where o.order_no = 1
+		  where o.order_no = #{orderNo}
 		  and o.reward_no = r.reward_no
 		  <!-- where order_no=#{orderNo} -->
 	</select>
