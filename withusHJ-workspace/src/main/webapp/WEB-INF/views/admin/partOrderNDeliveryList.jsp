@@ -80,14 +80,20 @@
   .partnerOrder, .trackingInfo{ padding:0 20px;}
   .partnerOrder table, .trackingInfo *{ font-size: 14px; width: 90%;}
   .partnerOrder table *{padding: 3px 0;}
-  .modal-body th {color: grey; font-weight: 500;}
+  .partnerOrder>table>th {color: grey; font-weight: 500;}
   .trackingInfo select{margin-bottom: 15px; height: 30px;} 
   .trackingInfo label{font-size: 15px; font-weight: 550;}
 
   /*refundInfo*/
-  .subTable{width: 100%; background-color: #f4f4f4;}
+  .partnerRefund {color: #3b3e41; padding: 10px 10px 30px; border-bottom: 1px solid gainsboro; }
+  .partnerRefund td, .partnerRefundInfo th, .refundTb th {width:140px;}
+  .partnerRefundInfo {padding: 5px 10px;}
+  .refundTb {padding: 5px 10px; border-top: 1px dashed gainsboro; color: black;}
+  .detailTb {width:447px; border-radius: 3px;}
+  .subTable{width: 465px;}
+  .detailTb, .subTable{background-color: #f4f4f4; border:16px solid #f4f4f4;}
   .subTable *{font-size: 14px;}
-  .subTable{border:16px solid #f4f4f4;}
+  .suTable td{width:130px}
   .st1{height: 30px;}
 
   button.btn.btn-withus.approvalBtn{ width: 48%; float: left;}
@@ -303,23 +309,23 @@
 	              				//console.log(ri);
 	              				var resultOrder = "<table>"
 				          			   				+ "<tr>" 
-				          			   				+ "<th>펀딩번호</th>"
+				          			   				+ "<td>펀딩번호</td>"
 				          			   				+ "<td>" + ri.orderNo + "</td>" 
 				          			   				+ "</tr>"
 				              			   			+ "<tr>" 
-				          			   				+ "<th>서포터명</th>"
+				          			   				+ "<td>서포터명</td>"
 				          			   				+ "<td>" + ri.supporterName + "</td>" 
 				          			   				+ "</tr>"
 				              			   			+ "<tr>" 
-				          			   				+ "<th>펀딩내역</th>"
+				          			   				+ "<td>펀딩내역</td>"
 				          			   				+ "<td>" + ri.rewardTitle + "</td>" 
 				          			   				+ "</tr>"
 				              			   			+ "<tr>" 
-				          			   				+ "<th>옵션</th>"
+				          			   				+ "<td>옵션</td>"
 				          			   				+ "<td>" + ri.orderOption / ri.orderCount + "</td>" 
 				          			   				+ "</tr>"	
-				              			   			+ "<th>총 결제 금액</th>"
-				          			   				+ "<td>" + ri.totalPrice + "</td>" 
+				              			   			+ "<td>총 결제 금액</td>"
+				          			   				+ "<td>" + ri.totalPrice + " 원</td>" 
 				          			   				+ "</tr>"
 				          			   				+ "</table>"
 				          			   				
@@ -342,15 +348,15 @@
 				          			   				+ "</table>"
 				          			   				
           			   			var resultTable = "<tr>"
-					            					+ "<td class=" + "st1" + ">반환 금액</td>"
+					            					+ "<th class=" + "st1" + ">반환 금액</th>"
 											        + "</tr>"
 											        + "<tr>"
-											        + "<td>반환 신청 금액</td>"
-											        + "<td>" + ri.totalPrice + "원 </td>"
+											        + "<th>반환 신청 금액</th>"
+											        + "<td>" + ri.totalPrice + "원</td>"
 											        + "</tr>"
 											        + "<tr>"
-											        + "<td colspan=" + "2> 상세금액"
-												        + "<table class=" + "subTable" + ">" 
+											        + "<td colspan=" + "2><b>상세금액</b>"
+												        + "<table class=" + "detailTb" + ">" 
 												        + "<tr>"
 												        + "<td>리워드 금액</td>"
 												        + "<td>"+ ri.rewardPrice + " 원 </td>"
@@ -363,8 +369,8 @@
 											        + "</td>"
 											        + "</tr>"   				
 	              		
-	   	              			$(".partnerOrder").html(resultOrder);
-	              				$(".partnerRefund").html(resultRefund);
+	   	              			$(".partnerRefund").html(resultOrder);
+	              				$(".partnerRefundInfo").html(resultRefund);
 	              				$(".refundTb").html(resultTable);
 	              			},error:function(){
 	              				console.log("환불 ajax 조회실패");
@@ -439,22 +445,21 @@
                         <!-- Modal body -->
                         <div class="modal-body">
                           <label style="font-size:14px;">서포터가 펀딩금반환 요청한 내역을 확인하고 승인 또는 거절 처리하세요.</label>
-                            <div class="partnerOrder">
+                            <div class="partnerRefund">
                                 
                             </div>
                             <br>
-                            <div class="partnerRefund">
+                            <div class="partnerRefundInfo">
 	                            
                             </div>
             
-                            <hr style="width: 100%;">
                             <table>
                                  <div class="refundTb">
 							        
 							    </div>
                                 <tr>
-                                    <td colspan="2">
-                                                                               펀딩금 반환 신청 처리
+                                    <td colspan="2" style="padding: 20px 0 0;">
+                                         [펀딩금 반환 신청 처리]
                                     <table class="subTable">
                                         <tr>
                                             <td><b>승인</b></td>

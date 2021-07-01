@@ -205,7 +205,7 @@
 			  , re.refund_no
 			  , re.r_reason
 			  , re.r_changename
-			  , re.rewardPrice
+			  , r.reward_price
 			  , o.order_plus
 		   from tb_order o
 		   join member m on(o.member_no = m.member_no)
