@@ -15,11 +15,16 @@ public interface OrderService {
 	OrderTB slectOrderDetail(int orderNo);
 	
 	// 파트너 발송관리
+	// 프로젝트  총 주문내역  건수
 	int selectDeliveryCount();
+	// 프로젝트 진행 현황
 	OrderTB selectStatusCount();
-	//OrderTB selectSendInfo();
+	// 프로젝트 총 주문내역 리스트
 	ArrayList<OrderTB> selectOrderNDelivery(PageInfo pi);
-	OrderTB selectSendInfo(int orderNo);
+	// 발송모달:펀딩내역
+	OrderTB selectOrderInfo(int orderNo);
+	// 환불모달:펀딩내역+환불신청내역
+	OrderTB selectRefundInfo(int orderNo);
 	
 
 }

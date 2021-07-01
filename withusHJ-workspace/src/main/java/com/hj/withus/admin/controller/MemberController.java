@@ -38,10 +38,11 @@ public class MemberController {
 		return mv;
 	}
 	
-	// 회원상태 변경
+	// 회원탈퇴
 	@RequestMapping("deleteMem.mana")
-	public String deleteMember(String mId, String mStatus, HttpSession session, Model model) {
-		int result = mService.updateMemStatus(mId, mStatus);
+	public String deleteMember(String mId, HttpSession session, Model model) {
+		int result = mService.deleteMember(mId);
+		System.out.println(mId);
 		
 		if(result > 0) {
 			session.setAttribute("alertMsg", "성공적으로 변경되었습니다.");

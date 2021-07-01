@@ -2,6 +2,8 @@ package com.hj.withus.admin.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,10 +53,13 @@ public class OrderController {
 		}
 	}
 	
+	// 파트너
+	// 프로젝트 펀딩현황
 	@RequestMapping("orderNDeliveryList.part")
 	public ModelAndView selectPartnerOrderList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, ModelAndView mv
 			) {
 		
+		// 총 주문리스트 갯수
 		int totalList = oService.selectDeliveryCount();
 		// statusBox에 출력될 건수
 		OrderTB sc = oService.selectStatusCount();
@@ -62,25 +67,51 @@ public class OrderController {
 		PageInfo pi = Pagination.getPageInfo(totalList, currentPage, 10, 10);
 		// 주문현황 리스트 
 		ArrayList<OrderTB> polist = oService.selectOrderNDelivery(pi);
-		// 발송정보 입력창 , 해쉬맵 or 자바 스크립트로
-		//OrderTB oi = oService.selectSendInfo();
-		// 펀딩금 반화 신청창
 		
 		mv.addObject("polist", polist)
 		  .addObject("pi",pi)
 		  .addObject("sc", sc)
-		  //.addObject("oi", oi)
 		  .setViewName("admin/partOrderNDeliveryList");
 
 		return mv;
 	}
 	
+//  모달 창만 나옴
+//	@RequestMapping(value="send.info", produces="application/json; charset=utf-8")
+//	public void ajaxSelectSendInfo(int ono, HttpServletResponse response) throws IOException {
+//		OrderTB o = oService.selectSendInfo(ono);
+//		System.out.println(o);
+//		JSONObject jObj = new JSONObject();
+//		jObj.put("ordreNo", o.getOrderNo());
+//
+//		response.setContentType("application/json; charset=utf-8");
+//		response.getWriter().print(jObj);
+//		
+//	}
+	
+	// 발송모달 -  주문내역
 	@ResponseBody
 	@RequestMapping(value="send.info", produces="application/json; charset=utf-8")
-	public String ajaxSelectSendInfo(int ono) {
+	public String ajaxSelectOrderInfo(int orderNo) {
 		
-		return new Gson().toJson(oService.selectSendInfo(ono));
-	}
+		//System.out.println(orderNo); // 펀딩번호 확인		
+		
+		OrderTB o = oService.selectOrderInfo(orderNo);
+		//System.out.println(o); // 펀딩내역 잘 담겼는지
+		
+		return new Gson().toJson(o);
+	}	
 
+	@ResponseBody
+	@RequestMapping(value="refund.info", produces="apllication/json; charset=utf-8")
+		public String ajaxSelectRefundinfo(int orderNo) {
+		
+		//System.out.println(orderNo);
+		
+		OrderTB r = oService.selectRefundInfo(orderNo);
+		//System.out.println(r);
+		
+		return new Gson().toJson(r);
+	}
 	
 }

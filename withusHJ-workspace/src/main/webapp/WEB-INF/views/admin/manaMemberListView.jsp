@@ -136,7 +136,7 @@
 		                    	</c:choose>
 		                    </td>
 		                    <td>${ m.memberStatus }</td>
-		                    <td><button type="button" class="btn-sm" data-toggle="modal" data-target="#delModal">탈퇴</button></td>
+		                    <td><button type="button" class="btn-sm" data-toggle="modal" data-target="#memberDelModal">탈퇴</button></td>
 		                </tr>
 	                </c:forEach>            
 	            </tbody>
@@ -146,10 +146,12 @@
 	    </div>
 			    <!-- 탈퇴 클릭 시 모달  -->
 			    <!-- The Modal -->
-			    <div class="modal fade" id="delModal">
+			    <div class="modal fade" id="memberDelModal">
 			        <div class="modal-dialog modal-dialog-centered" style="width: 380px;">
 			        <div class="modal-content">
-			        
+			        	
+			        <from action="deleteMem.mana" method="post">
+			        	<input type="hidden" name="mId" value="${ m.memberId }">
 			            <!-- Modal Header -->
 			            <div class="modal-header">
 			            <h5 class="modal-title">${ m.memberName } 회원을 탈퇴시키겠습니까?</h5>
@@ -158,9 +160,8 @@
 			            
 			            <!-- Modal body -->
 			            <div class="modal-body">
-			                <form id=deleteMem method=post>
-			                	<input type="hidden" name="mId" value="${m.memberId }">
 			                	
+			          <!--       	
 			                    <div class="input-group mb-s" >
 			                        <div class="input-group-prepend">
 			                          <span class="input-group-text">회원상태</span>
@@ -170,23 +171,19 @@
 			                          <option name="memStatus" value="N">탈퇴</option>
 			                        </select>
 			                    </div>
-			                </form>
+			            -->
 			            </div>
+			         </from>	   
 			            
 			            <!-- Modal footer -->
 			            <div class="modal-footer">
 			            <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-			            <button type="button" class="btn btn-withus" data-dismiss="modal" onclick="deleteMemSubmit()">수정</button>
+			            <button type="submit" class="btn btn-withus" data-dismiss="modal" onclick="deleteMem()">확인</button>
 			            </div>
 			        </div>
 			        </div>
 			    </div>			            
 		             
-		             <script>
-		             	function deleteMemSubmit(){
-		             		$("#deleteMem").attr("action","deleteMem.mana").submit();
-		             	}
-		             </script>
 	
 	    
 	    <br clear="both"><br>

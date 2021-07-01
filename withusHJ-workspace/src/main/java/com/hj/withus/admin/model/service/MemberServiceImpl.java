@@ -29,8 +29,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int updateMemStatus(String mId, String mStatus) {
-		return mDao.updateMemStatus(sqlSession, mId, mStatus);
+	public int deleteMember(String memberId) {
+		return mDao.deleteMember(sqlSession, memberId);
 	}
 	
 	

@@ -88,12 +88,14 @@
   .subTable{width: 100%; background-color: #f4f4f4;}
   .subTable *{font-size: 14px;}
   .subTable{border:16px solid #f4f4f4;}
+  .st1{height: 30px;}
 
   button.btn.btn-withus.approvalBtn{ width: 48%; float: left;}
   button.btn.btn-danger.oppositionBtn{ width: 48%;}
 
 
 </style>
+
 </head>
 <body>
     
@@ -205,12 +207,14 @@
                     <tbody>
                     	<c:forEach var="p" items="${ polist }">
 		                    <tr>
-		                      <td class=ono>${ p.orderNo }</td>
+		                      <td class="ono">${ p.orderNo }</td>
 		                      <td>${ p.supporterName }</td>
 		                      <td>${ p.orderStatus }</td>
 		                      <td>${ p.totalPrice } 원</td>
 		                      <td>${ p.rewardTitle }/${ p.orderOption }/${ p.orderCount }</td>
-		                      <td><button type="button" class="btn btn-withus btn-sm" id ="sendInfo" data-toggle="modal" data-target="#sendInfoModal" onclick="postFormSubmit(1);">발송정보 입력</button></td>
+		                      <td><button type="button" class="btn btn-withus btn-sm" data-toggle="modal" data-target="#sendInfoModal" onclick="ajaxSendInfo();">
+		                      		발송정보 입력
+		                      	</button></td>
 		                      <td>${ p.deliveryDate }</td>
 		                      <c:choose>
                         		<c:when test="${ p.shippingStatus == 1 }">
@@ -225,56 +229,151 @@
                         	</c:choose>
 		                      <td>${ p.shippingCom } <br> ${ p.shippingNo }</td>
 		                      <td style="font-size:10px;">
-		                        <!-- 조건처리 해야 되는데...-->
+		                        <!-- 환불 가능 기간을 언제로 할껀지?-->
 		                        <!-- 리워드 기간 -->
 		                        	지연반환 신청기간 <br>
 		                        	2021-05-11 ~ 2021-00-00<br>
 		                        <!-- 리워드 종료일 이후 -->
 		                        	신청 <br>
-		                        <button type="button" class="btn btn-danger btn-sm"  onclick="postFormSubmit(2);">확인하기</button>
+		                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#refundInfo" onclick="ajaxRefundInfo();">
+		                        	확인하기
+	                        	</button>
 		                      </td>
 		                    </tr>
+		            	<input type="hidden" name="ono" id="orderNo" value="${ p.orderNo }">
                    	    <form id="postForm" action="" method="post">
-		            	<input type="hidden" name="ono" value="${ p.orderNo }">
 	            		</form>
-                    	</c:forEach>
-	            		
-	            		<script>
-	            		function postFormSubmit(num){
-		            		if(num == 1){ // 수정하기 클릭시
-		            			$("#postForm").attr("action", "send.info").submit();
-		            		}else{ // 삭제하기 클릭시
-		            			$("#postForm").attr("action", "delete.bo").submit();
-		            		}
-		            	}
-		            </script>
+                    	</c:forEach>	           
                     </tbody>
 	                  
 	                </table>
 	
 	              </div>
-	              
-	              <script>
-	              	function selectSendInfo(){
+                  <script>
+                  	// 발송모달:주문내역
+	              	function ajaxSendInfo(){
+	              		var $orderNo = $(".ono").text();
+	              		//console.log($orderNo);
+	              		
 	              		$.ajax({
 	            			url:"send.info",
-	            			data:{ono:${p.orderNo}}
-	              		   ,success:function(result){
-	              			   $("#sendInfo").modal("show");
-	              			   
-	              			   alert("ajax 실패")
-	        					
-	            				
-	            			},error:function(){
-	            				console.log("조회 ajax실패");
-	            			}
-	            		});
-	              		
+	            			type: "POST" ,
+	            			data:{orderNo:$orderNo},
+	              		   success:function(oi){
+	              			   //console.log(oi);
+ 	              			   
+	              			   var resultSend = "<table>"
+	              			   				+ "<tr>" 
+	              			   				+ "<th>펀딩번호</th>"
+	              			   				+ "<td>" + oi.orderNo + "</td>" 
+	              			   				+ "</tr>"
+		              			   			+ "<tr>" 
+	              			   				+ "<th>서포터명</th>"
+	              			   				+ "<td>" + oi.supporterName + "</td>" 
+	              			   				+ "</tr>"
+		              			   			+ "<tr>" 
+	              			   				+ "<th>펀딩내역</th>"
+	              			   				+ "<td>" + oi.rewardTitle + "</td>" 
+	              			   				+ "</tr>"
+		              			   			+ "<tr>" 
+	              			   				+ "<th>옵션</th>"
+	              			   				+ "<td>" + oi.orderOption / oi.orderCount + "</td>" 
+	              			   				+ "</tr>"	
+		              			   			+ "<th>총 결제 금액</th>"
+	              			   				+ "<td>" + oi.totalPrice + "</td>" 
+	              			   				+ "</tr>"
+	              			   				+ "</table>"
+	              			   			
+	              		  	 $(".partnerOrder").html(resultSend);
+	              		},error:function(){
+	    					console.log("발송ajax 조회실패");
+	              		}
+	    				});
 	              	}
-	              </script>
-	              
-	              
-	              
+                  
+	              	// 환불모달:펀딩내역+환불신청내역
+	              	function ajaxRefundInfo(){
+	              		var $orderNo = $(".ono").text();
+	              		//console.log($orderNo);
+	              		
+	              		$.ajax({
+	              			url:"refund.info",
+	              			data:{orderNo:$orderNo},
+	              			success:function(ri){
+	              				//console.log(ri);
+	              				var resultOrder = "<table>"
+				          			   				+ "<tr>" 
+				          			   				+ "<th>펀딩번호</th>"
+				          			   				+ "<td>" + ri.orderNo + "</td>" 
+				          			   				+ "</tr>"
+				              			   			+ "<tr>" 
+				          			   				+ "<th>서포터명</th>"
+				          			   				+ "<td>" + ri.supporterName + "</td>" 
+				          			   				+ "</tr>"
+				              			   			+ "<tr>" 
+				          			   				+ "<th>펀딩내역</th>"
+				          			   				+ "<td>" + ri.rewardTitle + "</td>" 
+				          			   				+ "</tr>"
+				              			   			+ "<tr>" 
+				          			   				+ "<th>옵션</th>"
+				          			   				+ "<td>" + ri.orderOption / ri.orderCount + "</td>" 
+				          			   				+ "</tr>"	
+				              			   			+ "<th>총 결제 금액</th>"
+				          			   				+ "<td>" + ri.totalPrice + "</td>" 
+				          			   				+ "</tr>"
+				          			   				+ "</table>"
+				          			   				
+   	              				var resultRefund = "<p>펀딩금 반환 신청 사유</p>"
+   	              									+ "<table>"
+				          			   				+ "<tr>" 
+				          			   				+ "<th>환불신청번호</th>"
+				          			   				+ "<td>" + ri.refundNo + "</td>" 
+				          			   				+ "</tr>"
+				              			   			+ "<tr>" 
+				          			   				+ "<th>상세사유</th>"
+				          			   				+ "<td>" + ri.reReason + "</td>" 
+				          			   				+ "</tr>"
+				              			   			+ "<tr>" 
+				          			   				+ "<th>증빙자료</th>"
+				          			   				+ "<td>" +"<a href="+"${ ri.reChangeName }" +"download=" + "${ ri.reChangeName }" + ">"
+				          			   				+ ri.reChangeName
+				          			   				+ "</td>" 
+				          			   				+ "</tr>"
+				          			   				+ "</table>"
+				          			   				
+          			   			var resultTable = "<tr>"
+					            					+ "<td class=" + "st1" + ">반환 금액</td>"
+											        + "</tr>"
+											        + "<tr>"
+											        + "<td>반환 신청 금액</td>"
+											        + "<td>" + ri.totalPrice + "원 </td>"
+											        + "</tr>"
+											        + "<tr>"
+											        + "<td colspan=" + "2> 상세금액"
+												        + "<table class=" + "subTable" + ">" 
+												        + "<tr>"
+												        + "<td>리워드 금액</td>"
+												        + "<td>"+ ri.rewardPrice + " 원 </td>"
+												        + "</tr>" 
+												        + "<tr>"
+												        + "<td>추가 후원금</td>"
+												        + "<td>" + ri.orderPlus + " 원 </td>"
+												        + "</tr>"
+												        + "</table>"
+											        + "</td>"
+											        + "</tr>"   				
+	              		
+	   	              			$(".partnerOrder").html(resultOrder);
+	              				$(".partnerRefund").html(resultRefund);
+	              				$(".refundTb").html(resultTable);
+	              			},error:function(){
+	              				console.log("환불 ajax 조회실패");
+	              			}
+	              		});
+	              	}
+	              	
+	              		
+              </script>
 	
 	              <!-- 발송정보 입력창  -->
 	              <!-- The Modal -->
@@ -288,32 +387,13 @@
 	                      <button type="button" class="close" data-dismiss="modal">×</button>
 	                    </div>
 	                    
+	                    <form>
 	                    <!-- Modal body -->
 	                    <div class="modal-body">
-	
+	                    
+						  <!-- 주문정보 ajax로 출력  -->
 	                      <div class="partnerOrder">
-	                        <table>
-	                          <tr>
-	                            <th>펀딩번호</th>
-	                            <td>${oi.orderNo}</td>
-	                          </tr>
-	                          <tr>
-	                            <th>서포트명</th>
-	                            <td>${oi.supporterName}</td>
-	                          </tr>
-	                          <tr>
-	                          	<td>펀딩 정보</td>
-	                            <td><h6>${ oi.rewardTitle }</h6></td>
-	                          </tr>
-	                          <tr>
-	                            <th>옵션정보</th>
-	                            <td>${ oi.orderOption }/${ oi.orderCount }</td>
-	                          </tr>
-	                          <tr>
-	                            <th>총 결제 금액</th>
-	                            <td>${ oi.totalPrice }원</td>
-	                          </tr> 
-	                        </table>
+	                        
 	                      </div>
 	
 	                      <hr style="width: 95%;">
@@ -333,6 +413,7 @@
 	                      </div>
 	    
 	                    </div>
+	                    </form>
 	                    
 	                    <!-- Modal footer -->
 	                    <div class="modal-footer none">
@@ -359,70 +440,18 @@
                         <div class="modal-body">
                           <label style="font-size:14px;">서포터가 펀딩금반환 요청한 내역을 확인하고 승인 또는 거절 처리하세요.</label>
                             <div class="partnerOrder">
-                                <table class="">
-                                    <tr>
-                                        <th>펀딩번호</th>
-                                        <td>${oi.orderNo}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>서포트명</th>
-                                        <td>${oi.supporterName}</td>
-                                    </tr>
-                                    <tr>
-                                    	<td>펀딩 정보</td>
-                                        <td><h6>${oi.rewardTitle }</h6></td>
-                                    </tr>
-                                    <tr>
-                                        <th>옵션</th>
-                                        <td>${ oi.orderOption }/${ oi.orderCount }</td>
-                                    </tr>
-                                    <tr>
-                                        <th>총 결제 금액</th>
-                                        <td>${ oi.totalPrice }원</td>
-                                    </tr> 
-                                </table>
+                                
                             </div>
                             <br>
-                            <p>펀딩금 반환 신청 사유</p>
-                            <table style="width:100%">
-                                <tr>
-                                    <th>환불신청번호</th>
-                                    <td>${ oi.refundNo }</td>
-                                </tr>
-                                <tr>
-                                    <th>상세사유</th>
-                                    <td>${ oi.reReason }</td>
-                                </tr>
-                                <tr>
-                                    <th>증빙자료</th>
-                                    <td>${ oi.reChangeName }</td>
-                                </tr>
-                            </table>
+                            <div class="partnerRefund">
+	                            
+                            </div>
             
                             <hr style="width: 100%;">
                             <table>
-                                <tr>
-                                    <td colspan="2">반환 금액</td>
-                                </tr>
-                                <tr>
-                                    <td>반환 신청 금액</td>
-                                    <td>${ oi.totalPrice }원</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                                                                        상세금액
-                                        <table class="subTable">
-                                            <tr>
-                                                <td>리워드 금액</td>
-                                                <td>${ oi.rewardPrice }원</td>
-                                            </tr>
-                                            <tr>
-                                                <td>추가 후원금</td>
-                                                <td>${ oi.orderPlus }원</td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
+                                 <div class="refundTb">
+							        
+							    </div>
                                 <tr>
                                     <td colspan="2">
                                                                                펀딩금 반환 신청 처리
@@ -457,7 +486,6 @@
             
             </div>
             
-           
            	<!-- 페이징 -->
             <div id="content_2">
             <div id="pagingArea">

@@ -40,14 +40,11 @@
 	</select>
 	
 	<!-- 회원 상태 변경(탈퇴) -->
-	<update id="updateMemStatus" parameterType="string" >
+	<update id="deleteMember" parameterType="string" >
 		update 
 		       member
-		   <set>
-		   	<if test="memberStatus == #{mStatus}">member_status = 'Y',</if>
-		   	<if test="memberStatus == #{mStatus}">member_status = 'N'</if>
-		   </set> 
-		 where member_id = #{memberId}      
+		   set member_status = 'N' 
+		 where member_id = #{memberNo}      
 	</update>
 	
 	
