@@ -9,10 +9,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.hj.withus.admin.model.service.MemberService;
 import com.hj.withus.admin.model.vo.Member;
+import com.hj.withus.admin.model.vo.OrderTB;
 import com.hj.withus.common.model.PageInfo;
 import com.hj.withus.common.template.Pagination;
 
@@ -31,6 +34,7 @@ public class MemberController {
 		PageInfo pi = Pagination.getPageInfo(totalList, currentPage, 5, 10);
 		
 		ArrayList<Member> mList = mService.selectList(pi);
+		//System.out.println(mList);
 		
 		mv.addObject("mList",mList)
 		  .addObject("pi", pi)
@@ -39,10 +43,23 @@ public class MemberController {
 	}
 	
 	// 회원탈퇴
+	// 모달
+	@ResponseBody
+	@RequestMapping(value="memStatus.mana", produces="apllication/json; charset=utf-8")
+		public String ajaxSelectMemStatus(int mno) {
+		
+		System.out.println(mno);
+		
+		Member ms = mService.selectMemStatus(mno);
+		//System.out.println(ms);
+		
+		return new Gson().toJson(ms);
+	}
+	// 상태변경
 	@RequestMapping("deleteMem.mana")
-	public String deleteMember(String mId, HttpSession session, Model model) {
-		int result = mService.deleteMember(mId);
-		System.out.println(mId);
+	public String deleteMember(Member m, HttpSession session, Model model) {
+		System.out.println(m);
+		int result = mService.deleteMember(m);
 		
 		if(result > 0) {
 			session.setAttribute("alertMsg", "성공적으로 변경되었습니다.");

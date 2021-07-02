@@ -44,13 +44,14 @@ public class OrderController {
 		
 		OrderTB o = oService.slectOrderDetail(ono);
 		
-		if(o != null) {
-			model.addAttribute("o", o);
-			return "admin/manaOrderDetailView";
-		}else {
-			model.addAttribute("errorMsg","주문내역 상세 조회 실패");
-			return "";
-		}
+		model.addAttribute("o", o);
+		return "admin/manaOrderDetailView";
+		
+//		if(o == null) {
+//			model.addAttribute("errorMsg","주문내역 상세 조회 실패");
+//			return "";
+//		}else {
+//		}
 	}
 	
 	// 파트너

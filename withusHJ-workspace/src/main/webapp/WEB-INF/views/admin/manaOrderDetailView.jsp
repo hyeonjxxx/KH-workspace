@@ -139,16 +139,16 @@
                     </tr>      
                 </table> 
             </div> 
-        </div>
         
 
 
-        <div class="button_area">
-            <button type="button" class="btn btn-withus">수 정</button>
-            <button type="button" class="btn btn-secondary"  onclick="history.back()">목록으로</button>
-        </div>
+	        <div class="button_area">
+	            <button type="button" class="btn btn-withus">수 정</button>
+	            <button type="button" class="btn btn-secondary"  onclick="history.back()">목록으로</button>
+	        </div>
+    	</div>
 
-        <!-- 탈퇴 클릭 시 모달  -->
+        <!-- 결제취소 클릭 시 모달  -->
         <!-- The Modal -->
         <div class="modal fade" id="cancelPayModal">
             <div class="modal-dialog modal-dialog-centered" style="width: 380px;">
@@ -161,6 +161,7 @@
                 
                 <!-- Modal body -->
                 <div class="modal-body">
+                	<input type="hidden" id="ono" value="${ o.orderNo }">
                     <h6>결제 취소를 진행하시겠습니까?</h6>
                 </div>
 

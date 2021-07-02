@@ -290,10 +290,10 @@
 	              			   				+ "</tr>"
 	              			   				+ "</table>"
 	              			   			
-	              		  	 $(".partnerOrder").html(resultSend);
-	              		},error:function(){
+       	              			   $(".partnerOrder").html(resultSend);
+	              		   },error:function(){
 	    					console.log("발송ajax 조회실패");
-	              		}
+	              			}
 	    				});
 	              	}
                   

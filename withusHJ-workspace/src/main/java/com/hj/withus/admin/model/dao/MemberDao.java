@@ -26,8 +26,13 @@ public class MemberDao {
 		return (ArrayList)sqlSession.selectList("withusMemeberMapper.mSelectList", null, rowBounds);
 	}	
 	
-	public int deleteMember(SqlSessionTemplate sqlSession, String memberId) {
-		return sqlSession.update("withusMemeberMapper.deleteMember", memberId);
+	public Member selectMemStatus(SqlSessionTemplate sqlSession, int memberNo) {
+		return sqlSession.selectOne("withusMemeberMapper.selectMemStatus", memberNo);
 	}
+	
+	public int deleteMember(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("withusMemeberMapper.deleteMember", m);
+	}
+
 
 }

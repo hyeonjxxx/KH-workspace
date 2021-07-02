@@ -10,7 +10,10 @@ public interface MemberService {
 	int selectListCount();
 	ArrayList<Member> selectList(PageInfo pi);
 	
-	int deleteMember(String memberId);
+	// 탈퇴 모달
+	Member selectMemStatus(int memberNo);
+	// 탈퇴(회원 상태 변경)
+	int deleteMember(Member m);
 	
 
 }

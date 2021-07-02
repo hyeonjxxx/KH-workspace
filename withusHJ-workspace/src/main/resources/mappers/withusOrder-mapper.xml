@@ -110,8 +110,19 @@
 		   where order_no = #{orderNo}
 	</select>
 	
-	<!-- 사용자(파트너) -->
+	<!-- 관리자 (강제)결제 취소  -->
+	<update id="cancleOrder" parameterType="_int">
+		update tb_order
+ 		   set order_status = '1'
+		 where order_no = #{orderNo}; 
+	</update>
 	
+	<!-- 주문:결제 취소 변경 저장 -->
+	<update id="">
+	</update>
+	
+	
+	<!-- 사용자(파트너) -->
 	<!-- 발송리스트 갯수 -->
 	<select id="SelectDeliveryCount" resultType="_int">
 			select

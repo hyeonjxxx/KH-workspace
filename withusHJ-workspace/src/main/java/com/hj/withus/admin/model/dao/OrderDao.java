@@ -31,6 +31,10 @@ public class OrderDao {
 		return sqlSession.selectOne("withusOrderMapper.selectOrderDetail", orderNo);
 	}
 	
+	public int cancleOrder(SqlSessionTemplate sqlSession, int orderNo) {
+		
+		return sqlSession.selectOne("withusOrderMapper.cancleOrder", orderNo);
+	}
 	
 	public int selectDeilveryCount(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("withusOrderMapper.SelectDeliveryCount");

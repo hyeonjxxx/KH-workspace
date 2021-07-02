@@ -40,11 +40,21 @@
 	</select>
 	
 	<!-- 회원 상태 변경(탈퇴) -->
-	<update id="deleteMember" parameterType="string" >
+	<!-- 모달 -->
+	<select id="selectMemStatus" resultMap="memberRset" 
+			parameterType="string">
+		select
+				member_name
+		 from member
+		 where member_no = #{memberNo}
+	
+	</select>
+	<!--  -->
+	<update id="deleteMember" parameterType="Member" >
 		update 
 		       member
-		   set member_status = 'N' 
-		 where member_id = #{memberNo}      
+		   set member_status = #{memberStatus} 
+		 where member_no = #{memberNo}      
 	</update>
 	
 	

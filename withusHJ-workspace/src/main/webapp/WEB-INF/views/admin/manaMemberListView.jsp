@@ -119,6 +119,7 @@
 	            </thead>
 	            <tbody>
 	            	<c:forEach var="m" items="${ mList }">
+	            	  	<input type="hidden" class="mno" value="${m.memberNo}">
 		                <tr>
 		                    <td>${ m.memberNo }</td>
 		                    <td>${ m.memberId }</td>
@@ -136,53 +137,80 @@
 		                    	</c:choose>
 		                    </td>
 		                    <td>${ m.memberStatus }</td>
-		                    <td><button type="button" class="btn-sm" data-toggle="modal" data-target="#memberDelModal">탈퇴</button></td>
+		                    <td><button type="button" class="btn-sm" data-toggle="modal" data-target="#delModal" onclick="ajaxDel();">
+		                    	탈퇴</button></td>
 		                </tr>
 	                </c:forEach>            
 	            </tbody>
-
-
 	        </table>
+	        <script>
+	        	// 탈퇴 모달
+	        	function ajaxDel(){
+	        		var $memberNo = $(".mno").val();
+	        		console.log($memberNo);
+	        		
+	        		$.ajax({
+	        			url:"memStatus.mana",
+	        			data:{mno:$memberNo},
+	        			success:function(ms){
+	        				console.log(ms);
+	        			}, error: function(){
+	        				console.log("모달 조회 실패")
+	        			}
+	        		});
+	        	}
+	        </script>
+	        
 	    </div>
-			    <!-- 탈퇴 클릭 시 모달  -->
+	
+				 <!-- 탈퇴 클릭 시 모달  -->
 			    <!-- The Modal -->
 			    <div class="modal fade" id="memberDelModal">
 			        <div class="modal-dialog modal-dialog-centered" style="width: 380px;">
 			        <div class="modal-content">
 			        	
-			        <from action="deleteMem.mana" method="post">
-			        	<input type="hidden" name="mId" value="${ m.memberId }">
 			            <!-- Modal Header -->
 			            <div class="modal-header">
-			            <h5 class="modal-title">${ m.memberName } 회원을 탈퇴시키겠습니까?</h5>
+			            <h5 class="modal-title">회원을 탈퇴시키겠습니까?</h5>
+			            
 			            <button type="button" class="close" data-dismiss="modal">&times;</button>
 			            </div>
 			            
 			            <!-- Modal body -->
 			            <div class="modal-body">
-			                	
-			          <!--       	
-			                    <div class="input-group mb-s" >
-			                        <div class="input-group-prepend">
-			                          <span class="input-group-text">회원상태</span>
-			                        </div>
-			                        <select type="text" class="form-control" id="memberStatus" name="memberStatus">
-			                          <option name="memStatus" value="Y">활동</option>
-			                          <option name="memStatus" value="N">탈퇴</option>
-			                        </select>
-			                    </div>
-			            -->
-			            </div>
-			         </from>	   
+		            		<form id="delectMem" action="deleteMem.mana" method="post">
+		            		<input type="hidden" class="mno" value="">
+		                     <div class="input-group mb-s" >
+		                        <div class="input-group-prepend">
+		                          <span class="input-group-text">회원상태</span>
+		                        </div>
+		                        
+		                        <select class="form-control" id="memberStatus" name="memberStatus">
+		                          <option value="Y">활동</option>
+		                          <option value="N">탈퇴</option>
+		                        </select>
+		                        
+		                        <!-- 수정된 회원상태 컨트롤러에 넘겨주는 함수 -->
+		                        <script>
+		                        	$(function(){
+		                        		$("#memberStatus option").attr("selected", true);
+		                        	});
+		                        </script> 
+		                         
+		                    	</div>
+			            	</div>
 			            
-			            <!-- Modal footer -->
-			            <div class="modal-footer">
-			            <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-			            <button type="submit" class="btn btn-withus" data-dismiss="modal" onclick="deleteMem()">확인</button>
-			            </div>
+				            <!-- Modal footer -->
+				            <div class="modal-footer">
+				            	<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+				            	<button type="submit" class="btn btn-withus" data-dismiss="modal">확인</button>
+				            </div>
+		            		</form>
+			             
 			        </div>
 			        </div>
-			    </div>			            
+			    </div>	
+			    			            
 		             
 	
 	    

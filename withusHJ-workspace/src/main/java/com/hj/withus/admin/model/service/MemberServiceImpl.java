@@ -28,11 +28,16 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.selectList(sqlSession, pi);
 	}
 
+
 	@Override
-	public int deleteMember(String memberId) {
-		return mDao.deleteMember(sqlSession, memberId);
+	public Member selectMemStatus(int memberNo) {
+		return mDao.selectMemStatus(sqlSession, memberNo);
 	}
 	
+	@Override
+	public int deleteMember(Member m) {
+		return mDao.deleteMember(sqlSession, m);
+	}
 	
 
 
