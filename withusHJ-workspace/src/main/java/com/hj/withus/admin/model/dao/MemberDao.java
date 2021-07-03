@@ -1,6 +1,7 @@
 package com.hj.withus.admin.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -32,6 +33,18 @@ public class MemberDao {
 	
 	public int deleteMember(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.update("withusMemeberMapper.deleteMember", m);
+	}
+
+	public int countSearch(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
+		return sqlSession.selectOne("withusMemeberMapper.countSearch", map);
+	}
+
+	public ArrayList<Member> searchMember(SqlSessionTemplate sqlSession, HashMap<String, String> map, PageInfo pi) {
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("withusMemeberMapper.searchMember", map, rowBounds);
 	}
 
 

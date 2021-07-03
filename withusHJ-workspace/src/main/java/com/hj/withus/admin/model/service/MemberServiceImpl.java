@@ -1,6 +1,7 @@
 package com.hj.withus.admin.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,17 @@ public class MemberServiceImpl implements MemberService {
 	public int deleteMember(Member m) {
 		return mDao.deleteMember(sqlSession, m);
 	}
+
+	@Override
+	public int countSearch(HashMap<String, String> map) {
+		return mDao.countSearch(sqlSession, map);
+	}
+
+	@Override
+	public ArrayList<Member> searchMember(HashMap<String, String> map, PageInfo pi) {
+		return mDao.searchMember(sqlSession, map, pi);
+	}
+
 	
 
 

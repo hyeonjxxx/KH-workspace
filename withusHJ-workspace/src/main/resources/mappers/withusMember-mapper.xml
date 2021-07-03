@@ -42,9 +42,10 @@
 	<!-- 회원 상태 변경(탈퇴) -->
 	<!-- 모달 -->
 	<select id="selectMemStatus" resultMap="memberRset" 
-			parameterType="string">
+			parameterType="_int">
 		select
-				member_name
+				member_no
+			  , member_name
 		 from member
 		 where member_no = #{memberNo}
 	
@@ -57,5 +58,54 @@
 		 where member_no = #{memberNo}      
 	</update>
 	
+	<!-- 검색기능 -->
+	<!-- 검색된 총 게시글 -->
+	<select id="" resultType="_int" parameterType="hashmap">
+		select
+				count(*)
+		   from	member m
+		  where
+			  <if test="memberStatus == 'Y'">
+			  	and member_status
+			  </if>
+			  <if test="memberStatus =='N'">
+			  	and member_status
+			  </if>
+			  <if test="memberStatus =='A'">
+			  	and member_status
+			  </if>
+			  like '%' || #{memKeyword} || '%'
+		  
+	</select>
+	<!-- 키워드 검색 -->
+	<select id="searchMember" resultMap="memberRset" parameterType="hashmap">
+		select 
+               member_no
+		     , member_id
+		     , member_name
+		     , to_char(member_create_dt,'YYYY-MM-DD') member_create_dt
+		     , partner_join
+		     , partner_name
+		     , member_status
+          from member
+         where 
+           <choose>
+           		<when test="memberStatus == 'Y'">
+           			and member_status
+           		</when>
+           		<when test="memberStatus =='N'">
+           			and member_status
+           		</when>
+           		<when test="memberStatus =='A'">
+           			and member_status
+           		</when>
+           		<otherwise>
+           			and member_status
+           		</otherwise>
+           </choose>
+           		like '%' || #{keyword} || '%'           	
+         order
+            by member_no desc
+	</select>
 	
 </mapper>

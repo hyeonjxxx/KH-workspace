@@ -1,6 +1,7 @@
 package com.hj.withus.admin.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,16 @@ public class OrderServiceImpl implements OrderService {
 	public OrderTB slectOrderDetail(int orderNo) {
 		return (OrderTB) oDao.selectOrderDetail(sqlSession, orderNo);
 	}
+	
+	
+	@Override
+	public ArrayList<OrderTB> searchOrder(HashMap<String, String> map) {
+		return oDao.searchOrder(sqlSession, map);
+	}
+	
+	
+	
+	
 
 	@Override
 	public int selectDeliveryCount() {
@@ -62,7 +73,8 @@ public class OrderServiceImpl implements OrderService {
 	public OrderTB selectRefundInfo(int orderNo) {
 		return oDao.selectRefundInfo(sqlSession, orderNo);
 	}
-	
+
+
 	
 	
 

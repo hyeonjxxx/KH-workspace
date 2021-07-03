@@ -68,6 +68,8 @@
 	    <div class="container">
 	
 	        <div class="search_area">
+	        	<form action="searchMember.mana" name="searchForm" method="post">
+	        	<input type="hidden" name="currentPage" value="1">
 	             <div class="searchKey_1">
 	                 <select name="partnerJoin" id="partnerJoin">
 	                     <option value="memberAll">전체</option>
@@ -77,7 +79,7 @@
 	             </div>
 	             <div class="searchKey_2">
 	                <select name="memberStatus" id="memberStatus">
-	                    <option value="T">전체</option>
+	                    <option value="T"> 전체</option>
 	                    <option value="Y">활동</option>
 	                    <option value="N">탈퇴</option>
 	                    <option value="A">관리자</option>
@@ -87,7 +89,7 @@
 	            <div class="searchKey_3">
 	                <div class="memberKeyword">
 	                    <select name="memberInfo" id="memberInfo">
-	                        <option value="">전체</option>
+	                        <option value="AllKey">전체</option>
 	                        <option value="memberNo">회원번호</option>
 	                        <option value="memberName">이름</option>
 	                        <option value="email">이메일</option>
@@ -95,15 +97,23 @@
 	                </div>
 	
 	                <div class="input-group search">
-	                    <input type="text" class="form-control" placeholder="검색어를 입력하세요">
+	                    <input type="text" name="memKeyword" class="form-control" placeholder="검색어를 입력하세요">
 	                    <div class="input-group-append">
 	                        <button class="btn searchBtn" type="submit"><i class="fa fa-search"></i></button>
 	                    </div>
 	                </div>
 	            </div>
-	
+				</form>
 	        </div>
+	        <c:if test="${ !empty memberStatus }">
+	        	<script>
+	        	$(function(){
+	        		$(".searchKey_2 option[value=${memberStatus}]").attr("selected", true);
+	        	});
+	        	</script>
+	        </c:if>
 	
+			<!-- 회원리스트 영역 -->
 	        <table class="table table-bordered">
 	            <thead class="tableHead">
 	                <tr>
@@ -119,8 +129,8 @@
 	            </thead>
 	            <tbody>
 	            	<c:forEach var="m" items="${ mList }">
-	            	  	<input type="hidden" class="mno" value="${m.memberNo}">
 		                <tr>
+		            	  	<input type="hidden" id="mno" name="mno" value="${m.memberNo}">
 		                    <td>${ m.memberNo }</td>
 		                    <td>${ m.memberId }</td>
 		                    <td>${ m.memberName }</td>
@@ -137,7 +147,7 @@
 		                    	</c:choose>
 		                    </td>
 		                    <td>${ m.memberStatus }</td>
-		                    <td><button type="button" class="btn-sm" data-toggle="modal" data-target="#delModal" onclick="ajaxDel();">
+		                    <td><button type="button" id="delMem" class="btn-sm" data-toggle="modal" data-target="#delModal">
 		                    	탈퇴</button></td>
 		                </tr>
 	                </c:forEach>            
@@ -145,41 +155,60 @@
 	        </table>
 	        <script>
 	        	// 탈퇴 모달
-	        	function ajaxDel(){
-	        		var $memberNo = $(".mno").val();
-	        		console.log($memberNo);
-	        		
-	        		$.ajax({
-	        			url:"memStatus.mana",
-	        			data:{mno:$memberNo},
-	        			success:function(ms){
-	        				console.log(ms);
-	        			}, error: function(){
-	        				console.log("모달 조회 실패")
-	        			}
+	        	
+	        	$(function(){
+	        		$("#delMem").click(function(){
+	        			var $memberNo = $("#mno").eq(0).val();
+	        			console.log($memberNo);
+	        			
+	        			$.ajax({
+		        			url:"memStatus.mana",
+		        			data:{mno:$memberNo},
+		        			success:function(ms){
+		        				console.log(ms);
+		        				var result = "<div>" 
+		        							+ ms.memberName 
+		        							+ " 회원을 탈퇴시키겠습니까?</div>"
+		        							+ "<input type=" 
+		        							+ "hidden value="
+		        							+ ms.MemberNo
+		        							+ " name="
+		        							+ "memberNo"+
+		        							">"
+		        				
+
+		        				$(".modal-title").html(result);
+		        				
+		        			}, error: function(){
+		        				console.log("모달 조회 실패")
+		        			}
+		        		});
+	        			
 	        		});
-	        	}
+	        	});
+	        	
+	        	
 	        </script>
 	        
 	    </div>
 	
 				 <!-- 탈퇴 클릭 시 모달  -->
 			    <!-- The Modal -->
-			    <div class="modal fade" id="memberDelModal">
+			    <div class="modal fade" id="delModal">
 			        <div class="modal-dialog modal-dialog-centered" style="width: 380px;">
 			        <div class="modal-content">
 			        	
+	            		<form id="delectMem" action="deleteMem.mana" method="post">
 			            <!-- Modal Header -->
 			            <div class="modal-header">
-			            <h5 class="modal-title">회원을 탈퇴시키겠습니까?</h5>
+			            <h5 class="modal-title"> </h5>
 			            
 			            <button type="button" class="close" data-dismiss="modal">&times;</button>
 			            </div>
 			            
 			            <!-- Modal body -->
 			            <div class="modal-body">
-		            		<form id="delectMem" action="deleteMem.mana" method="post">
-		            		<input type="hidden" class="mno" value="">
+		            		
 		                     <div class="input-group mb-s" >
 		                        <div class="input-group-prepend">
 		                          <span class="input-group-text">회원상태</span>
@@ -193,8 +222,10 @@
 		                        <!-- 수정된 회원상태 컨트롤러에 넘겨주는 함수 -->
 		                        <script>
 		                        	$(function(){
-		                        		$("#memberStatus option").attr("selected", true);
-		                        	});
+		                        		$("#memberStatus option").each(function(){
+		                        				$(this).attr("selected", true);
+		                        			});
+		                        		});
 		                        </script> 
 		                         
 		                    	</div>
@@ -205,7 +236,7 @@
 				            	<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
 				            	<button type="submit" class="btn btn-withus" data-dismiss="modal">확인</button>
 				            </div>
-		            		</form>
+            			</form>
 			             
 			        </div>
 			        </div>

@@ -45,6 +45,8 @@
         </div>
         <div class="container">
             <div class="data1">
+            	<form action="orderUpdate.mana" method="post">
+
                 <label class="tableName">펀딩 내역</label>
                 <table class="table table-bordered">
 	                <tr>
@@ -73,14 +75,25 @@
 	                </tr>
 	                <tr>
 		                <th>펀딩 상태</th>
-		                <td>
-		                    <!--  -->
+		                <c:choose>
+                        		<c:when test="${ o.orderStatus == 1 }">
+                        			<td>결제완료 <button type="button" class="btn-sm" onclick="cancleOrder();">결제 취소</button></td>
+                        		</c:when>
+                        		<c:when test="${ o.orderStatus == 2 }">
+                        			<td>취소요청 <button type="button" class="btn-sm" onclick="cancleOrder();">결제 취소</button></td>
+                        		</c:when>
+                        		<c:when test="${ o.orderStatus == 3 }">
+                        			<td>취소완료 <button type="button" class="btn-sm" onclick="cancleOrder();">결제 취소</button></td>
+                        		</c:when>
+                        	</c:choose>
+		               <!--  <td>
+		                    
 		                                                       결제 완료 &nbsp;&nbsp;&nbsp;&nbsp;
-		                    <!-- 펀딩마감일 +00일 이후 결제 취소버튼 노출 -->
+		                    펀딩마감일 +00일 이후 결제 취소버튼 노출
 		                      
 		                    <button type="button" class="btn-sm" data-toggle="modal" data-target="#cancelPayModal">결제 취소</button>
-		                    
-		                </td>
+		                    <button type="button" class="btn-sm" onclick="cancleOrder();">결제 취소</button>
+		                </td> -->
 	                    <th>카드 번호</th>
 	                    <td>${ o.cardNo }</td>
 	                </tr>
@@ -96,7 +109,14 @@
                     <tr>
                     </tr>              
            		</table>
+           		<script>
+           		function(cancleOrder(){
+           			
+           		});
+           		
+           		</script>
             </div>
+            
             <div class="data1">
                 <label class="tableName">배송지 정보</label>
                 <table class="table table-bordered">
@@ -143,14 +163,15 @@
 
 
 	        <div class="button_area">
-	            <button type="button" class="btn btn-withus">수 정</button>
+	            <button type="submit" class="btn btn-withus">수 정</button>
 	            <button type="button" class="btn btn-secondary"  onclick="history.back()">목록으로</button>
 	        </div>
     	</div>
+    	</from>
 
         <!-- 결제취소 클릭 시 모달  -->
         <!-- The Modal -->
-        <div class="modal fade" id="cancelPayModal">
+<%--         <div class="modal fade" id="cancelPayModal">
             <div class="modal-dialog modal-dialog-centered" style="width: 380px;">
             <div class="modal-content">
             
@@ -173,7 +194,7 @@
                 
             </div>
             </div>
-        </div>
+        </div> --%>
 
     </div>
 </body>

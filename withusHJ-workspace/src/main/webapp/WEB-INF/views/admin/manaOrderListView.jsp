@@ -58,14 +58,14 @@
         <div class="container">
 
             <div class="search_box">
-                <form action="">
+                <form action="orderSearch.mana">
                     <div class="searchForm">
                         <select name="orderKeyword" id="orderKeyword">
                             <option value="orderAll">전체</option>
-                            <option value="orderName">서포터</option>
-                            <option value="oredeNo">주문번호</option>
+                            <option value="member_name">서포터</option>
+                            <option value="order_no">주문번호</option>
                         </select>
-                        <input type="text" class="form-control order" placeholder="검색어를 입력하세요">
+                        <input type="text" name="keyword" class="form-control order" placeholder="검색어를 입력하세요">
                     </div>
                     <br>
                     <div class="orderAllStatus">
@@ -86,7 +86,13 @@
                     </div>
                 </form>
             </div>
-
+			<c:if test="${ !empty condition }">
+	        	<script>
+	        		$(function(){
+	        			$("#searchForm option[value=${orderKeyword}]").attr("selected", true);
+	        		})
+	        	</script>
+       		 </c:if>
             <br>
 
             <table class="table table-bordered" id="orderTable">

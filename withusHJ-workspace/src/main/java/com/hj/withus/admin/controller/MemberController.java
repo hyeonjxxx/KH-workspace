@@ -1,6 +1,7 @@
 package com.hj.withus.admin.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.hj.withus.admin.model.service.MemberService;
 import com.hj.withus.admin.model.vo.Member;
-import com.hj.withus.admin.model.vo.OrderTB;
 import com.hj.withus.common.model.PageInfo;
 import com.hj.withus.common.template.Pagination;
 
@@ -48,7 +48,7 @@ public class MemberController {
 	@RequestMapping(value="memStatus.mana", produces="apllication/json; charset=utf-8")
 		public String ajaxSelectMemStatus(int mno) {
 		
-		System.out.println(mno);
+		//System.out.println(mno);
 		
 		Member ms = mService.selectMemStatus(mno);
 		//System.out.println(ms);
@@ -70,6 +70,33 @@ public class MemberController {
 		}
 	}
 	
-	
+	// 다중 조건 검색
+	@RequestMapping("searchMember.mana")
+	public ModelAndView searchMember(@RequestParam(defaultValue="T") String memberStatus,
+									 @RequestParam(defaultValue="") String memKeyword ,
+									 @RequestParam(value="currentPage", defaultValue="1") int currentPage,
+									 ModelAndView mv) {
+		
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("memberStatus", memberStatus);
+		map.put("memKeyword", memKeyword);
+		// 검색결과 리스트 총 갯수
+		int count = mService.countSearch(map);
+		
+		// 페이징 처리
+		PageInfo pi = Pagination.getPageInfo(count, currentPage, 10, 10);
+		// 검색결과 담아내기
+		ArrayList<Member> mList = mService.searchMember(map, pi);
+		
+		mv.addObject("pi", pi)
+		  .addObject("mList",mList)
+		  .setViewName("admin/manaMemberListView");
+		
+		return mv;
+		
+
+		
+	}
 	
 }

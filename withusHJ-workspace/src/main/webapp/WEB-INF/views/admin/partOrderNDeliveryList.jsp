@@ -218,7 +218,8 @@
 		                      <td>${ p.orderStatus }</td>
 		                      <td>${ p.totalPrice } 원</td>
 		                      <td>${ p.rewardTitle }/${ p.orderOption }/${ p.orderCount }</td>
-		                      <td><button type="button" class="btn btn-withus btn-sm" data-toggle="modal" data-target="#sendInfoModal" onclick="ajaxSendInfo();">
+		                      <td><button type="button" class="btn btn-withus btn-sm" data-toggle="modal" 
+		                           data-target="#sendInfoModal" onclick="ajaxSendInfo();">
 		                      		발송정보 입력
 		                      	</button></td>
 		                      <td>${ p.deliveryDate }</td>
@@ -246,9 +247,6 @@
 	                        	</button>
 		                      </td>
 		                    </tr>
-		            	<input type="hidden" name="ono" id="orderNo" value="${ p.orderNo }">
-                   	    <form id="postForm" action="" method="post">
-	            		</form>
                     	</c:forEach>	           
                     </tbody>
 	                  
@@ -257,16 +255,16 @@
 	              </div>
                   <script>
                   	// 발송모달:주문내역
+                  	
 	              	function ajaxSendInfo(){
-	              		var $orderNo = $(".ono").text();
-	              		//console.log($orderNo);
+	              		var $orderNo = $(".ono").eq(0).text();
+	              		console.log($orderNo);
 	              		
 	              		$.ajax({
 	            			url:"send.info",
-	            			type: "POST" ,
 	            			data:{orderNo:$orderNo},
 	              		   success:function(oi){
-	              			   //console.log(oi);
+	              			   console.log(oi);
  	              			   
 	              			   var resultSend = "<table>"
 	              			   				+ "<tr>" 
@@ -377,7 +375,6 @@
 	              			}
 	              		});
 	              	}
-	              	
 	              		
               </script>
 	

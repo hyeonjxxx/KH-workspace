@@ -1,7 +1,9 @@
 package com.hj.withus.admin.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +45,7 @@ public class OrderController {
 	public String selectOrder(int ono, Model model) {
 		
 		OrderTB o = oService.slectOrderDetail(ono);
+		System.out.println(o);
 		
 		model.addAttribute("o", o);
 		return "admin/manaOrderDetailView";
@@ -53,6 +56,39 @@ public class OrderController {
 //		}else {
 //		}
 	}
+	
+	
+	//결제 취소 기능 --> 안됨....
+	@RequestMapping("orderUpdate.mana")
+	public String updateOrder(int ono, Model model) {
+		
+		OrderTB o = oService.slectOrderDetail(ono);
+		
+		model.addAttribute("o", o);
+		return "admin/manaOrderListView";
+		
+	}
+	
+	// 검색기능 -> 일단 키워드로 검색만(라디오 버튼 조건 없이)
+	@RequestMapping("orderSearch.mana")
+	public String selectOrderList(HttpServletRequest request, Model model) {
+		
+		String orderKeyword = request.getParameter("orderKeyword"); // title|writer|content
+		String keyword = request.getParameter("keyword");
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("orderKeyword", orderKeyword);
+		map.put("keyword", keyword);
+		
+		ArrayList<OrderTB> olist = oService.searchOrder(map);
+		
+		model.addAttribute("olist", olist)
+		     .addAttribute("orderKeyword",orderKeyword)
+		     .addAttribute("keyword",keyword);
+		return "admin/manaOrderListView";
+	}
+	
+	
 	
 	// 파트너
 	// 프로젝트 펀딩현황
@@ -77,6 +113,7 @@ public class OrderController {
 		return mv;
 	}
 	
+	
 //  모달 창만 나옴
 //	@RequestMapping(value="send.info", produces="application/json; charset=utf-8")
 //	public void ajaxSelectSendInfo(int ono, HttpServletResponse response) throws IOException {
@@ -95,10 +132,10 @@ public class OrderController {
 	@RequestMapping(value="send.info", produces="application/json; charset=utf-8")
 	public String ajaxSelectOrderInfo(int orderNo) {
 		
-		//System.out.println(orderNo); // 펀딩번호 확인		
+		System.out.println(orderNo); // 펀딩번호 확인		
 		
 		OrderTB o = oService.selectOrderInfo(orderNo);
-		//System.out.println(o); // 펀딩내역 잘 담겼는지
+		System.out.println(o); // 펀딩내역 잘 담겼는지
 		
 		return new Gson().toJson(o);
 	}	
