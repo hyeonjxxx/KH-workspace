@@ -89,7 +89,7 @@
 	            <div class="searchKey_3">
 	                <div class="memberKeyword">
 	                    <select name="memberInfo" id="memberInfo">
-	                        <option value="AllKey">전체</option>
+	                        <option value="all">전체</option>
 	                        <option value="memberNo">회원번호</option>
 	                        <option value="memberName">이름</option>
 	                        <option value="email">이메일</option>
@@ -97,7 +97,7 @@
 	                </div>
 	
 	                <div class="input-group search">
-	                    <input type="text" name="memKeyword" class="form-control" placeholder="검색어를 입력하세요">
+	                    <input type="text" name="memKeyword" value="${ keyword }" class="form-control" placeholder="검색어를 입력하세요">
 	                    <div class="input-group-append">
 	                        <button class="btn searchBtn" type="submit"><i class="fa fa-search"></i></button>
 	                    </div>
@@ -105,10 +105,24 @@
 	            </div>
 				</form>
 	        </div>
+	        <c:if test="${ !empty partnerJoin }">
+	        	<script>
+	        	$(function(){
+	        		$(".partnerJoin option[value=${partnerJoin}]").attr("selected", true);
+	        	});
+	        	</script>
+	        </c:if>
 	        <c:if test="${ !empty memberStatus }">
 	        	<script>
 	        	$(function(){
-	        		$(".searchKey_2 option[value=${memberStatus}]").attr("selected", true);
+	        		$(".memberStatus option[value=${memberStatus}]").attr("selected", true);
+	        	});
+	        	</script>
+	        </c:if>
+	        <c:if test="${ !empty memberInfo }">
+	        	<script>
+	        	$(function(){
+	        		$(".memberInfo option[value=${memberInfo}]").attr("selected", true);
 	        	});
 	        	</script>
 	        </c:if>

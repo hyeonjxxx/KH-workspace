@@ -81,6 +81,7 @@ public class MemberController {
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("memberStatus", memberStatus);
 		map.put("memKeyword", memKeyword);
+		
 		// 검색결과 리스트 총 갯수
 		int count = mService.countSearch(map);
 		

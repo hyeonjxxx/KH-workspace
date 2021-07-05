@@ -69,14 +69,14 @@
                             <option value="refundName">신청인</option>
                             <option value="refundNo">신청번호</option>
                         </select>
-                        <input type="text" class="form-control refund" placeholder="검색어를 입력하세요">
+                        <input type="text" name="keyword" value="${ keyword }" class="form-control refund" placeholder="검색어를 입력하세요">
                     </div>
                     <br>
                     <div class="refundAllStatus">
                         <label for="" style="float: left;"><b>환불상태</b></label> &nbsp;&nbsp;
                         <div class="refundRadios">
-                            <input type="radio" name="refundStatus" value=""> 환불대기
-                            <input type="radio" name="refundStatus" value=""> 환불완료
+                            <input type="radio" name="refundStatus" value="N"> 환불대기
+                            <input type="radio" name="refundStatus" value="Y"> 환불완료
                         </div>
                     </div>
                     <div class="searchBtns" align="right">
@@ -85,6 +85,11 @@
                     </div>
                 </form>
             </div>
+            <c:if test="${ !empty refundStatus}">
+            	<script>
+            		$("[name=refundStatus]").filter("[value=${refundStatus}]").prop("checked", true);
+            	</script>
+            </c:if>
 
             <br>
 

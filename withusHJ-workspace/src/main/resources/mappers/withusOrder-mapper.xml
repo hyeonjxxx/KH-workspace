@@ -156,12 +156,27 @@
            			   <choose>
 	          			   	<when test="shStatus == 1"> and shipping_status = 1 </when>
 	          			   	<when test="shStatus == 2"> and shipping_status = 2 </when>
+	          			   	<when test="shStatus == 3"> and shipping_status = 2 </when>
 	          			   	<otherwise> and  shipping_status = 3  </otherwise>
            			   </choose>
        			   </if>  
            		</when>
            		<otherwise>
-	           	 	and ${orderKeyword} like '%' || #{keyword} || '%' 
+	           	 	where ${orderKeyword} like '%' || #{keyword} || '%' 
+	           	 	<if test="odStatus != null">
+           			   <choose>
+	          			   	<when test="odStatus == 1"> and order_status = 1 </when>
+	          			   	<when test="odStatus == 2"> and order_status = 2 </when>
+	          			   	<otherwise> and  order_status = 3  </otherwise>
+           			   </choose>
+       			   </if>  
+       			   <if test="shStatus != null">
+           			   <choose>
+	          			   	<when test="shStatus == 1"> and shipping_status = 1 </when>
+	          			   	<when test="shStatus == 2"> and shipping_status = 2 </when>
+	          			   	<otherwise> and  shipping_status = 3  </otherwise>
+           			   </choose>
+       			   </if>  
            		</otherwise>
            </choose>
 		 order
