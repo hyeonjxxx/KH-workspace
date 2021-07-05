@@ -142,12 +142,26 @@
           on (o.project_no = p.project_no)
          join reward using (reward_no)
            <choose>
-           		<when test="orderKeyword == 'orderAll'">
+           		<when test="orderKeyword == 'orderAll' ">
            			where order_no like '%' || #{keyword} || '%' 
            			   or member_name like '%' || #{keyword} || '%' 
+           			<if test="odStatus != null">
+           			   <choose>
+	          			   	<when test="odStatus == 1"> and order_status = 1 </when>
+	          			   	<when test="odStatus == 2"> and order_status = 2 </when>
+	          			   	<otherwise> and  order_status = 3  </otherwise>
+           			   </choose>
+       			   </if>  
+       			   <if test="shStatus != null">
+           			   <choose>
+	          			   	<when test="shStatus == 1"> and shipping_status = 1 </when>
+	          			   	<when test="shStatus == 2"> and shipping_status = 2 </when>
+	          			   	<otherwise> and  shipping_status = 3  </otherwise>
+           			   </choose>
+       			   </if>  
            		</when>
            		<otherwise>
-	           	 	where ${orderKeyword} like '%' || #{keyword} || '%' 
+	           	 	and ${orderKeyword} like '%' || #{keyword} || '%' 
            		</otherwise>
            </choose>
 		 order
