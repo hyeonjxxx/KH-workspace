@@ -144,8 +144,7 @@
 	            <tbody>
 	            	<c:forEach var="m" items="${ mList }">
 		                <tr>
-		            	  	<input type="hidden" id="mno" name="mno" value="${m.memberNo}">
-		                    <td>${ m.memberNo }</td>
+		                    <td class="mno">${ m.memberNo }</td>
 		                    <td>${ m.memberId }</td>
 		                    <td>${ m.memberName }</td>
 		                    <td>${ m.memberCreateDate }</td>
@@ -161,7 +160,7 @@
 		                    	</c:choose>
 		                    </td>
 		                    <td>${ m.memberStatus }</td>
-		                    <td><button type="button" id="delMem" class="btn-sm" data-toggle="modal" data-target="#delModal">
+		                    <td><button type="button" class="btn-sm" data-toggle="modal" data-target="#delModal" onclick="ajaxMemInfo();">
 		                    	탈퇴</button></td>
 		                </tr>
 	                </c:forEach>            
@@ -169,37 +168,36 @@
 	        </table>
 	        <script>
 	        	// 탈퇴 모달
-	        	
-	        	$(function(){
-	        		$("#delMem").click(function(){
-	        			var $memberNo = $("#mno").eq(0).val();
-	        			console.log($memberNo);
-	        			
-	        			$.ajax({
-		        			url:"memStatus.mana",
-		        			data:{mno:$memberNo},
-		        			success:function(ms){
-		        				console.log(ms);
-		        				var result = "<div>" 
-		        							+ ms.memberName 
-		        							+ " 회원을 탈퇴시키겠습니까?</div>"
-		        							+ "<input type=" 
-		        							+ "hidden value="
-		        							+ ms.MemberNo
-		        							+ " name="
-		        							+ "memberNo"+
-		        							">"
-		        				
+	        	function ajaxMemInfo(){
+        			var $memberNo = $(event.target).parent().siblings(".mno").text();
+        			//console.log($memberNo);
+        			
+        			$.ajax({
+	        			url:"memStatus.mana",
+	        			data:{mno:$memberNo},
+	        			success:function(ms){
+	        				console.log(ms);
+	        				var result = "<div>" 
+	        							+ ms.memberName 
+	        							+ " 회원을 탈퇴시키겠습니까?</div>"
+	        							+ "<input type=" + "hidden" 
+	        							+ "name=" + "memberNo" 
+	        							+ "value=" 
+	        							+ "${"+ ms.memberNo+ "}" +">"
+	        							+ "<div name="+"memberNo" +"value=" + "${ms.memberNo}" + ">" 
+	        							+ ms.memberNo 
+	        							+ "</div>"
+	        				/* 멤버번호를 넘기지 못하고 있음... 그래서 탈퇴처리가 안되느 ㄴ거임 */
+	        							
 
-		        				$(".modal-title").html(result);
-		        				
-		        			}, error: function(){
-		        				console.log("모달 조회 실패")
-		        			}
-		        		});
-	        			
+	        				$(".modal-title").html(result);
+	        				
+	        			}, error: function(){
+	        				console.log("모달 조회 실패")
+	        			}
 	        		});
-	        	});
+        			
+	        	}
 	        	
 	        	
 	        </script>
@@ -208,11 +206,11 @@
 	
 				 <!-- 탈퇴 클릭 시 모달  -->
 			    <!-- The Modal -->
+           		<form action="deleteMem.mana" method="post">
 			    <div class="modal fade" id="delModal">
 			        <div class="modal-dialog modal-dialog-centered" style="width: 380px;">
 			        <div class="modal-content">
 			        	
-	            		<form id="delectMem" action="deleteMem.mana" method="post">
 			            <!-- Modal Header -->
 			            <div class="modal-header">
 			            <h5 class="modal-title"> </h5>
@@ -228,19 +226,10 @@
 		                          <span class="input-group-text">회원상태</span>
 		                        </div>
 		                        
-		                        <select class="form-control" id="memberStatus" name="memberStatus">
+		                        <select class="form-control" id=mStatus name="mStatus">
 		                          <option value="Y">활동</option>
 		                          <option value="N">탈퇴</option>
 		                        </select>
-		                        
-		                        <!-- 수정된 회원상태 컨트롤러에 넘겨주는 함수 -->
-		                        <script>
-		                        	$(function(){
-		                        		$("#memberStatus option").each(function(){
-		                        				$(this).attr("selected", true);
-		                        			});
-		                        		});
-		                        </script> 
 		                         
 		                    	</div>
 			            	</div>
@@ -248,13 +237,14 @@
 				            <!-- Modal footer -->
 				            <div class="modal-footer">
 				            	<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-				            	<button type="submit" class="btn btn-withus" data-dismiss="modal">확인</button>
+				            	<button type="submit" onclick="form.submit();" class="btn btn-withus" data-dismiss="modal">확인</button>
+				            	<!-- ?궁금?  타입'submit'에서는 작동을 안하는데   클릭이벤트론 되네... 왜? -->
 				            </div>
-            			</form>
 			             
 			        </div>
 			        </div>
 			    </div>	
+       			</form>
 			    			            
 		             
 	

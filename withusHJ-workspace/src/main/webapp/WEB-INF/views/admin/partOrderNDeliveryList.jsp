@@ -219,7 +219,7 @@
 		                      <td>${ p.totalPrice } 원</td>
 		                      <td>${ p.rewardTitle }/${ p.orderOption }/${ p.orderCount }</td>
 		                      <td><button type="button" class="btn btn-withus btn-sm" data-toggle="modal" 
-		                           data-target="#sendInfoModal" onclick="ajaxSendInfo();">
+		                           data-target="#sendInfoModal" id="test" onclick="ajaxSendInfo();">
 		                      		발송정보 입력
 		                      	</button></td>
 		                      <td>${ p.deliveryDate }</td>
@@ -242,7 +242,8 @@
 		                        	2021-05-11 ~ 2021-00-00<br>
 		                        <!-- 리워드 종료일 이후 -->
 		                        	신청 <br>
-		                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#refundInfo" onclick="ajaxRefundInfo();">
+		                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" 
+		                        		data-target="#refundInfo" onclick="ajaxRefundInfo();">
 		                        	확인하기
 	                        	</button>
 		                      </td>
@@ -255,9 +256,9 @@
 	              </div>
                   <script>
                   	// 발송모달:주문내역
-                  	
 	              	function ajaxSendInfo(){
-	              		var $orderNo = $(".ono").eq(0).text();
+	              		 var $orderNo = $(event.target).parent().siblings(".ono").text();
+	              		
 	              		console.log($orderNo);
 	              		
 	              		$.ajax({

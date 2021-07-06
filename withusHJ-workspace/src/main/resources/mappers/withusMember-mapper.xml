@@ -51,10 +51,10 @@
 	
 	</select>
 	<!--  -->
-	<update id="deleteMember" parameterType="Member" >
+	<update id="deleteMember" parameterType="hashmap" >
 		update 
 		       member
-		   set member_status = #{memberStatus} 
+		   set member_status = #{mStatus} 
 		 where member_no = #{memberNo}      
 	</update>
 	

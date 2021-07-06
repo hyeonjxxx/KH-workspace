@@ -57,17 +57,28 @@ public class MemberController {
 	}
 	// 상태변경
 	@RequestMapping("deleteMem.mana")
-	public String deleteMember(Member m, HttpSession session, Model model) {
-		System.out.println(m);
-		int result = mService.deleteMember(m);
+	public String deleteMember(@RequestParam(defaultValue="") String mStatus,
+									 @RequestParam(defaultValue="") String memberNo,
+									 HttpSession session) {
 		
-		if(result > 0) {
-			session.setAttribute("alertMsg", "성공적으로 변경되었습니다.");
-			return "redirect:memberListView.mana";
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("mStatus", mStatus );
+		map.put("memberNo", memberNo );
+		
+		System.out.println(map);
+		
+		int delMem = mService.deleteMember(map);
+		
+		if (delMem > 0) {
+			//session.setAttribute("alertMsg", "탈퇴처리 성공");
+			return "redirect:/memberListView.mana";
 		}else {
-			model.addAttribute("errorMsg","상태변경 실패");
-			return "common/errorPage";
+			session.setAttribute("alertMsg", "실패실패");
+			return "redirect:/memberListView.mana";
 		}
+		
+		
 	}
 	
 	// 다중 조건 검색
@@ -76,7 +87,6 @@ public class MemberController {
 									 @RequestParam(defaultValue="") String memKeyword ,
 									 @RequestParam(value="currentPage", defaultValue="1") int currentPage,
 									 ModelAndView mv) {
-		
 		
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("memberStatus", memberStatus);
@@ -96,8 +106,9 @@ public class MemberController {
 		
 		return mv;
 		
-
-		
 	}
+	
+	
+
 	
 }

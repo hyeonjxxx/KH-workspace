@@ -31,8 +31,8 @@ public class MemberDao {
 		return sqlSession.selectOne("withusMemeberMapper.selectMemStatus", memberNo);
 	}
 	
-	public int deleteMember(SqlSessionTemplate sqlSession, Member m) {
-		return sqlSession.update("withusMemeberMapper.deleteMember", m);
+	public int deleteMember(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
+		return sqlSession.update("withusMemeberMapper.deleteMember", map);
 	}
 
 	public int countSearch(SqlSessionTemplate sqlSession, HashMap<String, String> map) {

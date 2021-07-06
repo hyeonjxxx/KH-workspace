@@ -68,22 +68,20 @@
                         <input type="text" name="keyword" value="${ keyword }" class="form-control order" placeholder="검색어를 입력하세요">
                     </div>
                     <br>
-                    <div class="orderAllStatus">
-                        <div class="orderRadios">
-                            <div class="oStatus">
-                        	<label for="" style="float: left;"><b>결제상태</b></label> &nbsp;&nbsp;
-                            <input type="radio" name="odStatus" value="1"> 결제완료
-                            <input type="radio" name="odStatus" value="2"> 취소요청
-                            <input type="radio" name="odStatus" value="3"> 취소완료
-                        </div>
-                        <div class="dStatus">
-                        	<label for="" style="float: left;"><b>배송 상태</b></label> &nbsp;&nbsp;
-                            <input type="radio" name="shStatus" value="1"> 배송 준비중
-                            <input type="radio" name="shStatus" value="2"> 배송중
-                            <input type="radio" name="shStatus" value="3"> 배송 완료
-                        </div>
-                        </div>
-                    </div>
+                      <div class="orderRadios">
+                          <div class="oStatus">
+                       	<label for="" style="float: left;"><b>결제상태</b></label> &nbsp;&nbsp;
+                           <input type="radio" name="odStatus" value="1"> 결제완료
+                           <input type="radio" name="odStatus" value="2"> 취소요청
+                           <input type="radio" name="odStatus" value="3"> 취소완료
+                      	</div>
+                      	<div class="dStatus">
+                       	<label for="" style="float: left;"><b>배송 상태</b></label> &nbsp;&nbsp;
+                           <input type="radio" name="shStatus" value="1"> 배송 준비중
+                           <input type="radio" name="shStatus" value="2"> 배송중
+                           <input type="radio" name="shStatus" value="3"> 배송 완료
+                      	</div>
+                  	</div>
                     <div class="searchBtns" align="right">
                         <button type="reset" class="btn btn-secondary btn-sm">초기화</button>
                         <button type="submit" class="btn btn-withus btn-sm">검색</button>
