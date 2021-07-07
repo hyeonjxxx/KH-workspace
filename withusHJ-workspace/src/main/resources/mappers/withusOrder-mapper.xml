@@ -114,15 +114,12 @@
 	</select>
 	
 	<!-- 관리자 (강제)결제 취소  -->
-	<update id="cancleOrder" parameterType="_int">
+	<update id="updateOrderCancle" parameterType="Order">
 		update tb_order
- 		   set order_status = '1'
+ 		   set order_status = '3'
 		 where order_no = #{orderNo}
 	</update>
 	
-	<!-- 주문:결제 취소 변경 저장 -->
-	<update id="">
-	</update>
 	
 	<!-- 검색 -->
 	<select id="searchOrder" resultMap="orderRset" parameterType="hashmap">
@@ -265,6 +262,20 @@
 	</select>
 	
 	<!-- 발송모달창 : 발송정보 입력 -->
+	<insert id="insertShippingInfo" parameterType="hashmap">
+		insert
+				into tb_order
+				(
+				   shipping_com
+				 , shipping_no
+				)
+				values
+				(
+				   #{company}
+				 , #{dno}
+				)
+	
+	</insert>
 	
 	<!-- 환불모달 : 환불신청내역 조회-->
 	<select id="selectRefundInfo" resultMap="orderRset"

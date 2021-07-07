@@ -42,7 +42,7 @@ public class OrderTB   {
 	private String projectEndDt;
 	private String projectTitle;
 	private String rewardTitle;
-	private int rewardPrice;
+	private String rewardPrice;
 	private String cardNo;
 	
 	// 파트너 발송관리

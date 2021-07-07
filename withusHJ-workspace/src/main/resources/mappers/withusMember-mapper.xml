@@ -60,21 +60,33 @@
 	
 	<!-- 검색기능 -->
 	<!-- 검색된 총 게시글 -->
-	<select id="" resultType="_int" parameterType="hashmap">
+	<select id="countSearch" resultType="_int" parameterType="hashmap">
 		select
 				count(*)
 		   from	member m
-		  where
-			  <if test="memberStatus == 'Y'">
-			  	and member_status
-			  </if>
-			  <if test="memberStatus =='N'">
-			  	and member_status
-			  </if>
-			  <if test="memberStatus =='A'">
-			  	and member_status
-			  </if>
-			  like '%' || #{memKeyword} || '%'
+			  <choose>
+           		<when test='memKey == "all"' >
+           			where ( member_no  like '%' || #{keyword} || '%' 
+           			       or member_name like '%' || #{keyword} || '%' 
+           			       or member_id like '%' || #{keyword} || '%' )
+           		</when>
+           		<otherwise>
+           			where ${memKey} like '%' || #{keyword} || '%' 
+           		</otherwise>
+           </choose>
+            <if test='partnerJoin != null'>
+   			   <choose>
+	   			   	<when test='partnerJoin == "supporter"'> and member_link = 'N' </when>
+	   			   	<when test='partnerJoin == "partner"'> and member_link = 'Y' </when>
+   			   </choose>
+		   </if>
+		   <if test='memberStatus != null'>
+   			   <choose>
+	   			   	<when test='memberStatus == "Y"'> and member_status = 'Y' </when>
+	   			   	<when test='memberStatus == "N"'> and member_status = 'N' </when>
+	   			   	<when test='memberStatus == "A"'> and member_status = 'A' </when>
+   			   </choose>
+		   </if>
 		  
 	</select>
 	<!-- 키워드 검색 -->
@@ -87,23 +99,32 @@
 		     , partner_join
 		     , partner_name
 		     , member_status
+		     , member_link
           from member
-         where 
            <choose>
-           		<when test="memberStatus == 'Y'">
-           			and member_status
-           		</when>
-           		<when test="memberStatus =='N'">
-           			and member_status
-           		</when>
-           		<when test="memberStatus =='A'">
-           			and member_status
+           		<when test="memKey == 'all'">
+           			where ( member_no  like '%' || #{keyword} || '%' 
+           			       or member_name like '%' || #{keyword} || '%' 
+           			       or member_id like '%' || #{keyword} || '%' )
            		</when>
            		<otherwise>
-           			and member_status
+           			where ${memKey} like '%' || #{keyword} || '%' 
            		</otherwise>
            </choose>
-           		like '%' || #{keyword} || '%'           	
+            <if test='partnerJoin != null'>
+   			   <choose>
+	   			   	<when test='partnerJoin == "supporter"'> and member_link = 'N' </when>
+	   			   	<when test='partnerJoin == "partner"'> and member_link = 'Y' </when>
+   			   </choose>
+		   </if>
+		   <if test='memberStatus != null'>
+   			   <choose>
+	   			   	<when test='memberStatus == "Y"'> and member_status = 'Y' </when>
+	   			   	<when test='memberStatus == "N"'> and member_status = 'N' </when>
+	   			   	<when test='memberStatus == "A"'> and member_status = 'A' </when>
+   			   </choose>
+		   </if>
+           		           	
          order
             by member_no desc
 	</select>

@@ -68,7 +68,7 @@
 	    <div class="container">
 	
 	        <div class="search_area">
-	        	<form action="searchMember.mana" name="searchForm" method="post">
+	        	<form action="searchMember.mana" name="searchForm" method="">
 	        	<input type="hidden" name="currentPage" value="1">
 	             <div class="searchKey_1">
 	                 <select name="partnerJoin" id="partnerJoin">
@@ -79,7 +79,7 @@
 	             </div>
 	             <div class="searchKey_2">
 	                <select name="memberStatus" id="memberStatus">
-	                    <option value="T"> 전체</option>
+	                    <option value="T">전체</option>
 	                    <option value="Y">활동</option>
 	                    <option value="N">탈퇴</option>
 	                    <option value="A">관리자</option>
@@ -88,16 +88,16 @@
 	
 	            <div class="searchKey_3">
 	                <div class="memberKeyword">
-	                    <select name="memberInfo" id="memberInfo">
+	                    <select name="memKey" id="memKey">
 	                        <option value="all">전체</option>
-	                        <option value="memberNo">회원번호</option>
-	                        <option value="memberName">이름</option>
-	                        <option value="email">이메일</option>
+	                        <option value="member_no">회원번호</option>
+	                        <option value="member_name">이름</option>
+	                        <option value="member_id">이메일</option>
 	                    </select>
 	                </div>
 	
 	                <div class="input-group search">
-	                    <input type="text" name="memKeyword" value="${ keyword }" class="form-control" placeholder="검색어를 입력하세요">
+	                    <input type="text" name="keyword" value="${ keyword }" class="form-control" placeholder="검색어를 입력하세요">
 	                    <div class="input-group-append">
 	                        <button class="btn searchBtn" type="submit"><i class="fa fa-search"></i></button>
 	                    </div>
@@ -105,6 +105,7 @@
 	            </div>
 				</form>
 	        </div>
+	        
 	        <c:if test="${ !empty partnerJoin }">
 	        	<script>
 	        	$(function(){
@@ -119,10 +120,10 @@
 	        	});
 	        	</script>
 	        </c:if>
-	        <c:if test="${ !empty memberInfo }">
+	        <c:if test="${ !empty memKey }">
 	        	<script>
 	        	$(function(){
-	        		$(".memberInfo option[value=${memberInfo}]").attr("selected", true);
+	        		$(".memKey option[value=${memKey}]").attr("selected", true);
 	        	});
 	        	</script>
 	        </c:if>

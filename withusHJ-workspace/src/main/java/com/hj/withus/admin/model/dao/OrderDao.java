@@ -33,9 +33,11 @@ public class OrderDao {
 		return sqlSession.selectOne("withusOrderMapper.selectOrderDetail", orderNo);
 	}
 	
-	public int cancleOrder(SqlSessionTemplate sqlSession, int orderNo) {
+	public int updateOrderCancle(SqlSessionTemplate sqlSession, int orderNo) {
 		
-		return sqlSession.selectOne("withusOrderMapper.cancleOrder", orderNo);
+		int test = sqlSession.selectOne("withusOrderMapper.updateOrderCancle", orderNo);
+		System.out.println(test);
+		return test;
 	}
 	
 	public int selectDeilveryCount(SqlSessionTemplate sqlSession) {
@@ -76,6 +78,12 @@ public class OrderDao {
 		
 		
 		return (ArrayList)sqlSession.selectList("withusOrderMapper.searchOrder", map);
+	}
+	
+	//운송장입력
+	public int insertShippingInfo(SqlSessionTemplate sqlSession, HashMap<String, Object> map) {
+		
+		return sqlSession.insert("withusOrderMapper.insertShippingInfo", map);
 	}
 	
 	

@@ -3,6 +3,7 @@ package com.hj.withus.admin.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -45,7 +46,7 @@ public class OrderController {
 	public String selectOrder(int ono, Model model) {
 		
 		OrderTB o = oService.slectOrderDetail(ono);
-		System.out.println(o);
+		//System.out.println(o);
 		
 		model.addAttribute("o", o);
 		return "admin/manaOrderDetailView";
@@ -58,14 +59,21 @@ public class OrderController {
 	}
 	
 	
-	//결제 취소 기능 --> 안됨....
+	//결제 취소 기능 --> DB변경은 되는데 왜 어디서 nullpointer가 뜨는 걸까?
 	@RequestMapping("orderUpdate.mana")
-	public String updateOrder(int ono, Model model) {
+	public String updateOrderCancle(int ono, Model model, HttpSession session) {
 		
-		OrderTB o = oService.slectOrderDetail(ono);
+		int result = oService.updateOrderCancle(ono);
 		
-		model.addAttribute("o", o);
-		return "admin/manaOrderListView";
+		if(result > 0) {
+			session.setAttribute("alertMsg", "성공적으로 수정되었습니다.");
+			return "redirect:manaOrderListView";
+		}else {
+			model.addAttribute("alertMsg", "실패");
+			return "admin/manaOrderListView";
+		}
+		
+		
 		
 	}
 	
@@ -120,29 +128,41 @@ public class OrderController {
 		return mv;
 	}
 	
+	@RequestMapping("insertShippingInfo")
+	public String insertShippingInfo(@RequestParam(defaultValue="") String company,
+									 @RequestParam(defaultValue="") String dno,
+									 HttpSession session) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("company", company);
+		map.put("dno", dno);
+		
+		System.out.println(map);
+		
+		int result = oService.insertShippingInfo(map);
+		
+		if (result > 0) {
+			//session.setAttribute("alertMsg", "탈퇴처리 성공");
+			return "redirect:/memberListView.mana";
+		}else {
+			session.setAttribute("alertMsg", "실패실패");
+			return "redirect:/memberListView.mana";
+		}
+		
+	}
 	
-//  모달 창만 나옴
-//	@RequestMapping(value="send.info", produces="application/json; charset=utf-8")
-//	public void ajaxSelectSendInfo(int ono, HttpServletResponse response) throws IOException {
-//		OrderTB o = oService.selectSendInfo(ono);
-//		System.out.println(o);
-//		JSONObject jObj = new JSONObject();
-//		jObj.put("ordreNo", o.getOrderNo());
-//
-//		response.setContentType("application/json; charset=utf-8");
-//		response.getWriter().print(jObj);
-//		
-//	}
+	
+	
 	
 	// 발송모달 -  주문내역
 	@ResponseBody
 	@RequestMapping(value="send.info", produces="application/json; charset=utf-8")
-	public String ajaxSelectOrderInfo(int orderNo) {
+	public String ajaxSelectOrderInfo(int ono) {
 		
-		System.out.println(orderNo); // 펀딩번호 확인		
+		//System.out.println(orderNo); // 펀딩번호 확인		
 		
-		OrderTB o = oService.selectOrderInfo(orderNo);
-		System.out.println(o); // 펀딩내역 잘 담겼는지
+		OrderTB o = oService.selectOrderInfo(ono);
+		//System.out.println(o); // 펀딩내역 잘 담겼는지
 		
 		return new Gson().toJson(o);
 	}	

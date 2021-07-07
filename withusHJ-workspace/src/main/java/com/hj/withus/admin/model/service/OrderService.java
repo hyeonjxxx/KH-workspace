@@ -16,7 +16,8 @@ public interface OrderService {
 	OrderTB slectOrderDetail(int orderNo);
 	// 검색 기능
 	ArrayList<OrderTB> searchOrder(HashMap<String, String> map);
-	
+	// 결제취소
+	int updateOrderCancle(int orderNo);
 	
 	
 	// 파트너 발송관리
@@ -30,6 +31,10 @@ public interface OrderService {
 	OrderTB selectOrderInfo(int orderNo);
 	// 환불모달:펀딩내역+환불신청내역
 	OrderTB selectRefundInfo(int orderNo);
+	// 발송모달 : 발송정보 입력
+	int insertShippingInfo(HashMap<String, Object> map);
+	
+
 	
 
 }

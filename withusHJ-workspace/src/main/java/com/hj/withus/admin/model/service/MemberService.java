@@ -15,6 +15,7 @@ public interface MemberService {
 	Member selectMemStatus(int memberNo);
 	// 탈퇴(회원 상태 변경)
 	int deleteMember(HashMap<String, Object> map);
+	
 	// 검색된 총 게시글 수
 	int countSearch(HashMap<String, String> map);
 	// 검색 기능

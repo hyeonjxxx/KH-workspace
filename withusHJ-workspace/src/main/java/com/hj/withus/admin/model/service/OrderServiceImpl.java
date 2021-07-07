@@ -74,6 +74,18 @@ public class OrderServiceImpl implements OrderService {
 		return oDao.selectRefundInfo(sqlSession, orderNo);
 	}
 
+	// 발송정보입력
+	@Override
+	public int insertShippingInfo(HashMap<String, Object> map) {
+		return oDao.insertShippingInfo(sqlSession, map);
+	}
+
+	// 결제취소
+	@Override
+	public int updateOrderCancle(int orderNo) {
+		return oDao.updateOrderCancle(sqlSession, orderNo);
+	}
+
 
 	
 	

@@ -15,12 +15,22 @@
 <!-- 부트스트랩에서 제공하고 있는 스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
+<!-- alertify----------------------------- -->
+<!-- JavaScript -->
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+<!-- CSS -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+<!-- Default theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+<!-- Semantic UI theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
+<!-- Bootstrap theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
     
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
-
   *{box-sizing: border-box;} 
-  .wrap{width: 1000px; height: 1800px; margin: auto;}
+  .wrap{width: 1150px; position: relative;}
   .wrap>div{width: 100%;}
 
   /* 메뉴 아래 선 */
@@ -29,7 +39,7 @@
     height: 1.5px;
     width: 80%;
   }
-  #mypage{height: 100%; margin-top: 50px;}
+  #mypage{height: 100%; position: absolute; top: 3%; left: 7%;}
   
   /* mypage안의 세부영역 */
   #mypage>div{height: 100%;}
@@ -40,7 +50,6 @@
   
   /* fundingList content */
   .list #content_1{height: 80%; margin-top: 50px; width: 80%;}
-  .list #content_2{height: 10%; width: 80%;}
 
   /* 페이징*/
   #pagingArea{width:fit-content; margin:auto; margin-top: 50px;} 
@@ -56,8 +65,9 @@
 
   .searchForm{margin: 10px 0; }
   .searchForm select{height: 38px; border-color: lightgray; outline: none; float: left; margin-right: 5px; font-size: 13px;}
-  .keyword_1 { width: 60%;float: left;} 
-  .keyword_2 {width: 40%; float: right;} 
+  .keyword_1 { float: left;} 
+  .keyword_2 { width: 40%;float: left;}  
+  .keyword_3 {width: 40%; float: right;} 
   .input-group.search {width: 70%;}
   .btn.searchBtn{background-color: #3498db;}
   .fa.fa-search{color: white;}
@@ -65,7 +75,7 @@
   #orderList{text-align: center; margin: auto; margin-top: 70px;}
   #orderList th{font-size: 12px;}
   #orderList td{font-size: 13px;}
-  #orderList td, #orderList th{padding: .20rem; vertical-align: inherit;}
+  #orderList td, #orderList th{ padding: 0.7rem .20rem; vertical-align: middle;}
 
   
   button.btn.btn-sm {font-size: 10px; text-align: justify; padding: 5px; }
@@ -101,24 +111,23 @@
 
 
 </style>
-
 </head>
 <body>
-    
-	<div class="wrap">
-	
+   
+	<div class="wrap">   
+    	 
 	    <!--  -->
 	    <div id="mypage">
 	        <div id="content" class="list">
 	            <p class="mainTitle">펀딩 · 발송 관리</p>
 	            <div id="underLine"></div>
-	            
-	            
-	            <!-- -->
-	            <div id="content_1">
-	              <label>서포터 관리</label>
-	              <div class="statusBox">
-	                <table class="dTable">
+
+
+				<!-- -->
+				<div id="content_1">
+					<label>서포터 관리</label>
+					<div class="statusBox">
+						<table class="dTable">
 	                  <tr>
 	                    <th rowspan="2">펀딩·배송 상태</th>
 	                    <th style="color: rgb(52, 152, 219);">미발송</th> 
@@ -146,126 +155,152 @@
 	                    <td>${ sc.refRefund } 건</td>
 	                  </tr>
 	                </table>
-	              </div>
-	
-	              <div class="mentBox">
-	                <label>발송처리를 반드시 진행하세요. 모든 서포터의 발송처리를 진행하지 않을 경우 다음과 같이 처리 됩니다.</label>
-	                <ul>
-	                  <li>정산이 진행되지 않습니다.</li>
-	                  <li>서포터가 펀딩금 반환을 신청할 수 있습니다.(미발송 상태로 방솔예정일이 지난 시점부터)</li>
-	                  <li>종료일 +11개월까지 발송처리가 진행되지 않은 펀딩 내역은 자동 펀딩금 반환 처리(결제 취소)가 진행됩니다.</li>
-	                </ul>
-	              </div>
-	
-	              <div class="oList">
-	                <label>목록</label>
-	
-	                <form action="">
-	                  <div class="searchForm">
-	                  <div class="keyword_1">
-	                    <select name="" id="">
-	                      <option value="">발송 배송 : 전체</option>
-	                      <option value="">미발송</option>
-	                      <option value="">발송준비중</option>
-	                      <option value="">배송 중</option>
-	                      <option value="">배송완료</option>
-	                    </select>
-	                    <select name="" id="">
-	                      <option value="">결제 상태 : 전체</option>
-	                      <option value="">결제완료</option>
-	                      <option value="">취소요청</option>
-	                      <option value="">취소완료</option>
-	                    </select>
-	                  </div>
-	
-	                  <div class="keyword_2">
-	                    <select name="" id="">
-	                      <option value="">펀딩번호</option>
-	                      <option value="">발송번호</option>
-	                      <option value="">서포터</option>
-	                    </select>
-	                    <div class="input-group search">
-	                      <input type="text" class="form-control" placeholder="검색어를 입력하세요">
-	                      <div class="input-group-append">
-	                          <button class="btn searchBtn" type="submit"><i class="fa fa-search"></i></button>
-	                      </div>
-	                  </div>
-	                  </div>
-	                </div>
-	                </form>
-	
-	
-	                <table class="table table-border" id="orderList">
-	                  <thead>
-	                    <tr>
-	                      <th width="80">펀딩번호</th>
-	                      <th width="60">서포터 정보</th>
-	                      <th width="60">결제</th>
-	                      <th width="80">결제금액</th>
-	                      <th width="200">리워드</th>
-	                      <th width="110">발송정보</th>
-	                      <th width="80">발송 예정일</th>
-	                      <th width="80">발송·배송</th>
-	                      <th width="80">발송번호</th>
-	                      <th width="80">펀딩금 반환</th>
-	                    </tr>
-                    </thead>
-                    <tbody>
-                    	<c:forEach var="p" items="${ polist }">
-		                    <tr>
-		                      <td class="ono">${ p.orderNo }</td>
-		                      <td>${ p.supporterName }</td>
-		                      <td>${ p.orderStatus }</td>
-		                      <td>${ p.totalPrice } 원</td>
-		                      <td>${ p.rewardTitle }/${ p.orderOption }/${ p.orderCount }</td>
-		                      <td><button type="button" class="btn btn-withus btn-sm" data-toggle="modal" 
-		                           data-target="#sendInfoModal" id="test" onclick="ajaxSendInfo();">
-		                      		발송정보 입력
-		                      	</button></td>
-		                      <td>${ p.deliveryDate }</td>
-		                      <c:choose>
-                        		<c:when test="${ p.shippingStatus == 1 }">
-                        			<td>배송준비중</td>
-                        		</c:when>
-                        		<c:when test="${ p.shippingStatus == 2 }">
-                        			<td>배송시작</td>
-                        		</c:when>
-                        		<c:when test="${ p.shippingStatus == 3 }">
-                        			<td>배송완료</td>
-                        		</c:when>
-                        	</c:choose>
-		                      <td>${ p.shippingCom } <br> ${ p.shippingNo }</td>
-		                      <td style="font-size:10px;">
-		                        <!-- 환불 가능 기간을 언제로 할껀지?-->
-		                        <!-- 리워드 기간 -->
-		                        	지연반환 신청기간 <br>
-		                        	2021-05-11 ~ 2021-00-00<br>
-		                        <!-- 리워드 종료일 이후 -->
-		                        	신청 <br>
-		                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" 
-		                        		data-target="#refundInfo" onclick="ajaxRefundInfo();">
-		                        	확인하기
-	                        	</button>
-		                      </td>
-		                    </tr>
-                    	</c:forEach>	           
-                    </tbody>
-	                  
-	                </table>
-	
-	              </div>
-                  <script>
+					</div>
+
+					<div class="mentBox">
+						<label>발송처리를 반드시 진행하세요. 모든 서포터의 발송처리를 진행하지 않을 경우 다음과 같이 처리
+							됩니다.</label>
+						<ul>
+							<li>정산이 진행되지 않습니다.</li>
+							<li>서포터가 펀딩금 반환을 신청할 수 있습니다.(미발송 상태로 방솔예정일이 지난 시점부터)</li>
+							<li>종료일 +11개월까지 발송처리가 진행되지 않은 펀딩 내역은 자동 펀딩금 반환 처리(결제 취소)가
+								진행됩니다.</li>
+						</ul>
+					</div>
+
+					<div class="oList">
+						<label>목록</label>
+
+						<form action="orderNDeliverySearch.part">
+							<div class="searchForm">
+								<div class="keyword_1">
+									<select name="" id="">
+										<option value="">발송 배송 : 전체</option>
+										<option value="">미발송</option>
+										<option value="">배송 중</option>
+										<option value="">배송완료</option>
+									</select> 
+								</div>
+								<div class="keyword_2">	
+									<select name="" id="">
+										<option value="">결제 상태 : 전체</option>
+										<option value="">결제완료</option>
+										<option value="">취소요청</option>
+										<option value="">취소완료</option>
+									</select>
+								</div>
+
+								<div class="keyword_3">
+									<select name="condition" id="condition">
+										<option value="all">전체</option>
+										<option value="order_no">펀딩번호</option>
+										<option value="shipping_no">발송번호</option>
+										<option value="member_name">서포터</option>
+									</select>
+									<div class="input-group search">
+										<input type="text" class="form-control" name="keyword"
+										       value="${ keyword }" placeholder="검색어를 입력하세요">
+										<div class="input-group-append">
+											<button class="btn searchBtn" type="submit">
+												<i class="fa fa-search"></i>
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+						<c:if test="${ !empty condition }">
+							<script>
+							$(function(){
+								$(".condition option[value=${condition}]").attr("selected", true);
+							})
+							</script>
+						</c:if>
+
+
+						<table class="table table-border" id="orderList">
+							<thead>
+								<tr height="50">
+								
+									<th width="60">펀딩번호</th>
+									<th width="75">서포터 정보</th>
+									<th width="60">결제상태</th>
+									<th width="90">결제금액</th>
+									<th width="180">리워드</th>
+									<th width="100">발송정보</th>
+									<th width="80">발송 예정일</th>
+									<th width="80">발송·배송</th>
+									<th width="80">발송번호</th>
+									<th width="120">펀딩금 반환</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach var="p" items="${ polist }">
+		                    	<tr>
+			                      <td class="ono">${ p.orderNo }</td>
+			                      <td>${ p.supporterName }</td>
+			                      <c:choose>
+	                        		<c:when test="${ p.orderStatus eq 1 }">
+	                        			<td>결제완료</td>
+	                        		</c:when>
+	                        		<c:when test="${ p.orderStatus eq 2 }">
+	                        			<td>취소요청</td>
+	                        		</c:when>
+	                        		<c:when test="${ p.orderStatus eq 3 }">
+	                        			<td>취소완료</td>
+	                        		</c:when>
+	                        	  </c:choose>
+			                      <td>${ p.totalPrice } 원</td>
+			                      <td>${ p.rewardTitle }/${ p.orderOption }/${ p.orderCount }</td>
+			                      <td><button type="button" class="btn btn-withus btn-sm" data-toggle="modal" data-target="#sendInfoModal" onclick="ajaxSendInfo();">
+			                      		발송정보 입력
+			                      	</button></td>
+			                      <td>${ p.deliveryDate }</td>
+			                      <!-- 운송장 번호가 비어 있을 경우 배송준비 중, 배송완료 조건은 뭘로 해야되나? -->
+			                      <c:choose>
+	                        		<c:when test="${ empty p.shippingCom or p.shippingStatus eq 1}">
+	                        			<td>배송준비중</td>
+	                        		</c:when>
+	                        		<c:when test="${ p.shippingStatus eq 2 }">
+	                        			<td>배송시작</td>
+	                        		</c:when>
+	                        		<c:when test="${ p.shippingStatus eq 3 }">
+	                        			<td>배송완료</td>
+	                        		</c:when>
+			                      </c:choose>
+			                      <td>${ p.shippingCom } <br> ${ p.shippingNo }</td>
+			                      <td style="font-size:10px;">
+			                        <!-- 환불 가능 기간을 언제로 할껀지?-->
+			                        <!-- 리워드 기간 -->
+			                        	지연반환 신청기간 <br>
+			                        	2021-05-11 ~ 2021-00-00<br>
+			                        <!-- 환불 신청자만 버튼이 노출 -->
+			                        <c:if test="${ p.orderStatus eq 2 }">
+				                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#refundInfo" onclick="ajaxRefundInfo();">
+				                        	확인하기
+			                        	</button>
+			                        </c:if>
+			                      </td>
+			                    </tr>
+	                    		</c:forEach>
+	                    		</tbody>	
+							</table>
+						</div>
+					
+					<script>
                   	// 발송모달:주문내역
 	              	function ajaxSendInfo(){
-	              		 var $orderNo = $(event.target).parent().siblings(".ono").text();
-	              		
-	              		console.log($orderNo);
-	              		
+	              		//var $orderNo = $(".ono").val();  // 실패1
+	              		// 이벤트적 타켓 -> js로 하려면 $()로 감싸주기
+	              		var $orderNo = $(event.target).parent().siblings(".ono").text();
+	              		//console.log($orderNo);
+                  		
 	              		$.ajax({
+	              			
 	            			url:"send.info",
-	            			data:{orderNo:$orderNo},
+	            			data:{ono:$orderNo},
 	              		   success:function(oi){
-	              			   console.log(oi);
+	              			   //console.log(oi);
  	              			   
 	              			   var resultSend = "<table>"
 	              			   				+ "<tr>" 
@@ -285,25 +320,25 @@
 	              			   				+ "<td>" + oi.orderOption / oi.orderCount + "</td>" 
 	              			   				+ "</tr>"	
 		              			   			+ "<th>총 결제 금액</th>"
-	              			   				+ "<td>" + oi.totalPrice + "</td>" 
+	              			   				+ "<td>" + oi.totalPrice + "원</td>" 
 	              			   				+ "</tr>"
 	              			   				+ "</table>"
 	              			   			
-       	              			   $(".partnerOrder").html(resultSend);
-	              		   },error:function(){
+	              		  	 $(".partnerOrder").html(resultSend);
+	              		},error:function(){
 	    					console.log("발송ajax 조회실패");
-	              			}
+	              		}
 	    				});
 	              	}
                   
 	              	// 환불모달:펀딩내역+환불신청내역
 	              	function ajaxRefundInfo(){
-	              		var $orderNo = $(".ono").text();
+	              		var $orderNo = $(event.target).parent().siblings(".ono").text(); 
 	              		//console.log($orderNo);
 	              		
 	              		$.ajax({
 	              			url:"refund.info",
-	              			data:{orderNo:$orderNo},
+	              			data:{ono:$orderNo},
 	              			success:function(ri){
 	              				//console.log(ri);
 	              				var resultOrder = "<table>"
@@ -374,76 +409,74 @@
 	              			},error:function(){
 	              				console.log("환불 ajax 조회실패");
 	              			}
-	              		});
-	              	}
-	              		
-              </script>
-	
-	              <!-- 발송정보 입력창  -->
-	              <!-- The Modal -->
-	              <div class="modal" id="sendInfoModal">
-	                <div class="modal-dialog modal-dialog-centered">
-	                  <div class="modal-content" style="width: 400px;">
-	                  
-	                    <!-- Modal Header -->
-	                    <div class="modal-header none">
-	                      <h5 class="modal-title">발송정보 입력</h5>
-	                      <button type="button" class="close" data-dismiss="modal">×</button>
-	                    </div>
-	                    
-	                    <form>
-	                    <!-- Modal body -->
-	                    <div class="modal-body">
-	                    
-						  <!-- 주문정보 ajax로 출력  -->
-	                      <div class="partnerOrder">
-	                        
-	                      </div>
-	
-	                      <hr style="width: 95%;">
-	
-	                      <div class="trackingInfo">
-	                        <label>택배사</label>
-	                        <select>
-	                          <option value="">대한통운</option>
-	                            <option value="">우체국 택배</option>
-	                            <option value="">로젠 택배</option>
-	                            <option value="">000택배</option>
-	                        </select>
-	                        <label>송장번호</label>
-	                        <input type="text" placeholder="숫자만 입력하세요">
-	                        <p>특수문자(-)없이 숫자만 입력해주세요</p>
-	
-	                      </div>
-	    
-	                    </div>
-	                    </form>
-	                    
-	                    <!-- Modal footer -->
-	                    <div class="modal-footer none">
-	                      <button type="button" class="btn btn-withus btn-block" data-dismiss="modal">완료</button>
-	                    </div>
-	                    
-	                  </div>
-	                </div>
-	              </div>
-	      
-	              <!-- 환불신청내역 조회  -->
-	              <!-- The Modal -->
-	              <div class="modal" id="refundInfo">
-	                <div class="modal-dialog modal-dialog-centered">
-	                    <div class="modal-content">
-	                    
-	                        <!-- Modal Header -->
-                        <div class="modal-header none">
-                            <h5 class="modal-title">펀딩금 반환처리</h5>
-                            <button type="button" class="close" data-dismiss="modal">×</button>
-                        </div>
-                        
-                        <!-- Modal body -->
-                        <div class="modal-body">
-                          <label style="font-size:14px;">서포터가 펀딩금반환 요청한 내역을 확인하고 승인 또는 거절 처리하세요.</label>
-                            <div class="partnerRefund">
+	              			});
+		              	}
+					</script>
+
+					<!-- 발송정보 입력창  -->
+					<!-- The Modal -->
+					<form action="insertShippingInfo" method="post">
+					<div class="modal" id="sendInfoModal">
+						<div class="modal-dialog modal-dialog-centered">
+							<div class="modal-content" style="width: 400px;">
+
+								<!-- Modal Header -->
+								<div class="modal-header none">
+									<h5 class="modal-title">발송정보 입력</h5>
+									<button type="button" class="close" data-dismiss="modal">×</button>
+								</div>
+
+								<!-- Modal body -->
+								<div class="modal-body">
+
+									<div class="partnerOrder">
+										
+									</div>
+
+									<hr style="width: 95%;">
+
+									<div class="trackingInfo">
+										<label>택배사</label> 
+										<select id="company" name="company">
+				                          	<option value="대한통운">대한통운</option>
+				                            <option value="우체국">우체국 택배</option>
+				                            <option value="로젠">로젠 택배</option>
+				                            <option value="한진">한진 택배</option>
+										</select> 
+										<label>송장번호</label> 
+										<input type="text" placeholder="숫자만 입력하세요" name="dno" value="${dno}">
+										<p>특수문자(-)없이 숫자만 입력해주세요</p>
+
+									</div>
+
+								</div>
+
+								<!-- Modal footer -->
+								<div class="modal-footer none">
+									<button type="button" class="btn btn-withus btn-block" data-dismiss="modal">완료</button>
+								</div>
+
+							</div>
+						</div>
+					</div>
+                    </form>
+
+					<!-- 환불신청내역 조회  -->
+					<!-- The Modal -->
+					<div class="modal" id="refundInfo">
+						<div class="modal-dialog modal-dialog-centered">
+							<div class="modal-content">
+
+								<!-- Modal Header -->
+								<div class="modal-header none">
+									<h5 class="modal-title">펀딩금 반환처리</h5>
+									<button type="button" class="close" data-dismiss="modal">×</button>
+								</div>
+
+								<!-- Modal body -->
+		                        <div class="modal-body">
+		                          <label style="font-size:14px;">서포터가 펀딩금반환 요청한 내역을 확인하고 승인 또는 거절 처리하세요.</label>
+		                            <div class="partnerRefund">
                                 
                             </div>
                             <br>
@@ -476,36 +509,48 @@
                                 </tr>
                             </table>
                         </div>
-                        
-                        <!-- Modal footer -->
-                        <div class="modal-footer none">
-                            <button type="button" class="btn btn-withus approvalBtn" data-dismiss="modal">승인</button>
-                            <button type="button" class="btn btn-danger oppositionBtn" data-dismiss="modal">거절</button>
-                        </div>
-                    
-                    </div>
-                </div>
-                </div>
-            
-            </div>
-            
-           	<!-- 페이징 -->
-            <div id="content_2">
-            <div id="pagingArea">
-				<ul class="pagination">
-                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-				</ul>
-            </div>
-           	</div>
+
+								<!-- Modal footer -->
+								<div class="modal-footer none">
+									<button type="button" class="btn btn-withus approvalBtn" data-dismiss="modal">승인</button>
+									<button type="button" class="btn btn-danger oppositionBtn" data-dismiss="modal">거절</button>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+		           	<!-- 페이징 -->
+		            <div id="pagingArea">
+						<ul class="pagination">
+		                   <c:choose>
+				        		<c:when test="${ pi.currentPage eq 1 }">
+					           		<li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
+					            </c:when>
+					            <c:otherwise>
+					            	<li class="page-item"><a class="page-link" href="${ pi.currentPage -1 }">이전</a></li>
+					            </c:otherwise>
+					    	</c:choose>        
+					            
+							<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+				            	<li class="page-item"><a class="page-link" href="memberListView.mana?currentPage=${p}">${ p }</a></li>
+							</c:forEach>		            
+					            
+					        <c:choose> 
+					        	<c:when test="${ pi.currentPage eq pi.maxPage }">
+					           	 	<li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
+					           	</c:when>
+					           	<c:otherwise>
+					           		<li class="page-item"><a class="page-link" href="${ pi.currentPage+1 }">다음</a></li>
+					           	</c:otherwise> 	
+				        	</c:choose>
+						</ul>
+		            </div>
+				</div>
+
+			</div>
         
-        	</div>
-        
-    	</div>
-    
+  		</div>  
 
 	</div>
 	
