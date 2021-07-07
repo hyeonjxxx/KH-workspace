@@ -176,22 +176,18 @@
 	        			url:"memStatus.mana",
 	        			data:{mno:$memberNo},
 	        			success:function(ms){
-	        				console.log(ms);
-	        				var result = "<div>" 
+	        				//console.log(ms);
+	        				var result = "<div name ="
+	        							+ "'mamberName'" + " value ="
+	        							+ "'" + ms.memberName + "'" + ">"
 	        							+ ms.memberName 
 	        							+ " 회원을 탈퇴시키겠습니까?</div>"
-	        							+ "<input type=" + "hidden" 
-	        							+ "name=" + "memberNo" 
-	        							+ "value=" 
-	        							+ "${"+ ms.memberNo+ "}" +">"
-	        							+ "<div name="+"memberNo" +"value=" + "${ms.memberNo}" + ">" 
-	        							+ ms.memberNo 
-	        							+ "</div>"
-	        				/* 멤버번호를 넘기지 못하고 있음... 그래서 탈퇴처리가 안되느 ㄴ거임 */
-	        							
+	        				// value가 안넘어가...			
 
+   							console.log(result);
 	        				$(".modal-title").html(result);
 	        				
+	        							
 	        			}, error: function(){
 	        				console.log("모달 조회 실패")
 	        			}

@@ -55,7 +55,7 @@
 		update 
 		       member
 		   set member_status = #{mStatus} 
-		 where member_no = #{memberNo}      
+		 where member_name =  #{memberName}      
 	</update>
 	
 	<!-- 검색기능 -->
