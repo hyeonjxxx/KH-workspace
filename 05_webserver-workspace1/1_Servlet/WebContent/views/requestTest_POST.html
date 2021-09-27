@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>POST 방식으로 페이지 요청해보기</h1>
+	
+	<p>
+		특징1. POST방식으로 요청하는건 URL Body영역에 데이터를 포함시켜서 요청 <br>
+		=> 사용자가 입력한 값(데이터)들이 url에 노출안됨 <br>
+		=> 보안유지가 가능함 <br>
+		=> 즉, 로그인이나 회원가입과 같은 개인정보가 입력될만한 폼에 적합함 <br><br>
+		
+		특징2. 즐겨찾기가 가능하긴 하나 전달되는 데이터가 url에 포함되어있지 않기 때문에 기존에 봤던 응답화면을 볼수 없을 것 <br><br>
+		
+		특징3. 전송하는 길이에 제한 없음 <br>
+		=> 게시판 작성하기 폼에 적합함 <br><br>
+		
+		특징4. 최대요청받는시간(Time out)이 존재해 페이지 요청에 기다리는 시간이 있다. 
+	</p>
+	
+	<h2>개인 정보 입력 - POST</h2>
+	
+	<form action="/1_Servlet/test2.do" method="POST">
+		<ul>
+			<li>이름 : <input type="text" name="name" size="10"></li>
+			<li>
+				성별 : 
+				남자 <input type="radio" name="gender" value="M">
+				여자 <input type="radio" name="gender" value="F">
+			</li>
+			<li>나이 : <input type="number" name="age"></li>
+			<li>
+				거주지 : 
+				<select name="city">
+					<option>서울</option>
+					<option>경기도</option>
+					<option>강원도</option>
+					<option>충청도</option>
+					<option>제주도</option>
+					<option>경상도</option>
+				</select>
+			</li>
+			<li>키 : <input type="range" name="height" min="140" max="200"></li>
+			<li>
+				좋아하는 음식 (모두 고르시오) : 
+				한식 <input type="checkbox" name="food" value="한식">
+				중식 <input type="checkbox" name="food" value="중식">
+				일식 <input type="checkbox" name="food" value="일식">
+				양식 <input type="checkbox" name="food" value="양식">
+				분식 <input type="checkbox" name="food" value="분식">
+			</li>
+			<br>
+			<li>
+				<input type="submit" value="확인">
+				<input type="reset" value="취소">
+			</li>
+		</ul>
+	</form>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</body>
+</html>
